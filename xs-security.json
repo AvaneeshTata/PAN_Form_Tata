@@ -1,0 +1,21 @@
+{
+  "xsappname": "pan_form_demo",
+  "tenant-mode": "dedicated",
+  "description": "Security profile of called application",
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.Admin",
+      "description": "Admin"
+  }
+  ],
+  "role-templates": [
+    {
+      "name": "Admin",
+      "description": "generated",
+      "scope-references": [
+          "$XSAPPNAME.Admin"
+      ],
+      "attribute-references": []
+  }
+  ]
+}
