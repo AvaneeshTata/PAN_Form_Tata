@@ -1,10 +1,4 @@
 # CAP Sync_Project
-.cdsrc-private.json
-
-resources
-# Web IDE, App Studio
-.che/
-.gen/
 
 # MTA
 *_mta_build_tmp

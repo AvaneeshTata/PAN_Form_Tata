@@ -1,0 +1,35 @@
+{
+  "requires": {
+    "[hybrid]": {
+      "custom-service:TLP_Connectivity": {
+        "binding": {
+          "type": "cf",
+          "apiEndpoint": "https://api.cf.eu10-004.hana.ondemand.com",
+          "org": "Tata Projects Limited_btp-dev-0or0hi20",
+          "space": "DEV_SPACE",
+          "instance": "TLP_Connectivity",
+          "key": "key",
+          "resolved": false
+        },
+        "vcap": {
+          "name": "custom-service:TLP_Connectivity"
+        }
+      },
+      "db": {
+        "binding": {
+          "type": "cf",
+          "apiEndpoint": "https://api.cf.eu10-004.hana.ondemand.com",
+          "org": "Tata Projects Limited_btp-dev-0or0hi20",
+          "space": "DEV_SPACE",
+          "instance": "main_db2-db",
+          "key": "SharedDevKey",
+          "resolved": false
+        },
+        "kind": "hana-cloud",
+        "vcap": {
+          "name": "db"
+        }
+      }
+    }
+  }
+}
