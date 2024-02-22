@@ -1,0 +1,26 @@
+COLUMN TABLE CatalogService_vendor_data_drafts (
+  Proposed_Vendor_Code NVARCHAR(5000) NOT NULL,
+  PAN_Number NVARCHAR(5000) NOT NULL,
+  Awarded_Vendor NVARCHAR(5000) NULL,
+  Vendor_Name NVARCHAR(5000) NULL,
+  Vendor_Location NVARCHAR(5000) NULL,
+  Technically_Approved NVARCHAR(5000) NULL,
+  Client_Approved NVARCHAR(5000) NULL,
+  Original_quote NVARCHAR(5000) NULL,
+  Final_Quote NVARCHAR(5000) NULL,
+  Order_amount_OR_Split_order_amount NVARCHAR(5000) NULL,
+  Discount_Amount NVARCHAR(5000) NULL,
+  Discount_percentage NVARCHAR(5000) NULL,
+  "RANK" NVARCHAR(5000) NULL,
+  IsActiveEntity BOOLEAN,
+  HasActiveEntity BOOLEAN,
+  HasDraftEntity BOOLEAN,
+  DraftAdministrativeData_DraftUUID NVARCHAR(36) NOT NULL,
+  PRIMARY KEY(Proposed_Vendor_Code, PAN_Number)
+) WITH ASSOCIATIONS (
+  MANY TO ONE JOIN CatalogService_Fvendor_responseoo_drafts AS vendtovenr ON ((Proposed_Vendor_Code = vendtovenr.Proposed_Vendor_Code) AND PAN_Number = vendtovenr.PAN_Number),
+  MANY TO MANY JOIN CatalogService_PAYMENT_TERM_DETAILS_drafts AS vendtoptd ON ((Proposed_Vendor_Code = vendtoptd.Proposed_Vendor_Code) AND PAN_Number = vendtoptd.PAN_Number),
+  MANY TO MANY JOIN CatalogService_PAN_PRICE_DETAILS_drafts AS vendtopd ON ((Proposed_Vendor_Code = vendtopd.Proposed_Vendor_Code) AND PAN_Number = vendtopd.PAN_Number),
+  MANY TO ONE JOIN CatalogService_tab1_drafts AS vendor_datatotab1 ON (vendor_datatotab1.PAN_Number = PAN_Number),
+  MANY TO ONE JOIN CatalogService_DraftAdministrativeData AS DraftAdministrativeData ON (DraftAdministrativeData.DraftUUID = DraftAdministrativeData_DraftUUID)
+)

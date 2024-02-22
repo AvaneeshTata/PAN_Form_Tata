@@ -1,7 +1,5 @@
 # CAP Sync_Project
 .cdsrc-private.json
-gen/
-target/
 
 resources
 # Web IDE, App Studio

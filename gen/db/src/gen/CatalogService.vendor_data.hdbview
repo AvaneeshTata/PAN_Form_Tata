@@ -1,0 +1,21 @@
+VIEW CatalogService_vendor_data AS SELECT
+  PAN_vendor_data_0.Proposed_Vendor_Code,
+  PAN_vendor_data_0.PAN_Number,
+  PAN_vendor_data_0.Awarded_Vendor,
+  PAN_vendor_data_0.Vendor_Name,
+  PAN_vendor_data_0.Vendor_Location,
+  PAN_vendor_data_0.Technically_Approved,
+  PAN_vendor_data_0.Client_Approved,
+  PAN_vendor_data_0.Original_quote,
+  PAN_vendor_data_0.Final_Quote,
+  PAN_vendor_data_0.Order_amount_OR_Split_order_amount,
+  PAN_vendor_data_0.Discount_Amount,
+  PAN_vendor_data_0.Discount_percentage,
+  PAN_vendor_data_0."RANK"
+FROM proj_schema_PAN_vendor_data AS PAN_vendor_data_0
+WITH ASSOCIATIONS (
+  MANY TO ONE JOIN CatalogService_Fvendor_responseoo AS vendtovenr ON ((Proposed_Vendor_Code = vendtovenr.Proposed_Vendor_Code) AND PAN_Number = vendtovenr.PAN_Number),
+  MANY TO MANY JOIN CatalogService_PAYMENT_TERM_DETAILS AS vendtoptd ON ((Proposed_Vendor_Code = vendtoptd.Proposed_Vendor_Code) AND PAN_Number = vendtoptd.PAN_Number),
+  MANY TO MANY JOIN CatalogService_PAN_PRICE_DETAILS AS vendtopd ON ((Proposed_Vendor_Code = vendtopd.Proposed_Vendor_Code) AND PAN_Number = vendtopd.PAN_Number),
+  MANY TO ONE JOIN CatalogService_tab1 AS vendor_datatotab1 ON (vendor_datatotab1.PAN_Number = PAN_Number)
+)

@@ -426,7 +426,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 					// 	 var res1 = res.split("'");
 					var baseUrl = this.base.getAppComponent().getManifestObject()._oBaseUri._string;
 					//  let url =`/odata/v4/pan-approval/PAN_Details_APR/${res1[1]}/tab1toWORKFLOW_HISTORY`;
-					let url = `/odata/v4/catalog/tab1?$filter=(PAN_Number%20eq%20%27${res1[1]}%27)&$expand=tab1toWORKFLOW_HISTORY`
+					let url = baseUrl +`odata/v4/catalog/tab1?$filter=(PAN_Number%20eq%20%27${res1[1]}%27)&$expand=tab1toWORKFLOW_HISTORY`
 					debugger
 					await $.ajax({
 						url: url,
