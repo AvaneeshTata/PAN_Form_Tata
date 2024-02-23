@@ -955,6 +955,9 @@
         "HSN_OR_SAC_Code": {
           "type": "cds.String"
         },
+        "extendedPrice": {
+          "type": "cds.String"
+        },
         "Item_Short_Description": {
           "type": "cds.String"
         },
@@ -3147,6 +3150,9 @@
           },
           "type": "cds.String"
         },
+        "extendedPrice": {
+          "type": "cds.String"
+        },
         "Item_Short_Description": {
           "@Common.FieldControl": {
             "#": "ReadOnly"
@@ -4587,6 +4593,9 @@
           "type": "cds.String"
         },
         "HSN_OR_SAC_Code": {
+          "type": "cds.String"
+        },
+        "extendedPrice": {
           "type": "cds.String"
         },
         "Item_Short_Description": {

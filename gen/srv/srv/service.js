@@ -170,8 +170,8 @@ this.on('InsertData',async (req)=>{
         if(resp1[i].status=='New'){
             let hist = await SELECT.from(WORKFLOW_HISTORY).where`PAN_Number=${resp1[i].PAN_Number}`;
             if(hist.length==0){
-                // let url = "/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant='"+resp2['Order_Location_OR_Plant']+"'&plantCode='"+resp2['Order_Location_OR_Plant']+"'&sbg='"+resp2["SBG"]+"'&sub='"+resp2["SBU"]+"'";
-                let url = "/sap/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant=%27 %27&plantCode=%27"+resp2['Plant_Code']+"%27&sbg=%27"+resp2["SBG"]+"%27&sub=%27"+resp2["SBU"]+"%27"
+                let url = "/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant='"+resp2['Order_Location_OR_Plant']+"'&plantCode='"+resp2['Order_Location_OR_Plant']+"'&sbg='"+resp2["SBG"]+"'&sub='"+resp2["SBU"]+"'";
+                // let url = "/sap/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant=%27 %27&plantCode=%27"+resp2['Plant_Code']+"%27&sbg=%27"+resp2["SBG"]+"%27&sub=%27"+resp2["SBU"]+"%27"
                 let response = await AribaSrv.get(url);
                 console.log(response);
                 for(j=0;j<response.length;j++){
@@ -366,7 +366,7 @@ this.on('InsertData',async (req)=>{
             "json":JSON.stringify(data_m)
         }
         
-        response = await AribaSrv.post('/sap/opu/odata/sap/ZARB_BTP_ATTACHMENT_SRV/panHeaderSet',body);
+        response = await AribaSrv.post('/opu/odata/sap/ZARB_BTP_ATTACHMENT_SRV/panHeaderSet',body);
         console.log(response);
         console.log("resssssssssssssssssssssssssssssssssssssssssssssssssssss");
         let srv = await UPDATE(tab1,data.PAN_Number).with({
