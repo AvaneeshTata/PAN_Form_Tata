@@ -13,44 +13,20 @@
     <Schema Namespace="PanApproval" xmlns="http://docs.oasis-open.org/odata/ns/edm">
       <EntityContainer Name="EntityContainer">
         <EntitySet Name="PAN_Details_APR" EntityType="PanApproval.PAN_Details_APR">
-          <NavigationPropertyBinding Path="tab1totab2" Target="PAN_WEB_EVENT_APR"/>
-          <NavigationPropertyBinding Path="tab1totab3" Target="PAN_TYPE_APR"/>
-          <NavigationPropertyBinding Path="tab1toWORKFLOW_HISTORY" Target="PAN_WORKFLOW_HISTORY_APR"/>
+          <NavigationPropertyBinding Path="tab1totab2/tab2totab1" Target="PAN_Details_APR"/>
+          <NavigationPropertyBinding Path="tab1totab3/tab3totab1" Target="PAN_Details_APR"/>
+          <NavigationPropertyBinding Path="tab1toWORKFLOW_HISTORY/WORKFLOW_HISTORYtotab1" Target="PAN_Details_APR"/>
           <NavigationPropertyBinding Path="tab1topdf" Target="PAN_attachments_APR"/>
-          <NavigationPropertyBinding Path="tab1tovendor_data" Target="PAN_vendor_data_APR"/>
-          <NavigationPropertyBinding Path="tab1tocom" Target="PAN_Comments_APR"/>
-        </EntitySet>
-        <EntitySet Name="PAN_WEB_EVENT_APR" EntityType="PanApproval.PAN_WEB_EVENT_APR">
-          <NavigationPropertyBinding Path="tab2totab1" Target="PAN_Details_APR"/>
-        </EntitySet>
-        <EntitySet Name="PAN_TYPE_APR" EntityType="PanApproval.PAN_TYPE_APR">
-          <NavigationPropertyBinding Path="tab3totab1" Target="PAN_Details_APR"/>
-        </EntitySet>
-        <EntitySet Name="PAN_vendor_data_APR" EntityType="PanApproval.PAN_vendor_data_APR">
-          <NavigationPropertyBinding Path="vendtovenr" Target="PAN_vendor_response_APR"/>
-          <NavigationPropertyBinding Path="vendtoptd" Target="PAN_PAYMENT_TERM_DETAILS_APR"/>
-          <NavigationPropertyBinding Path="vendtopd" Target="PAN_PRICE_DETAILS_APR"/>
-          <NavigationPropertyBinding Path="vendor_datatotab1" Target="PAN_Details_APR"/>
-        </EntitySet>
-        <EntitySet Name="PAN_vendor_response_APR" EntityType="PanApproval.PAN_vendor_response_APR">
-          <NavigationPropertyBinding Path="venrtovend" Target="PAN_vendor_data_APR"/>
-        </EntitySet>
-        <EntitySet Name="PAN_PAYMENT_TERM_DETAILS_APR" EntityType="PanApproval.PAN_PAYMENT_TERM_DETAILS_APR">
-          <NavigationPropertyBinding Path="ptdtovend" Target="PAN_vendor_data_APR"/>
-        </EntitySet>
-        <EntitySet Name="PAN_PRICE_DETAILS_APR" EntityType="PanApproval.PAN_PRICE_DETAILS_APR">
-          <NavigationPropertyBinding Path="pdtovend" Target="PAN_vendor_data_APR"/>
-        </EntitySet>
-        <EntitySet Name="PAN_WORKFLOW_HISTORY_APR" EntityType="PanApproval.PAN_WORKFLOW_HISTORY_APR">
-          <NavigationPropertyBinding Path="WORKFLOW_HISTORYtotab1" Target="PAN_Details_APR"/>
+          <NavigationPropertyBinding Path="tab1tovendor_data/vendtovenr/venrtovend" Target="PAN_Details_APR/tab1tovendor_data"/>
+          <NavigationPropertyBinding Path="tab1tovendor_data/vendtoptd/ptdtovend" Target="PAN_Details_APR/tab1tovendor_data"/>
+          <NavigationPropertyBinding Path="tab1tovendor_data/vendtopd/pdtovend" Target="PAN_Details_APR/tab1tovendor_data"/>
+          <NavigationPropertyBinding Path="tab1tovendor_data/vendor_datatotab1" Target="PAN_Details_APR"/>
+          <NavigationPropertyBinding Path="tab1tocom/comtotab1" Target="PAN_Details_APR"/>
         </EntitySet>
         <EntitySet Name="PAN_attachments_APR" EntityType="PanApproval.PAN_attachments_APR">
           <NavigationPropertyBinding Path="pdftotab1" Target="PAN_Details_APR"/>
         </EntitySet>
         <EntitySet Name="PAN_Payment_Method_Drop_APR" EntityType="PanApproval.PAN_Payment_Method_Drop_APR"/>
-        <EntitySet Name="PAN_Comments_APR" EntityType="PanApproval.PAN_Comments_APR">
-          <NavigationPropertyBinding Path="comtotab1" Target="PAN_Details_APR"/>
-        </EntitySet>
         <EntitySet Name="vendorTaxDetails_APR" EntityType="PanApproval.vendorTaxDetails_APR"/>
         <FunctionImport Name="sendforapproval" Function="PanApproval.sendforapproval"/>
         <FunctionImport Name="InsertData" Function="PanApproval.InsertData"/>
@@ -107,22 +83,12 @@
         <Property Name="Comments" Type="Edm.String"/>
         <Property Name="submitted_by" Type="Edm.String"/>
         <Property Name="submitted_date" Type="Edm.String"/>
-        <NavigationProperty Name="tab1totab2" Type="Collection(PanApproval.PAN_WEB_EVENT_APR)" Partner="tab2totab1">
-          <OnDelete Action="Cascade"/>
-        </NavigationProperty>
-        <NavigationProperty Name="tab1totab3" Type="Collection(PanApproval.PAN_TYPE_APR)" Partner="tab3totab1">
-          <OnDelete Action="Cascade"/>
-        </NavigationProperty>
-        <NavigationProperty Name="tab1toWORKFLOW_HISTORY" Type="Collection(PanApproval.PAN_WORKFLOW_HISTORY_APR)" Partner="WORKFLOW_HISTORYtotab1">
-          <OnDelete Action="Cascade"/>
-        </NavigationProperty>
+        <NavigationProperty Name="tab1totab2" Type="Collection(PanApproval.PAN_WEB_EVENT_APR)" Partner="tab2totab1" ContainsTarget="true"/>
+        <NavigationProperty Name="tab1totab3" Type="Collection(PanApproval.PAN_TYPE_APR)" Partner="tab3totab1" ContainsTarget="true"/>
+        <NavigationProperty Name="tab1toWORKFLOW_HISTORY" Type="Collection(PanApproval.PAN_WORKFLOW_HISTORY_APR)" Partner="WORKFLOW_HISTORYtotab1" ContainsTarget="true"/>
         <NavigationProperty Name="tab1topdf" Type="Collection(PanApproval.PAN_attachments_APR)"/>
-        <NavigationProperty Name="tab1tovendor_data" Type="Collection(PanApproval.PAN_vendor_data_APR)" Partner="vendor_datatotab1">
-          <OnDelete Action="Cascade"/>
-        </NavigationProperty>
-        <NavigationProperty Name="tab1tocom" Type="Collection(PanApproval.PAN_Comments_APR)" Partner="comtotab1">
-          <OnDelete Action="Cascade"/>
-        </NavigationProperty>
+        <NavigationProperty Name="tab1tovendor_data" Type="Collection(PanApproval.PAN_vendor_data_APR)" Partner="vendor_datatotab1" ContainsTarget="true"/>
+        <NavigationProperty Name="tab1tocom" Type="Collection(PanApproval.PAN_Comments_APR)" Partner="comtotab1" ContainsTarget="true"/>
       </EntityType>
       <EntityType Name="PAN_WEB_EVENT_APR">
         <Key>
@@ -136,9 +102,7 @@
         <Property Name="date" Type="Edm.String"/>
         <Property Name="numberOfVendorsParticipated" Type="Edm.String"/>
         <Property Name="l1AmountObtained" Type="Edm.String"/>
-        <NavigationProperty Name="tab2totab1" Type="PanApproval.PAN_Details_APR" Partner="tab1totab2">
-          <ReferentialConstraint Property="PAN_Number" ReferencedProperty="PAN_Number"/>
-        </NavigationProperty>
+        <NavigationProperty Name="tab2totab1" Type="PanApproval.PAN_Details_APR" Partner="tab1totab2"/>
       </EntityType>
       <EntityType Name="PAN_TYPE_APR">
         <Key>
@@ -152,9 +116,7 @@
         <Property Name="submittedOn" Type="Edm.String"/>
         <Property Name="receivedOn" Type="Edm.String"/>
         <Property Name="timeTakenForApproval" Type="Edm.String"/>
-        <NavigationProperty Name="tab3totab1" Type="PanApproval.PAN_Details_APR" Partner="tab1totab3">
-          <ReferentialConstraint Property="PAN_Number" ReferencedProperty="PAN_Number"/>
-        </NavigationProperty>
+        <NavigationProperty Name="tab3totab1" Type="PanApproval.PAN_Details_APR" Partner="tab1totab3"/>
       </EntityType>
       <EntityType Name="PAN_vendor_data_APR">
         <Key>
@@ -174,19 +136,10 @@
         <Property Name="Discount_Amount" Type="Edm.String"/>
         <Property Name="Discount_percentage" Type="Edm.String"/>
         <Property Name="Rank" Type="Edm.String"/>
-        <NavigationProperty Name="vendtovenr" Type="PanApproval.PAN_vendor_response_APR">
-          <OnDelete Action="Cascade"/>
-          <ReferentialConstraint Property="PAN_Number" ReferencedProperty="PAN_Number"/>
-        </NavigationProperty>
-        <NavigationProperty Name="vendtoptd" Type="Collection(PanApproval.PAN_PAYMENT_TERM_DETAILS_APR)">
-          <OnDelete Action="Cascade"/>
-        </NavigationProperty>
-        <NavigationProperty Name="vendtopd" Type="Collection(PanApproval.PAN_PRICE_DETAILS_APR)">
-          <OnDelete Action="Cascade"/>
-        </NavigationProperty>
-        <NavigationProperty Name="vendor_datatotab1" Type="PanApproval.PAN_Details_APR" Partner="tab1tovendor_data">
-          <ReferentialConstraint Property="PAN_Number" ReferencedProperty="PAN_Number"/>
-        </NavigationProperty>
+        <NavigationProperty Name="vendtovenr" Type="PanApproval.PAN_vendor_response_APR" ContainsTarget="true"/>
+        <NavigationProperty Name="vendtoptd" Type="Collection(PanApproval.PAN_PAYMENT_TERM_DETAILS_APR)" ContainsTarget="true"/>
+        <NavigationProperty Name="vendtopd" Type="Collection(PanApproval.PAN_PRICE_DETAILS_APR)" ContainsTarget="true"/>
+        <NavigationProperty Name="vendor_datatotab1" Type="PanApproval.PAN_Details_APR" Partner="tab1tovendor_data"/>
       </EntityType>
       <EntityType Name="PAN_vendor_response_APR">
         <Key>
@@ -237,9 +190,7 @@
         <Property Name="Commercial_Terms" Type="Edm.String"/>
         <Property Name="Compliance_Terms" Type="Edm.String"/>
         <Property Name="Others" Type="Edm.String"/>
-        <NavigationProperty Name="venrtovend" Type="PanApproval.PAN_vendor_data_APR">
-          <ReferentialConstraint Property="Proposed_Vendor_Code" ReferencedProperty="Proposed_Vendor_Code"/>
-        </NavigationProperty>
+        <NavigationProperty Name="venrtovend" Type="PanApproval.PAN_vendor_data_APR"/>
       </EntityType>
       <EntityType Name="PAN_PAYMENT_TERM_DETAILS_APR">
         <Key>
@@ -250,16 +201,14 @@
         <Property Name="Proposed_Vendor_Code" Type="Edm.String" Nullable="false"/>
         <Property Name="PAN_Number" Type="Edm.String" Nullable="false"/>
         <Property Name="iddd" Type="Edm.String" Nullable="false"/>
-        <Property Name="slNo" Type="Edm.String"/>
+        <Property Name="slNo" Type="Edm.Int32"/>
         <Property Name="Payment_methord" Type="Edm.String" DefaultValue="RTGS payment"/>
         <Property Name="Percentage" Type="Edm.String"/>
         <Property Name="Description" Type="Edm.String"/>
         <Property Name="Due_date" Type="Edm.String"/>
         <Property Name="Mandatory_Documents_OR_Submissions" Type="Edm.String"/>
         <Property Name="To_be_certified_in_Company" Type="Edm.String"/>
-        <NavigationProperty Name="ptdtovend" Type="PanApproval.PAN_vendor_data_APR">
-          <ReferentialConstraint Property="Proposed_Vendor_Code" ReferencedProperty="Proposed_Vendor_Code"/>
-        </NavigationProperty>
+        <NavigationProperty Name="ptdtovend" Type="PanApproval.PAN_vendor_data_APR"/>
       </EntityType>
       <EntityType Name="PAN_PRICE_DETAILS_APR">
         <Key>
@@ -278,9 +227,7 @@
         <Property Name="Amount" Type="Edm.String"/>
         <Property Name="Indian_Tax_PER" Type="Edm.String"/>
         <Property Name="Quantity_Over_Delivery_Tolerance" Type="Edm.String"/>
-        <NavigationProperty Name="pdtovend" Type="PanApproval.PAN_vendor_data_APR">
-          <ReferentialConstraint Property="Proposed_Vendor_Code" ReferencedProperty="Proposed_Vendor_Code"/>
-        </NavigationProperty>
+        <NavigationProperty Name="pdtovend" Type="PanApproval.PAN_vendor_data_APR"/>
       </EntityType>
       <EntityType Name="PAN_WORKFLOW_HISTORY_APR">
         <Key>
@@ -300,9 +247,7 @@
         <Property Name="End_DateAND_Time" Type="Edm.String"/>
         <Property Name="Days_Taken" Type="Edm.String"/>
         <Property Name="Remarks" Type="Edm.String"/>
-        <NavigationProperty Name="WORKFLOW_HISTORYtotab1" Type="PanApproval.PAN_Details_APR" Partner="tab1toWORKFLOW_HISTORY">
-          <ReferentialConstraint Property="PAN_Number" ReferencedProperty="PAN_Number"/>
-        </NavigationProperty>
+        <NavigationProperty Name="WORKFLOW_HISTORYtotab1" Type="PanApproval.PAN_Details_APR" Partner="tab1toWORKFLOW_HISTORY"/>
       </EntityType>
       <EntityType Name="PAN_attachments_APR">
         <Key>
@@ -345,9 +290,7 @@
         <Property Name="user" Type="Edm.String"/>
         <Property Name="Comments" Type="Edm.String"/>
         <Property Name="status" Type="Edm.String"/>
-        <NavigationProperty Name="comtotab1" Type="PanApproval.PAN_Details_APR" Partner="tab1tocom">
-          <ReferentialConstraint Property="PAN_Number" ReferencedProperty="PAN_Number"/>
-        </NavigationProperty>
+        <NavigationProperty Name="comtotab1" Type="PanApproval.PAN_Details_APR" Partner="tab1tocom"/>
       </EntityType>
       <EntityType Name="vendorTaxDetails_APR">
         <Key>

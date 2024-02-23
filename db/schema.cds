@@ -242,7 +242,7 @@ entity PAN_PAYMENT_TERM_DETAILS {
 key Proposed_Vendor_Code : String; 
     key  PAN_Number : String;
    key iddd : String;
-   slNo:String;
+   slNo:Integer;
   Payment_methord : String default'RTGS payment';
   //  ADVANCE : String;
   //  Progress : String;
@@ -311,6 +311,7 @@ entity PAN_PRICE_DETAILS{
   key Item_Code : String;
     HSN_OR_SAC_Code : String;
    
+   extendedPrice:String;
    Item_Short_Description : String;
    UOM : String;
    Quantity : String;
@@ -339,6 +340,8 @@ entity PAN_Comments:managed{
   status:String;
   comtotab1:Association to one PAN_Details on comtotab1.PAN_Number = PAN_Number;
 }
+
+@cds.persistence.exists
 entity vendorTaxDetails{
   key Proposed_Vendor_Code : String; 
   key  PAN_Number : String;

@@ -222,11 +222,6 @@ annotate service.tab1 with @(
                 $Type : 'UI.DataField',
                 Value : number_of_vendors_invited,
                 Label : 'Number Of Vendors Invited',
-            },
-            {
-                $Type : 'UI.DataField',
-                Value : total_levels_of_approval,
-                Label : 'Total Levels Of Approval',
             },],
     }
 );

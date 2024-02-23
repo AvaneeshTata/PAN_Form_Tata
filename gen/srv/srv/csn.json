@@ -716,7 +716,7 @@
           "type": "cds.String"
         },
         "slNo": {
-          "type": "cds.String"
+          "type": "cds.Integer"
         },
         "Payment_methord": {
           "type": "cds.String",
@@ -1109,6 +1109,7 @@
     },
     "proj_schema.vendorTaxDetails": {
       "kind": "entity",
+      "@cds.persistence.exists": true,
       "elements": {
         "Proposed_Vendor_Code": {
           "key": true,
@@ -1432,13 +1433,6 @@
             "=": "number_of_vendors_invited"
           },
           "Label": "Number Of Vendors Invited"
-        },
-        {
-          "$Type": "UI.DataField",
-          "Value": {
-            "=": "total_levels_of_approval"
-          },
-          "Label": "Total Levels Of Approval"
         }
       ],
       "@Common.SemanticKey": [
@@ -2981,7 +2975,7 @@
           "type": "cds.String"
         },
         "slNo": {
-          "type": "cds.String"
+          "type": "cds.Integer"
         },
         "Payment_methord": {
           "@Common.ValueList.$Type": "Common.ValueListType",
@@ -4524,7 +4518,7 @@
           "type": "cds.String"
         },
         "slNo": {
-          "type": "cds.String"
+          "type": "cds.Integer"
         },
         "Payment_methord": {
           "type": "cds.String",

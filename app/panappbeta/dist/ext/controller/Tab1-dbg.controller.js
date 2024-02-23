@@ -27,7 +27,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 			 * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
 			 * @memberOf panappbeta.ext.controller.Tab1
 			 */
-			onInit: function () {
+			onInit: function () {debugger
 				// you can access the Fiori elements extensionAPI via this.base.getExtensionAPI
 				var oModel = this.base.getExtensionAPI().getModel();
 				// this.getExtensionAPI.refresh();

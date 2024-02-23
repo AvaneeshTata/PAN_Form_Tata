@@ -10,6 +10,31 @@ module.exports = cds.service.impl(async function () {
     } = this.entities;
 
 const AribaSrv = await cds.connect.to('ARIBA_DEV');
+const c1re = await cds.connect.to('iflow1');
+
+this.before('READ',tab1,async (req)=>{debugger
+    if(req.params.length == 0)
+    try {
+        let pan = await SELECT.from(tab1);
+        pan.forEach(async element => {
+            if(element.Plant_Code){
+                let urlll = `/odata/v4/my/plant/${element.Plant_Code}`;
+                try{
+            let plantData = await c1re.get(urlll); 
+            // console.log();
+            if(plantData)
+            await UPDATE(tab1,element.PAN_Number).with({SBG:`${plantData.SBG}`,SBU:`${plantData.SBU}`})   
+                }catch(error){debugger
+console.log(error.message);
+                }
+            }
+        }); 
+        
+    } catch (error) {
+        console.log(error);
+    }
+
+});
 
 this.on('Listdata', async (req)=>{
     let data = JSON.parse(req.data.ID);

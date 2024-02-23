@@ -1,1 +1,14 @@
-{}
+{
+    "odata": {
+        "flavor": "x4"
+      },
+      "requires": {
+        "iflow1": {
+          "kind": "rest",
+          "credentials": {
+            "url": "https://tata-projects-limited-btp-dev-0or0hi20-dev-space-plantm790a9887.cfapps.eu10-004.hana.ondemand.com"
+          }
+        }
+    } 
+    
+}

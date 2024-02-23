@@ -3,6 +3,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 	// var oUserInfoService = sap.ushell.Container.getService("UserInfo");
 	// var oUser = oUserInfoService.getUser();
 	var ButtonType = library.ButtonType;
+	var DialogType = library.DialogType;
 	var oBusyDialog = new sap.m.BusyDialog("oBusyDialog");
 	let dialog;
 	var cdialog;
@@ -85,6 +86,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 					debugger
 					dialog = new sap.m.Dialog({
 						title: "Confirm",
+						type: DialogType.Message,
 						content: new sap.m.Text({ text: "   Submit PAN Form For Approval  " }),
 						beginButton: new sap.m.Button({
 							type: ButtonType.Emphasized,
@@ -97,13 +99,25 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 								let sFunctionName = "sendforapproval";
 								// let oFunction = oModel.bindContext(`/${sFunctionName}(...)`);
 								let appr_url = window.location.href;
+								// let nav_url = appr_url.split("obj1-display");
+								let nav_url = window.location.origin;
+								let search = window.location.search;
+								let nav = search.split("&");
+								let nav1 = nav[0];
+								let hash = window.location.hash;
+								hash = hash.replace("obj1-display","pan_approval-display");
+								hash = hash.replace("panappbeta","panapproval");
+								hash = hash.replace("tab1","PAN_Details_APR");
+								
 								var pieces = appr_url.split("(");
 								var res = pieces[1];
 								var res1 = res.split("'");
 
 								let comp_url = "https://btp-dev-0or0hi20.launchpad.cfapps.eu10.hana.ondemand.com/site?siteId=94a17d9a-05b5-425d-b51d-2cd74a2c2762#pan_approval-display?sap-ui-app-id-hint=saas_approuter_panapproval&/PAN_Details_APR('" + res1[1] + "')";
+								// let comp = nav_url[0]+"pan_approval-display?sap-ui-app-id-hint=saas_approuter_panapproval&/PAN_Details_APR('" + res1[1] + "')";
 								// let oFunction = oModel.bindContext(`/Books`);
 								// let data = {some: "data"};
+								let comp = nav_url+nav1+hash;
 								let body = {
 									"url": comp_url,
 									"PAN_Number": res1[1],
@@ -426,7 +440,8 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 					// 	 var res1 = res.split("'");
 					var baseUrl = this.base.getAppComponent().getManifestObject()._oBaseUri._string;
 					//  let url =`/odata/v4/pan-approval/PAN_Details_APR/${res1[1]}/tab1toWORKFLOW_HISTORY`;
-					let url = baseUrl +`odata/v4/catalog/tab1?$filter=(PAN_Number%20eq%20%27${res1[1]}%27)&$expand=tab1toWORKFLOW_HISTORY`
+					let url = baseUrl+`odata/v4/catalog/tab1?$filter=(PAN_Number%20eq%20%27${res1[1]}%27)&$expand=tab1toWORKFLOW_HISTORY`
+					// let url =`/odata/v4/catalog/tab1?$filter=(PAN_Number%20eq%20%27${res1[1]}%27)&$expand=tab1toWORKFLOW_HISTORY`
 					debugger
 					await $.ajax({
 						url: url,
@@ -939,49 +954,115 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 
 					}
 					var frag4 = this.base.getView().getContent()[0]
-					function resize(id) {
-						debugger
-						// oBusyDialog.open();
-						let subCol = sap.ui.getCore().byId(id).mAggregations.content.getContent().mAggregations.columns;
-						subCol.forEach(col => {
-							let colName = col.mProperties.dataProperty;
-							let mLength = colName.length;
-							let valuevendor = sap.ui.getCore().byId(id).mAggregations.content.getContent().mAggregations._content.mBindingInfos.rows.binding.oCache.getValue();
-							const maxLength = Math.max(...valuevendor.map(item => (item[colName]?.length ?? 8)));
-							if (maxLength > mLength)
-								mLength = maxLength;
-							const width = (mLength+2) * 8 + 20 + "px";
+					function resize(id) {debugger
+					let subCol = sap.ui.getCore().byId(id).mAggregations.content.getContent().mAggregations.columns;
+				subCol.forEach(col =>{
+					let colName = col.mProperties.dataProperty;
+					var colHeader = col.getHeader();
+							var mLength = colHeader.length;	
+								let valuevendor = sap.ui.getCore().byId(id).mAggregations.content.getContent().mAggregations._content.mBindingInfos.rows.binding.oCache.getAllElements();
+								const maxLength = Math.max(...valuevendor.map(item => (item[colName]?.length ?? 8)));
+						if(maxLength > mLength)
+						mLength = maxLength; 
+				const width = mLength * 8 + 20 + "px"; 
+
+				col.setWidth(width)
+							});	
+				}
+				
+					frag4.attachSectionChange(function(){debugger
+						var section = this.getScrollingSectionId()
+						if(section == "panappbeta::tab1ObjectPage--fe::FacetSection::GeneralDetails1"){ 
+							resize("__block1");
+							resize("__block2");
+						};
+
+							debugger
+							var columns = sap.ui.getCore().byId(`${section}`).mAggregations._grid.mAggregations.content[0].mAggregations._grid.mAggregations.content[0].mAggregations.content.mAggregations.content.mAggregations.columns;
+							if(columns != undefined )
+							columns.forEach(col =>{
+								let colName = col.mProperties.dataProperty;
+								let mLength = colName.length;
+											let valuevendor = sap.ui.getCore().byId(`${section}`).mAggregations._grid.mAggregations.content[0].mAggregations._grid.mAggregations.content[0].mAggregations.content.mAggregations.content.mAggregations._content.mBindingInfos.rows.binding.oCache.getValue()
+											const maxLength = Math.max(...valuevendor.map(item => (item[colName]?.length ?? 8)));
+									if(maxLength > mLength)
+									mLength = maxLength; 
+							const width = mLength * 8 + 20 + "px"; 
 
 							col.setWidth(width)
-						});
-						// oBusyDialog.close();
-					} debugger
-					resize("__block1");
-					resize("__block2");
-					// frag4.attachSectionChange(function () {
-						debugger
+										});	
 						
-						function tableresize(section){
-						// if(sap.ui.getCore().byId(`${section}`).mAggregations._grid.mAggregations.content[0].getTitle()=="Vendor Details"){
-							// oBusyDialog.open();
-						var columns = sap.ui.getCore().byId(`${section}`).mAggregations._grid.mAggregations.content[0].getContent().getContent().getColumns();
-						if (columns != undefined)
-							columns.forEach(col => {
-								var colName = col.mProperties.dataProperty;
-								var colHeader = col.getHeader();
-								var mLength = colHeader.length;
-								var valuevendor = sap.ui.getCore().byId(`${section}`).mAggregations._grid.mAggregations.content[0].getContent().getContent().mAggregations._content.mBindingInfos.rows.binding.oCache.getValue();
-								const maxLength = Math.max(...valuevendor.map(item => (item[colName]?.length ?? 8)));
-								if (maxLength > mLength)
-									mLength = maxLength;
-								const width = (mLength+2) * 8 + 20 + "px";
+					   });
 
-								col.setWidth(width)
-							});
-							// oBusyDialog.close();
-						// }
-					}
-					tableresize("panappbeta::tab1ObjectPage--fe::FacetSubSection::VendorData");
+
+
+
+
+
+					// function resize(id) {debugger
+					// 	let subCol = sap.ui.getCore().byId(id).mAggregations.content.getContent().mAggregations.columns;
+					// subCol.forEach(col =>{
+					// 	let colName = col.mProperties.dataProperty;
+					// 	var colHeader = col.getHeader();
+					// 			var mLength = colHeader.length;	
+					// 				let valuevendor = sap.ui.getCore().byId(id).mAggregations.content.getContent().mAggregations._content.mBindingInfos.rows.binding.oCache.getAllElements();
+					// 				const maxLength = Math.max(...valuevendor.map(item => (item[colName]?.length ?? 8)));
+					// 		if(maxLength > mLength)
+					// 		mLength = maxLength; 
+					// const width = mLength * 8 + 20 + "px"; 
+
+					// col.setWidth(width)
+					// 			});	
+					// }
+					// var frag4 = this.base.getView().getContent()[0]
+					// var section = this.getScrollingSectionId()
+					// if(section == "panapproval::PAN_Details_APRObjectPage--fe::FacetSection::GeneralDetails1"){ 
+					// 	resize("__block1");
+					// 	resize("__block2");
+					// };
+					// function resize(id) {
+					// 	debugger
+					// 	// oBusyDialog.open();
+					// 	let subCol = sap.ui.getCore().byId(id).mAggregations.content.getContent().mAggregations.columns;
+					// 	subCol.forEach(col => {
+					// 		let colName = col.mProperties.dataProperty;
+					// 		let mLength = colName.length;
+					// 		let valuevendor = sap.ui.getCore().byId(id).mAggregations.content.getContent().mAggregations._content.mBindingInfos.rows.binding.oCache.getValue();
+					// 		const maxLength = Math.max(...valuevendor.map(item => (item[colName]?.length ?? 8)));
+					// 		if (maxLength > mLength)
+					// 			mLength = maxLength;
+					// 		const width = (mLength+2) * 8 + 20 + "px";
+
+					// 		col.setWidth(width)
+					// 	});
+					// 	// oBusyDialog.close();
+					// } debugger
+					// resize("__block1");
+					// resize("__block2");
+					// // frag4.attachSectionChange(function () {
+					// 	debugger
+						
+					// 	function tableresize(section){
+					// 	// if(sap.ui.getCore().byId(`${section}`).mAggregations._grid.mAggregations.content[0].getTitle()=="Vendor Details"){
+					// 		// oBusyDialog.open();
+					// 	var columns = sap.ui.getCore().byId(`${section}`).mAggregations._grid.mAggregations.content[0].getContent().getContent().getColumns();
+					// 	if (columns != undefined)
+					// 		columns.forEach(col => {
+					// 			var colName = col.mProperties.dataProperty;
+					// 			var colHeader = col.getHeader();
+					// 			var mLength = colHeader.length;
+					// 			var valuevendor = sap.ui.getCore().byId(`${section}`).mAggregations._grid.mAggregations.content[0].getContent().getContent().mAggregations._content.mBindingInfos.rows.binding.oCache.getValue();
+					// 			const maxLength = Math.max(...valuevendor.map(item => (item[colName]?.length ?? 8)));
+					// 			if (maxLength > mLength)
+					// 				mLength = maxLength;
+					// 			const width = (mLength+2) * 8 + 20 + "px";
+
+					// 			col.setWidth(width)
+					// 		});
+					// 		// oBusyDialog.close();
+					// 	// }
+					// }
+					// tableresize("panappbeta::tab1ObjectPage--fe::FacetSubSection::VendorData");
 							
 
 					// });
@@ -989,7 +1070,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 					oBusyDialog.close();
 
 				},
-				onAfterBinding: function (oBindingContext) {
+				onAfterBinding: function (oBindingContext) {	
 					debugger
 					var path_1 = this.getView().getContent()[0].attachSectionChange(
 						function(oEvent){

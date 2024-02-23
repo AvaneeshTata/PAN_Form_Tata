@@ -2,7 +2,7 @@
     xmlns:u="sap.ui.unified"
     xmlns:rich="sap.ui.richtexteditor"
     xmlns="sap.m">
-j
+
     <Dialog id="_IDDialog" title="Approval History" class="sapUiResponsiveContentPadding" beforeOpen=".onBeforeOpen" afterClose=".onAfterClose" resizable="true" draggable="true">
         <content>
             <VBox id="box" width="800px" height="500px">
