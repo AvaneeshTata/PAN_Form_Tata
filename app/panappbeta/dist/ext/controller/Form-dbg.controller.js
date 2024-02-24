@@ -117,9 +117,9 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 								// let comp = nav_url[0]+"pan_approval-display?sap-ui-app-id-hint=saas_approuter_panapproval&/PAN_Details_APR('" + res1[1] + "')";
 								// let oFunction = oModel.bindContext(`/Books`);
 								// let data = {some: "data"};
-								let comp = nav_url+nav1+hash;
+								let comp = nav_url+'/site'+nav1+hash;
 								let body = {
-									"url": comp_url,
+									"url": comp,
 									"PAN_Number": res1[1],
 									"buttonclicked": "sendforApproval"
 								};
