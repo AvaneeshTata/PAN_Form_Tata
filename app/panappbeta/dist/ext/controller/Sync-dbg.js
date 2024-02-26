@@ -5,7 +5,7 @@ sap.ui.define([
     var oBusyDialog=new sap.m.BusyDialog();
     
     return {
-        Sync: function(oEvent) {debugger
+        Sync: function(oEvent) { 
             // oScroll.addContent(new sap.uxap.ObjectPageSubSection({
             //     // title: `Level ${levelArray[0].level}`
             // }));
@@ -19,7 +19,7 @@ sap.ui.define([
                                 type: "Emphasized",
                                 press:async function(oEvent,that){
                                     oBusyDialog.open();
-                                    debugger
+                                     
                                     let fromDate = this.getParent().getContent()[0].getItems()[0].getDateValue();
                                     let toDate = this.getParent().getContent()[0].getItems()[2].getDateValue();
 
@@ -51,7 +51,7 @@ sap.ui.define([
                             endButton: new sap.m.Button({
                                 text: "Cancel",
                                 press: function(oEvent){
-                                    debugger
+                                     
                                     this.getParent().close();
                                 }
                             })

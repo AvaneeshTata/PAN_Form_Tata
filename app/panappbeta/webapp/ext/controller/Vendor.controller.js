@@ -1,7 +1,7 @@
 sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExtension) {
 	'use strict';
 	const Fimport= async function(oModel,name,data){
-		debugger
+		 
 		console.log(oModel);
 		let oFunction = oModel.bindContext(`/${name}(...)`);
 					// let oFunction = oModel.bindContext(`/Books`);
@@ -31,14 +31,14 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 				var oModel = this.base.getExtensionAPI().getModel();
 			},
 			routing:{
-				onAfterBinding:async function(oBindingContext){debugger
+				onAfterBinding:async function(oBindingContext){ 
 					var frag4 = this.base.getView().getContent()[0]
-					frag4.attachSectionChange(function(){debugger
+					frag4.attachSectionChange(function(){ 
 						var section = this.getScrollingSectionId()
 						
 							var columns = sap.ui.getCore().byId(`${section}`).mAggregations._grid.mAggregations.content[0].mAggregations._grid.mAggregations.content[0].mAggregations.content.mAggregations.content.mAggregations.columns;
 							if(columns != undefined )
-							columns.forEach(col =>{debugger
+							columns.forEach(col =>{ 
 								var colName = col.mProperties.dataProperty;
 								var colheader=col.getHeader();
 								var mLength = colheader.length;		
@@ -55,7 +55,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 					   let sObj = {sorters : [{descending: false , name:"Property::slNo"}]}; 
 					   await sap.ui.getCore().byId('panappbeta::tab1_tab1tovendor_dataObjectPage--fe::table::vendtoptd::LineItem::PAYMENT_TERM_DETAILS').setSortConditions(sObj);
 				},
-				onBeforeBinding:async function(oBindingContext){debugger
+				onBeforeBinding:async function(oBindingContext){ 
 					const oModel = this.base.getExtensionAPI().getModel();
 					var that = this;
 					this.getView().getContent()[0].getSections()[0].setVisible(false);
@@ -70,13 +70,13 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 					   var data = res1[1];
 					//    let oFunction = oModel.bindContext(`/${sFunctionName}(...)`);
 					//    oFunction.setParameter("ID",data);
-					//    await oFunction.execute();debugger
+					//    await oFunction.execute(); 
 					   //  var oContext = oFunction.getBoundContext();
 						
 					   //  var res = oContext.getObject();
-					   //  debugger
+					   //   
 					   // await oFunction.execute();
-						debugger
+						 
 					//    let oContext1 = oFunction.getBoundContext();
 						// 
 					//    let result1 = oContext1.getObject();

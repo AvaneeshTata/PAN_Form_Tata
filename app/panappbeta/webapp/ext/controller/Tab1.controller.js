@@ -2,7 +2,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 	'use strict';
 
 	const Fimport= async function(oModel,name,data){
-		debugger
+		 
 		console.log(oModel);
 		let oFunction = oModel.bindContext(`/${name}(...)`);
 					// let oFunction = oModel.bindContext(`/Books`);
@@ -27,15 +27,15 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 			 * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
 			 * @memberOf panappbeta.ext.controller.Tab1
 			 */
-			onInit: function () {debugger
+			onInit: function () { 
 				// you can access the Fiori elements extensionAPI via this.base.getExtensionAPI
 				var oModel = this.base.getExtensionAPI().getModel();
 				// this.getExtensionAPI.refresh();
 			},
 			
-			onAfterRendering: function () {debugger
+			onAfterRendering: function () { 
 				console.log("rendering");		
-				// this.func = async function(oEvent){debugger
+				// this.func = async function(oEvent){ 
 				// 	const oModel = this.base.getExtensionAPI().getModel();
 				// 	let sFunctionName = "sendforapproval";
 				// 	let oFunction = oModel.bindContext(`/${sFunctionName}(...)`);
@@ -47,7 +47,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 			
 			},
 			routing: {
-				onBeforeBinding:async function(oBindingContext){debugger
+				onBeforeBinding:async function(oBindingContext){ 
 					// setTimeout(function() {
 					// 	const LineItem1 = sap.ui.getCore().byId("project1::parentList--fe::table::parent::LineItem");
 					// 	// const longestString = getLongestString(LineItem1, 1); // Assuming the name column is at index 1
@@ -63,7 +63,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 					var headers=[];
 					// this.getView().getContent()[0].getHeader().getContent()[0].getItems()[0].getContent().addFilterItem(new sap.m.Button({
 					// 	text:"Sync",
-					// 	press: async function(oEvent){debugger
+					// 	press: async function(oEvent){ 
 					// 		console.log(oEvent);
 					// 	}
 					// }));
@@ -114,8 +114,8 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 
 
 				},
-				onAfterBinding:function (oEvent) {debugger
-					debugger
+				onAfterBinding:function (oEvent) { 
+					 
 					this.base.getView().getContent()[0].getContent().getContent().getColumns()[0].setHAlign('Left');
 				}
 			}

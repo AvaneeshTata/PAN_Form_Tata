@@ -30,10 +30,10 @@ sap.ui.define(["sap/m/MessageBox",
 
         return {
             onBeforeOpen: function (oEvent) {
-                debugger;
+                 ;
             },
             onCancel: function (oEvent) {
-                debugger;
+                 ;
                 // Close the dialog
                 oDialogInstance && oDialogInstance.close();
             }
@@ -48,7 +48,7 @@ sap.ui.define(["sap/m/MessageBox",
                 name: "panappbeta.ext.fragment.timeline",
                 controller: _createUploadController(this, 'MediaFile')
             }).then(async function (oDialog) {
-                debugger;
+                 ;
                 function generateUniqueId() {
                     // Generate a random number
                     var randomNumber = Math.floor(Math.random() * 1000000);
@@ -62,7 +62,7 @@ sap.ui.define(["sap/m/MessageBox",
                     return uniqueId;
                 }
 
-                debugger
+                 
                 let functionname = 'getcomments';
                 let oFunction = oEvent.getModel().bindContext(`/${functionname}(...)`);
                 console.log();
@@ -96,7 +96,7 @@ sap.ui.define(["sap/m/MessageBox",
                     oDialog.mAggregations.content[0].addItem(new sap.m.Button(`${"button"+generateUniqueId()}`,{
                         text: "Cancel",
                         press: function (oEvent) {
-                            debugger;
+                             ;
                             oDialog.close();
                         },
                         layoutData: new sap.m.FlexItemData({ // Add layoutData for flexible item behavior
@@ -155,7 +155,7 @@ sap.ui.define(["sap/m/MessageBox",
                 oDialog.mAggregations.content[0].destroyItems();
 
                 for (let i = 0; i < data.length; i++) {
-                    debugger
+                     
                     // var currentDate = new Date();
                     // var currentDateTime = currentDate.toISOString();
                     var oTimelineItem = new sap.suite.ui.commons.TimelineItem({
@@ -175,7 +175,7 @@ sap.ui.define(["sap/m/MessageBox",
                 oDialog.mAggregations.content[0].addItem(new sap.m.Button(`${"button"+generateUniqueId()}`,{
                     text: "Cancel",
                     press: function (oEvent) {
-                        debugger;
+                         ;
                         oDialog.close();
                     },
                     layoutData: new sap.m.FlexItemData({ // Add layoutData for flexible item behavior

@@ -8,7 +8,7 @@ sap.ui.define([
 
 
     return {
-        send: async function(oEvent) {debugger
+        send: async function(oEvent) { 
 
 
             oBusyDialog.open();
@@ -57,7 +57,7 @@ sap.ui.define([
                 // this.extensionAPI.refresh("panappbeta::tab1List--fe::table::tab1::LineItem");
             }
             
-            debugger
+             
             // let url = "/odata/v4/catalog/attachments";
             // let surl=this.base.getAppComponent().getManifestObject()._oBaseUri._string;
             // // let url=this.getEditFlow().getAppComponent().getManifestObject().resolveUri('/odata/v4/catalog/attachments');
@@ -67,11 +67,11 @@ sap.ui.define([
             // data: JSON.stringify(body),
             // contentType: 'application/json',
             // dataType:"xml/html/script/json",
-            // success:function(result){debugger
+            // success:function(result){ 
             //     console.log(result);
             // },
             // error:function(e){
-            //     debugger
+            //      
             // }
             // }
             // );

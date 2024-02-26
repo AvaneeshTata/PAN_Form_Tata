@@ -4,7 +4,7 @@ sap.ui.define([
     'use strict';
 
     return {
-        onPress: function(oEvent) {debugger
+        onPress: function(oEvent) { 
             MessageToast.show("Remainder Email will be Sent.");
         }
     };

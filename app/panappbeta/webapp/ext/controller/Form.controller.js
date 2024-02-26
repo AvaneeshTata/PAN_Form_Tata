@@ -8,7 +8,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 	let dialog;
 	var cdialog;
 	const Fimport = async function (oModel, name, data, param) {
-		debugger
+		 
 		console.log(oModel);
 		let oFunction = oModel.bindContext(`/${name}(...)`);
 		// let oFunction = oModel.bindContext(`/Books`);
@@ -38,13 +38,13 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 			 * @memberOf panappbeta.ext.controller.Form
 			 */
 			onInit: async function () {
-				debugger
+				 
 				// you can access the Fiori elements extensionAPI via this.base.getExtensionAPI
 				// var oModel = this.base.getExtensionAPI().getModel();
 				// let oExtensionAPI = this.base.getExtensionAPI();
 				// 	// this.getView().getContent()[0].getHeader().getContent()[0].getItems()[0].getContent().addFilterItem(new sap.m.Button({
 				// 	// 	text:"Sync",
-				// 	// 	press: async function(oEvent){debugger
+				// 	// 	press: async function(oEvent){ 
 				// 	// 		console.log(oEvent);
 				// 	// 	}
 				// 	// }));
@@ -64,26 +64,26 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 				// 	console.log(result);
 			},
 			onBeforeRendering: async function () {
-				debugger
+				 
 
 				var oModel = this.base.getExtensionAPI().getModel();
 				let oExtensionAPI = this.base.getExtensionAPI();
 				// this.getView().getContent()[0].getHeader().getContent()[0].getItems()[0].getContent().addFilterItem(new sap.m.Button({
 				// 	text:"Sync",
-				// 	press: async function(oEvent){debugger
+				// 	press: async function(oEvent){ 
 				// 		console.log(oEvent);
 				// 	}
 				// }));
 				// let oModel = oExtensionAPI.getModel();
 				let sFunctionName = "InsertData";
 				let data = { some: "data" };
-				debugger
+				 
 				let result = await Fimport(oModel, sFunctionName, data, "ID")
 				console.log(result);
 			},
 			editFlow: {
 				onAfterSave: async function (oEvent) {
-					debugger
+					 
 					dialog = new sap.m.Dialog({
 						title: "Confirm",
 						type: DialogType.Message,
@@ -92,7 +92,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 							type: ButtonType.Emphasized,
 							text: "OK",
 							press: async function () {
-								debugger
+								 
 								// for(let i=0;i<2;i++){
 								oBusyDialog.open();
 								const oModel = this.base.getExtensionAPI().getModel();
@@ -128,7 +128,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 								// await oFunction.execute();
 								// let oContext = oFunction.getBoundContext();
 
-								debugger
+								 
 								// let result = oContext.getObject();
 								let result = await Fimport(oModel, sFunctionName, body, "data")
 								let value = JSON.parse(result);
@@ -160,7 +160,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 						endButton: new sap.m.Button({
 							text: "Close",
 							press: async function () {
-								debugger
+								 
 								// for(let i=0;i<2;i++){
 								oBusyDialog.open();
 								const oModel = this.base.getExtensionAPI().getModel();
@@ -177,7 +177,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 								// let oContext = oFunction.getBoundContext();
 
 								// let result = oContext.getObject();
-								debugger
+								 
 								let result = await Fimport(oModel, sFunctionName, data, "ID");
 								dialog.close();
 								dialog.destroy();
@@ -198,8 +198,13 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 					dialog.open();
 
 				},
+				onBeforeEdit:async function(oEvent){
+					this.getView().getContent()[0].getSections()[3].setVisible(true);
+					this.getView().getContent()[0].getSections()[2].mAggregations._grid.getContent()[0].mAggregations._grid.getContent()[0].getContent().getItems()[1].getDependents()[1].mAggregations.headerToolbar.setVisible(true);
+
+				},
 				onBeforeSave: async function (oEvent) {
-					debugger
+					 
 					// return this._createDialog("Do you want to submit this really nice... object ?");
 					let sFunctionName = "draft";
 					let oFunction = oEvent.context.getModel();
@@ -212,7 +217,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 
 					// await oFunction.execute();
 					// let oContext = oFunction.getBoundContext();
-					debugger
+					 
 
 					let result = await Fimport(oFunction, sFunctionName, data, "ID");
 					console.log(result);
@@ -220,13 +225,13 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 			},
 			// onAfterRendering: function () {
 			// 	// this.base.editFlow.onBeforeEdit(function(){
-			// 	// 	debugger;
+			// 	// 	 ;
 			// 	// });
-			// 	debugger
+			// 	 
 			// 	let uploadsetitem = this.base.getView().mAggregations.content[0].mAggregations.sections[2].mAggregations._grid.mAggregations.content[0].mAggregations._grid.mAggregations.content[0].mAggregations.content.mAggregations.items[1].mBindingInfos.items.path;
 			// 	uploadsetitem = "/attachments?$filter=PAN_Number eq 'pan123'";
 			// 	// this.func = async function (oEvent) {
-			// 	// 	debugger
+			// 	// 	 
 			// 		// if(!dialog){
 			// 	// 	dialog = new sap.m.Dialog({
 			// 	// 		title: "Confirm",
@@ -235,7 +240,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 			// 	// 			type: ButtonType.Emphasized,
 			// 	// 			text: "OK",
 			// 	// 			press: async function () {
-			// 	// 				debugger
+			// 	// 				 
 			// 	// 				// for(let i=0;i<2;i++){
 			// 	// 				oBusyDialog.open();
 			// 	// 				const oModel = this.base.getExtensionAPI().getModel();
@@ -258,7 +263,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 			// 	// 				// await oFunction.execute();
 			// 	// 				// let oContext = oFunction.getBoundContext();
 
-			// 	// 				debugger
+			// 	// 				 
 			// 	// 				// let result = oContext.getObject();
 			// 	// 				let result = await Fimport(oModel,sFunctionName,body,"data")
 			// 	// 				let value = JSON.parse(result);
@@ -290,7 +295,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 			// 	// 		endButton: new sap.m.Button({
 			// 	// 			text: "Close",
 			// 	// 			press: async function () {
-			// 	// 				debugger
+			// 	// 				 
 			// 	// 				// for(let i=0;i<2;i++){
 			// 	// 				oBusyDialog.open();
 			// 	// 				const oModel = this.base.getExtensionAPI().getModel();
@@ -307,7 +312,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 			// 	// 				// let oContext = oFunction.getBoundContext();
 
 			// 	// 				// let result = oContext.getObject();
-			// 	// 				debugger
+			// 	// 				 
 			// 	// 				let result = await Fimport(oModel,sFunctionName,data,"ID");
 			// 	// 				dialog.close();
 			// 	// 				dialog.destroy();
@@ -329,11 +334,11 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 
 			// 	// }
 			// 	// if (this.base.getExtensionAPI().getEditFlow() !== undefined) {
-			// 	// 	debugger
+			// 	// 	 
 			// 	// 	this.base.getExtensionAPI().getEditFlow().attachonAfterSave(this.func.bind(this));
 			// 	// }
 			// 	// this.draft = async function (oEvent) {
-			// 	// 	debugger
+			// 	// 	 
 			// 	// 	let sFunctionName = "draft";
 			// 	// 	let oFunction = oModel.bindContext(`/${sFunctionName}(...)`);
 			// 	// 	let appr_url = window.location.href;
@@ -349,7 +354,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 			// 	// 	let result = oContext.getObject();
 			// 	// 	console.log(result);
 			// 	// }
-			// 	// if(this.base.getExtensionAPI().getEditFlow()!== undefined){debugger
+			// 	// if(this.base.getExtensionAPI().getEditFlow()!== undefined){ 
 			// 	// 	this.base.getExtensionAPI().getEditFlow().onBeforeSave(this.draft.bind(this));
 			// 	// }
 
@@ -358,7 +363,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 
 			routing: {
 				onBeforeBinding: async function (oBindingContext) {
-					debugger
+					try{ 
 					oBusyDialog.open();
 
 					const oModel = this.base.getExtensionAPI().getModel();
@@ -367,7 +372,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 					let oExtensionAPI = this.base.getExtensionAPI();
 					// this.getView().getContent()[0].getHeader().getContent()[0].getItems()[0].getContent().addFilterItem(new sap.m.Button({
 					// 	text:"Sync",
-					// 	press: async function(oEvent){debugger
+					// 	press: async function(oEvent){ 
 					// 		console.log(oEvent);
 					// 	}
 					// }));
@@ -384,7 +389,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 					// let oContext = Function.getBoundContext();
 					let FunctionName = "InsertData";
 					let dat = { some: "data" };
-					debugger
+					 
 					let result = await Fimport(oModel, FunctionName, dat, "ID")
 					console.log(result);
 
@@ -393,7 +398,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 					// var v = that.getView().getContent()[0].getHeaderTitle().mAggregations._actionsToolbar.getContent()[4].mProperties.visible;
 					// // this.getView().getContent()[0].getSections()[2].mAggregations._grid.getContent()[0].mAggregations._grid.getContent()[0].getContent().getItems()[1].getItems()[0].setVisibleRemove(!v);
 					// let uploadsetitems_list = this.getView().getContent()[0].getSections()[2].mAggregations._grid.getContent()[0].mAggregations._grid.getContent()[0].getContent().getItems()[1].getItems();
-					// debugger
+					//  
 					// // setTimeout(() => {
 					// // if (v == false) {
 					// // 	this.getView().getContent()[0].getSections()[2].mAggregations._grid.getContent()[0].mAggregations._grid.getContent()[0].getContent().getItems()[1].setUploadEnabled(true)
@@ -426,11 +431,11 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 					var res1 = res.split("'");
 					var data = res1[1];
 					// 	oFunction.setParameter("ID",data);
-					// await oFunction.execute();debugger
+					// await oFunction.execute(); 
 					//  var oContext = oFunction.getBoundContext();
 
 					//  var res = oContext.getObject();
-					//  debugger
+					//   
 					// await oFunction.execute();
 
 					// 	 var complete_url = window.location.href;
@@ -442,11 +447,11 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 					//  let url =`/odata/v4/pan-approval/PAN_Details_APR/${res1[1]}/tab1toWORKFLOW_HISTORY`;
 					let url = baseUrl+`odata/v4/catalog/tab1?$filter=(PAN_Number%20eq%20%27${res1[1]}%27)&$expand=tab1toWORKFLOW_HISTORY`
 					// let url =`/odata/v4/catalog/tab1?$filter=(PAN_Number%20eq%20%27${res1[1]}%27)&$expand=tab1toWORKFLOW_HISTORY`
-					debugger
+					 
 					await $.ajax({
 						url: url,
 						success: function (result) {
-							debugger
+							 
 							// Code inside this function will execute after the AJAX call successfully completes
 							console.log(result);
 
@@ -454,7 +459,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 							processData(result);
 						},
 						error: function (xhr, status, error) {
-							debugger
+							 
 							// Handle errors if any
 							console.error(error);
 						}
@@ -462,12 +467,12 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 
 					// Define a function to process the result data
 					function processData(result) {
-						debugger
+						 
 
 						var dataa = result.value[0].tab1toWORKFLOW_HISTORY;
 						var data = [];
 						dataa.forEach(element => {
-							debugger
+							 
 							data.push({
 								Result: element.Result,
 								level: element.level,
@@ -566,7 +571,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 						ButtonHbox.addItem(new sap.m.Button({
 							text: "Comment History",
 							press: async function (oEvent) {
-								debugger
+								 
 								function generateUniqueId() {
 									// Generate a random number
 									var randomNumber = Math.floor(Math.random() * 1000000);
@@ -585,7 +590,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 										endButton: new sap.m.Button({
 											text: "Close",
 											press: async function () {
-												debugger
+												 
 												cdialog.close();
 											},
 											layoutData: new sap.m.FlexItemData({ // Add layoutData for flexible item behavior
@@ -614,14 +619,14 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 								// await oFunction.execute();
 								// const oContext = oFunction.getBoundContext();
 								// let resVal = oContext.getValue();
-								debugger
+								 
 								let resVal = await Fimport(oFunction, functionname, panNumber, "ID")
 								resVal = JSON.parse(resVal);
 
 								const data = [];
 								const entry = resVal[0];
 								if (entry == undefined) {
-									debugger
+									 
 									cdialog.getContent()[0].destroyItems();
 									var oTimelineItem = new sap.suite.ui.commons.TimelineItem({
 										// id: `${"item" + generateUniqueId()}`,
@@ -658,7 +663,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 									});
 									cdialog.getContent()[0].destroyItems();
 									for (let i = 0; i < data.length; i++) {
-										debugger
+										 
 										// var currentDate = new Date();
 										// var currentDateTime = currentDate.toISOString();
 										var oTimelineItem = new sap.suite.ui.commons.TimelineItem({
@@ -717,7 +722,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 								text: `Notification: `,
 								// design: "Bold"
 							}));
-							debugger
+							 
 							if (that.getView().getContent()[0].getHeaderTitle().mAggregations._actionsToolbar.getContent()[4].mProperties.visible == true) {
 								// if((!levelArray[0].Notification_Status)||(levelArray[0].Notification_Status==0)){
 								oHBox.addItem(new sap.m.Switch({
@@ -725,7 +730,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 									state: levelArray[0].Notification_Status === 'true',
 									type: "AcceptReject",
 									change: async function (oEvent) {
-										debugger
+										 
 										console.log(oEvent);
 										oBusyDialog.open();
 										let text = oEvent.getSource().getParent().getItems()[0].mProperties.text;
@@ -749,7 +754,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 										// await oFunction.execute();
 										// const oContext = oFunction.getBoundContext();
 										// let resVal = oContext.getValue();
-										debugger
+										 
 										let resVal = await Fimport(oFunction, functionname, ID, "ID");
 										// resVal = JSON.parse(resVal.value);
 										console.log(resVal);
@@ -766,7 +771,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 										state: levelArray[0].Notification_Status === 'true',
 										type: "AcceptReject",
 										change: async function (oEvent) {
-											debugger
+											 
 											oBusyDialog.open();
 											console.log(oEvent)
 											console.log(oEvent);
@@ -791,7 +796,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 											// await oFunction.execute();
 											// const oContext = oFunction.getBoundContext();
 											// let resVal = oContext.getValue();
-											debugger
+											 
 											let resVal = await Fimport(oFunction, functionname, ID, "ID");
 											// resVal = JSON.parse(resVal.value);
 											console.log(resVal);
@@ -832,7 +837,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 											// await oFunction.execute();
 											// const oContext = oFunction.getBoundContext();
 											// let resVal = oContext.getValue();
-											debugger
+											 
 											let resVal = await Fimport(oFunction, functionname, ID, "ID");
 											// resVal = JSON.parse(resVal.value);
 											console.log(resVal);
@@ -907,20 +912,20 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 					// that.getView().getContent()[0].setVisible(true);
 					// let oFunction = oModel.bindContext(`/${sFunctionName}(...)`);
 					// oFunction.setParameter("ID", data);
-					// await oFunction.execute(); debugger
+					// await oFunction.execute();  
 					//  var oContext = oFunction.getBoundContext();
 
 					//  var res = oContext.getObject();
-					//  debugger
+					//   
 					// await oFunction.execute();
-					debugger
+					 
 					// let oContext1 = oFunction.getBoundContext();
 
 					// let result1 = oContext1.getObject();
 					let result1 = await Fimport(oModel, sFunctionName, data, "ID");
 
 
-					debugger
+					 
 					if ((result1 === 'Pending for Approval') || (result1 === 'Approved') || (result1 === 'Rejected')) {
 						that.getView().getContent()[0].getSections()[3].setVisible(false);
 						// this.getView().getContent()[0].getSections()[2].mAggregations._grid.getContent()[0].mAggregations._grid.getContent()[0].getContent().getItems()[1].getDependents()[1].mAggregations.headerToolbar.setVisible(false);
@@ -934,7 +939,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 					else {
 
 						if (this.getView().getContent()[0].getHeaderTitle().mAggregations._actionsToolbar.getContent()[4].mProperties.visible === true) {
-							debugger
+							 
 
 							that.getView().getContent()[0].getSections()[3].setVisible(false);
 							this.getView().getContent()[0].getSections()[2].mAggregations._grid.getContent()[0].mAggregations._grid.getContent()[0].getContent().getItems()[1].getDependents()[1].mAggregations.headerToolbar.setVisible(false);
@@ -954,7 +959,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 
 					}
 					var frag4 = this.base.getView().getContent()[0]
-					function resize(id) {debugger
+					function resize(id) { 
 					let subCol = sap.ui.getCore().byId(id).mAggregations.content.getContent().mAggregations.columns;
 				subCol.forEach(col =>{
 					let colName = col.mProperties.dataProperty;
@@ -970,14 +975,14 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 							});	
 				}
 				
-					frag4.attachSectionChange(function(){debugger
+					frag4.attachSectionChange(function(){ 
 						var section = this.getScrollingSectionId()
 						if(section == "panappbeta::tab1ObjectPage--fe::FacetSection::GeneralDetails1"){ 
 							resize("__block1");
 							resize("__block2");
 						};
 
-							debugger
+							 
 							var columns = sap.ui.getCore().byId(`${section}`).mAggregations._grid.mAggregations.content[0].mAggregations._grid.mAggregations.content[0].mAggregations.content.mAggregations.content.mAggregations.columns;
 							if(columns != undefined )
 							columns.forEach(col =>{
@@ -999,7 +1004,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 
 
 
-					// function resize(id) {debugger
+					// function resize(id) { 
 					// 	let subCol = sap.ui.getCore().byId(id).mAggregations.content.getContent().mAggregations.columns;
 					// subCol.forEach(col =>{
 					// 	let colName = col.mProperties.dataProperty;
@@ -1021,7 +1026,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 					// 	resize("__block2");
 					// };
 					// function resize(id) {
-					// 	debugger
+					// 	 
 					// 	// oBusyDialog.open();
 					// 	let subCol = sap.ui.getCore().byId(id).mAggregations.content.getContent().mAggregations.columns;
 					// 	subCol.forEach(col => {
@@ -1036,11 +1041,11 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 					// 		col.setWidth(width)
 					// 	});
 					// 	// oBusyDialog.close();
-					// } debugger
+					// }  
 					// resize("__block1");
 					// resize("__block2");
 					// // frag4.attachSectionChange(function () {
-					// 	debugger
+					// 	 
 						
 					// 	function tableresize(section){
 					// 	// if(sap.ui.getCore().byId(`${section}`).mAggregations._grid.mAggregations.content[0].getTitle()=="Vendor Details"){
@@ -1066,12 +1071,16 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 							
 
 					// });
-
+					}catch(error){
+						console.log(error)
+					}
+					finally{
 					oBusyDialog.close();
+					}
 
 				},
 				onAfterBinding: function (oBindingContext) {	
-					debugger
+					 
 					var path_1 = this.getView().getContent()[0].attachSectionChange(
 						function(oEvent){
 							var attach_items = oEvent.getSource().mAggregations.sections[2].mAggregations._grid.mAggregations.content[0].mAggregations._grid.mAggregations.content[0].mAggregations.content.mAggregations.items[1].getItems();
@@ -1091,7 +1100,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 								attach_items[i].setEnabledRemove(true);
 							}
 						}
-							debugger
+							 
 						}
 					);
 					
@@ -1112,7 +1121,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 					// }
 					// // resize("__block1");
 					// // resize("__block2");
-					// frag4.attachSectionChange(function(){debugger
+					// frag4.attachSectionChange(function(){ 
 					// 	var section = this.getScrollingSectionId()
 					// 		var columns = sap.ui.getCore().byId(`${section}`).mAggregations._grid.mAggregations.content[0].mAggregations._grid.mAggregations.content[0].mAggregations.content.mAggregations.content.mAggregations.columns;
 					// 		if(columns != undefined )
@@ -1133,11 +1142,11 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 
 
 
-					debugger;
+					 ;
 					var edit_mode = this.getView().getContent()[0].getHeaderTitle().mAggregations._actionsToolbar.getContent()[4].mProperties.visible;
 
 					let uploadsetitems_list = this.getView().getContent()[0].getSections()[2].mAggregations._grid.getContent()[0].mAggregations._grid.getContent()[0].getContent().getItems()[1].getItems();
-					debugger
+					 
 						if (!edit_mode) {
 							this.getView().getContent()[0].getSections()[2].mAggregations._grid.getContent()[0].mAggregations._grid.getContent()[0].getContent().getItems()[1].setUploadEnabled(true)
 							for (let i = 0; i < uploadsetitems_list.length; i++) {
@@ -1148,7 +1157,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 							}
 						}
 						else {
-							debugger;
+							 ;
 							this.getView().getContent()[0].getSections()[2].mAggregations._grid.getContent()[0].mAggregations._grid.getContent()[0].getContent().getItems()[1].setUploadEnabled(false)
 							for (let i = 0; i < uploadsetitems_list.length; i++) {
 								this.getView().getContent()[0].getSections()[2].mAggregations._grid.getContent()[0].mAggregations._grid.getContent()[0].getContent().getItems()[1].getDependents()[1].mAggregations.headerToolbar.setVisible(false);
@@ -1158,7 +1167,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 							}
 						}
 
-					debugger
+					 
 					var pan_numb = oBindingContext.oBinding.sPath;
 					const pattern = /PAN_Number='([^']+)'/;
 					const matches = pan_numb.match(pattern);

@@ -12,30 +12,37 @@ module.exports = cds.service.impl(async function () {
 const AribaSrv = await cds.connect.to('ARIBA_DEV');
 const c1re = await cds.connect.to('iflow1');
 
-// this.before('READ',tab1,async (req)=>{debugger
-//     // if(req.params.length == 0)
-//     try {
-//         let pan = await SELECT.from(tab1);
-//         pan.forEach(async element => {
-//             if(element.Plant_Code){
-//                 let urlll = `/odata/v4/my/plant/${element.Plant_Code}`;
-//                 try{
-//             var plantData = await c1re.get(urlll); 
-//             // console.log();
-//             if(plantData)
-//             await UPDATE(tab1,element.PAN_Number).with({SBG:`${plantData.SBG}`,SBU:`${plantData.SBU}`})   
-//                 }catch(error){debugger
-//                     var plantData = await c1re.get(urlll); 
-// console.log(error.message);
-//                 }
-//             }
-//         }); 
+this.before('READ',tab1,async (req)=>{ 
+    // quality domain
+    // https://tata-projects-limited-tpl-ariba-uat-dzu885iy-tpl-aruat-48c5f432.cfapps.eu10-004.hana.ondemand.com
+    // test domain
+    // https://tata-projects-limited-btp-dev-0or0hi20-dev-space-plantm790a9887.cfapps.eu10-004.hana.ondemand.com
+    try {
+        let pan = await SELECT.from(tab1);
+        // pan.forEach(async element => {
+        for(let i =0;i<pan.length;i++){
+            if(pan[i].Plant_Code){
+                let urlll = `/odata/v4/my/plant/${pan[i].Plant_Code}`;
+                try{
+            var plantData = await c1re.get(urlll); 
+            // console.log();
+            if(plantData)
+            await UPDATE(tab1,pan[i].PAN_Number).with({SBG:`${plantData.SBG}`,SBU:`${plantData.SBU}`})   
+                }catch(error){ 
+                    await UPDATE(tab1,pan[i].PAN_Number).with({SBG:null,SBU:null})   
+                    console.log(error.message);
+                }
+            }
+        // }); 
+        }
         
-//     } catch (error) {
-//         console.log(error);
-//     }
+    } catch (error) {
+        console.log(error);
+    }
+    
+  return req;
 
-// });
+});
 
 this.on('Listdata', async (req)=>{
     let data = JSON.parse(req.data.ID);
@@ -290,11 +297,11 @@ this.on('InsertData',async (req)=>{
     // }
     // // return req;
     // });
-    this.on('sendforapproval',async(req)=>{debugger
+    this.on('sendforapproval',async(req)=>{ 
         let auth = req?.headers?.authorization;
         let response;
         if(auth != undefined){
-            let token = auth.split(" ");
+            var token = auth.split(" ");
             if (token[0]=='Basic'){
                 let decod = atob(token[1]);
                 let decode = decod.split(":");
@@ -305,6 +312,9 @@ this.on('InsertData',async (req)=>{
             var decoded = jwtDecode(token[1]);
             }
         }   
+        console.log("#########USER###########");
+        console.log(token);
+        console.log(decoded);
         console.log(req.data);
         let data = JSON.parse(req.data.data);
         let resp1 = await SELECT.from(tab1).where`PAN_Number=${data.PAN_Number}`
@@ -314,6 +324,11 @@ this.on('InsertData',async (req)=>{
             });
         }else{
         // req._.odataRes.setHeader("Access-Control-Allow-Origin",'*');
+        const options =  { timeZone: 'Asia/Kolkata', day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit',hour12:false };
+        var currentDate1 = new Date().toLocaleDateString('en-IN', options);
+        // let dateup = await UPDATE(tab1,data.PAN_Number).with({
+        //                 "submitted_date":currentDate1
+        // });
         // let body = {
         //     "pankey" : "PAN3",
         //     "file" : "pan.pdf",
@@ -325,6 +340,7 @@ this.on('InsertData',async (req)=>{
         data_m = data_m[0];
         data_m.created_by=decoded['user_name'];
         data_m.status='Pending for Approval';
+        data_m.submitted_date=currentDate1;
         data_m.submitted_by=decoded['user_name'];
         let data1 = await SELECT.from(tab2).where`PAN_Number=${data.PAN_Number}`;
         let data2 = await SELECT.from(tab3).where`PAN_Number=${data.PAN_Number}`;
@@ -377,12 +393,13 @@ this.on('InsertData',async (req)=>{
             "Sap_workitem_id":response["workitemId"],
             "statusInd":2,
             "submitted_by":decoded['user_name'],
-            "created_by":decoded['user_name']
+            "created_by":decoded['user_name'],
+            "submitted_date":currentDate1
         });
     }
         let comm = await SELECT.from(tab1).where`PAN_Number = ${data.PAN_Number}`
         var commentss = null;
-        if((comm[0].Comments != null )){
+        if(comm[0].Comments){
             let ComEnt = {
                 PAN_Number : data.PAN_Number,
                 user : decoded['user_name'],
@@ -395,8 +412,7 @@ this.on('InsertData',async (req)=>{
             "Comments":""
          });
         }
-        const options =  { timeZone: 'Asia/Kolkata', day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit',hour12:false };
-        var currentDate1 = new Date().toLocaleDateString('en-IN', options);
+        
         let up={
             "Begin_DateAND_Time": currentDate1.toString(),
             "Remarks": currentDate1.toString()
@@ -576,7 +592,7 @@ this.on('InsertData',async (req)=>{
 
 //             return JSON.stringify(ret);
 //     });
-// //     this.on('Comments' ,async (req) => {debugger
+// //     this.on('Comments' ,async (req) => { 
         
 //         let auth = req?.headers?.authorization;
         
@@ -652,7 +668,7 @@ this.on('InsertData',async (req)=>{
         
     });
 
-    // this.before('READ', tab2, async (req) => {debugger
+    // this.before('READ', tab2, async (req) => { 
     //     try {
     //         resp = await c5re.get('/tab2');
     //         const data = resp.value;
@@ -664,7 +680,7 @@ this.on('InsertData',async (req)=>{
     //         req.error(500, err.message);
     //     }
     // });
-    // this.before('READ', vendor_data, async (req) => {debugger
+    // this.before('READ', vendor_data, async (req) => { 
     //     try {
     //         resp = await c5re.get('/vendor_data');
     //         const data = resp.value;
@@ -695,7 +711,7 @@ this.on('InsertData',async (req)=>{
     // }
        
     // });
-    // this.before('READ', Fvendor_responseoo, async (req) => {debugger
+    // this.before('READ', Fvendor_responseoo, async (req) => { 
     //     try {
     //         resp = await c5re.get('/Fvendor_responseoo');
     //         const data = resp.value;
@@ -707,7 +723,7 @@ this.on('InsertData',async (req)=>{
     //         req.error(500, err.message);
     //     }
     // });
-    // this.before('READ', PAYMENT_TERM_DETAILS, async (req) => {debugger
+    // this.before('READ', PAYMENT_TERM_DETAILS, async (req) => { 
     //     try {
     //         resp = await c5re.get('/PAYMENT_TERM_DETAILS');
     //         const data = resp.value;
@@ -719,7 +735,7 @@ this.on('InsertData',async (req)=>{
     //         req.error(500, err.message);
     //     }
     // });
-    // this.before('READ', WORKFLOW_HISTORY, async (req) => {debugger
+    // this.before('READ', WORKFLOW_HISTORY, async (req) => { 
     //     try {
     //         resp = await c5re.get('/WORKFLOW_HISTORY');
     //         const data = resp.value;
@@ -731,7 +747,7 @@ this.on('InsertData',async (req)=>{
     //         req.error(500, err.message);
     //     }
     // });
-    // this.before('READ', WORKFLOW_HISTORY_EMP, async (req) => {debugger
+    // this.before('READ', WORKFLOW_HISTORY_EMP, async (req) => { 
     //     try {
     //         resp = await c5re.get('/WORKFLOW_HISTORY_EMP');
     //         const data = resp.value;
@@ -744,7 +760,7 @@ this.on('InsertData',async (req)=>{
     //     }
     // });
     // this.on('getPdfUrl', async (req) => {
-    //     debugger
+    //      
     //     console.log(re1.params);
     //     const fileLinkValue = req.params;
     //     return fileLinkValue;
@@ -765,7 +781,7 @@ this.on('InsertData',async (req)=>{
     });
 
 
-    // this.before('READ', attachments, async (req) => {debugger
+    // this.before('READ', attachments, async (req) => { 
     //     try {
     //         // req.params.id[0];
     //         const a =await SELECT.from(attachments);
@@ -783,7 +799,7 @@ this.on('InsertData',async (req)=>{
 
 
     // this.before('CREATE', 'attachments',async (req) => {
-    //     debugger
+    //      
     //     // console.log('Create called')
      // req.data.url = `/media/attachments(${req.data.idd})/content`;
 
@@ -853,7 +869,7 @@ this.on('InsertData',async (req)=>{
  
 
     this.before('CREATE', 'attachments', req => {
-        debugger
+         
         console.log('Create called')
         console.log(JSON.stringify(req.data))
         // req.data.fileName = req.data.ID
@@ -865,13 +881,13 @@ this.on('InsertData',async (req)=>{
     })
 
     this.after('CREATE','attachments',req => {
-        debugger
+         
         console.log(req);
     })
 
     this.before('READ', 'attachments', async req => {
         // response = await AribaSrv.get('/sap/opu/odata/sap/ZARB_BTP_ATTACHMENT_SRV/panHeaderSet');
-        // debugger
+        //  
         //check content-type
         console.log('content-type: ', req.headers['content-type'])
     });

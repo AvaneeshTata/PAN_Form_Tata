@@ -27,7 +27,7 @@ sap.ui.define(["sap/m/MessageBox", "sap/m/MessageToast", "sap/ui/core/UIComponen
 
             return {
                 onFileUploadDone:function (oEvent) {
-                    debugger
+                     
                 },
                 onBeforeOpen: function (oEvent) {
                     oUploadDialog = oEvent.getSource();
@@ -45,7 +45,7 @@ sap.ui.define(["sap/m/MessageBox", "sap/m/MessageToast", "sap/ui/core/UIComponen
                 //function import try==============================================================================
                 onAfterBinding : async function (oBindingContext)
                 {
-                    debugger
+                     
                     const oExtensionAPI = this.base.getExtensionAPI();
                     oModel = oExtensionAPI.getModel();
                     sFunctionName = "getattachments";
@@ -71,7 +71,7 @@ sap.ui.define(["sap/m/MessageBox", "sap/m/MessageToast", "sap/ui/core/UIComponen
                 //                     var oUploader = sap.ui.core.Fragment.byId("excelUploadDialog", "uploader");
 
                 //                     var selectedFile = oUploader.getValue();
-                // debugger;
+                //  ;
 
                 //                     var sUploadUri = oExtensionAPI._controller.extensionAPI._controller._oAppComponent.getManifestObject().resolveUri("/odata/v4/catalog/ExcelUpload/excel")
                 //                     oFileUploader.setUploadUrl(sUploadUri);
@@ -86,7 +86,7 @@ sap.ui.define(["sap/m/MessageBox", "sap/m/MessageToast", "sap/ui/core/UIComponen
                 //                         })
                 //                 },
                 _getBaseURL: function () {
-                    debugger;
+                     ;
                     var oBaseUrl = this.getOwnerComponent().getManifestEntry("/sap.app/id").replaceAll(".", "/");
                     return jQuery.sap.getModulePath(oBaseUrl)
                 },
@@ -95,17 +95,17 @@ sap.ui.define(["sap/m/MessageBox", "sap/m/MessageToast", "sap/ui/core/UIComponen
                  * on File Change
                  */
                 onFileChange: function (oEvent) {
-                    debugger
+                     
                     var file = oEvent.getParameters("files").files[0];
                     this.file = file;
                 },
                 onFileUploadDone: function (oEvent) {
-                    debugger
+                     
                 },
 
 
                 onOk: function (oEvent) {
-                 debugger;
+                  ;
                     let inputString = oEvent.oSource.oPropagatedProperties.oModels.pageInternal.mContexts["/pages/panappbeta::tab1ObjectPage/controls/fe::table::tab1tovendor_data::LineItem::VendorData"].oModel.oData.currentCtxt.sPath;
                     const regex = /PAN_Number='([^']+)'/
                     const match = inputString.match(regex);
@@ -116,7 +116,7 @@ sap.ui.define(["sap/m/MessageBox", "sap/m/MessageToast", "sap/ui/core/UIComponen
                     var reader = new FileReader();
                     reader.onload = function (oEvent) {
                         // get an access to the content of the file
-                        debugger;
+                         ;
                         var file = this.file;
                         this.content = oEvent.currentTarget.result;
                     // new Promise((resolve) => setTimeout(resolve, 50));
@@ -132,12 +132,12 @@ sap.ui.define(["sap/m/MessageBox", "sap/m/MessageToast", "sap/ui/core/UIComponen
                  */
 
                 createfile: async function (invoice_no,evententity) {
-                    debugger;
+                     ;
                     var that = this;
                     var invoice_no = invoice_no;
 
                     var file_ori = this.file;
-                    debugger
+                     
                     // Data for CAP to create entry
                     var oImageData = {
                         "PAN_Number" : invoice_no,
@@ -147,7 +147,7 @@ sap.ui.define(["sap/m/MessageBox", "sap/m/MessageToast", "sap/ui/core/UIComponen
                         "fileName": this.file.name
                     };
 
-                    debugger
+                     
                     let baseUri = evententity.getParent().getParent().getParent().oContainer.getParent().getParent().getParent().getManifestObject()._oBaseUri._string;
                     // let functionname = 'getattachments';
                     // let oFunction = evententity.getModel().bindContext(`/${functionname}(...)`);
@@ -165,15 +165,15 @@ sap.ui.define(["sap/m/MessageBox", "sap/m/MessageToast", "sap/ui/core/UIComponen
                         data: JSON.stringify(oImageData)
                     }
 
-                    debugger
+                     
                     const loadData = async () => {
                         var busy = new sap.m.BusyDialog({ text: "Uploading file..." });
                          busy.open();
                     return new Promise((resolve, reject) => {
-                        debugger
+                         
                         $.ajax(settings)
                             .done(async (results, textStatus, request) => {
-                                debugger
+                                 
                                 var stat = textStatus;
                                 if (stat=='success')
                                 {
@@ -185,16 +185,16 @@ sap.ui.define(["sap/m/MessageBox", "sap/m/MessageToast", "sap/ui/core/UIComponen
                                     var ermsg = "ERROR UPLOADING THE FILE"
                                     MessageBox.error(ermsg);
                                 }
-                                debugger
+                                 
                                 resolve(results.ID);
-                                debugger 
+                                  
                                 let eventt = evententity;
                                 if(evententity.getParent().getBindingContext() != undefined){
-                                    debugger
+                                     
                                     await evententity.getParent().getBindingContext().refresh();
                                 }
                                 else {
-                                    debugger
+                                     
                                 }
                                 
                                 
@@ -205,21 +205,21 @@ sap.ui.define(["sap/m/MessageBox", "sap/m/MessageToast", "sap/ui/core/UIComponen
                                 
                             })
                             .fail((err) => {
-                                debugger
+                                 
 
                                 reject(err);
                                 
                             })
                     })
                 };
-                debugger
+                 
                 await loadData();
-                    debugger
+                     
                     closeDialog();
                     // location.reload();
                     // return 1;
                     // var file_real = this.content;
-                    // debugger
+                    //  
             
                     // // Remove the data URI prefix
                     // var base64Content = file_real.split(',')[1];
@@ -237,7 +237,7 @@ sap.ui.define(["sap/m/MessageBox", "sap/m/MessageToast", "sap/ui/core/UIComponen
                     // // var pdfBlob = new Blob([base64Data], { type: 'application/pdf' });
                     // var file_name = this.file.name;
                     // var mime_type = this.file.type;
-                    // debugger;
+                    //  ;
                     // var size = this.file.size;
                     // const binaryData = atob(base64Content);
                     // // Create an ArrayBuffer from the binary data
@@ -310,7 +310,7 @@ sap.ui.define(["sap/m/MessageBox", "sap/m/MessageToast", "sap/ui/core/UIComponen
                     // // };
 
 
-                    // debugger;
+                    //  ;
                     // // var oCAPModel = this.getOwnerComponent().getModel("oCAPModel");
                     // // var sURL = "/MediaFile";
                     // // //Create call for CAP OData Service
@@ -333,7 +333,7 @@ sap.ui.define(["sap/m/MessageBox", "sap/m/MessageToast", "sap/ui/core/UIComponen
 
 
                 onCancel: function (oEvent) {
-                    debugger
+                     
                     closeDialog();
                 },
 
