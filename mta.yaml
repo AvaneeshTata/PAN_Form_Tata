@@ -19,6 +19,7 @@ modules:
       - name: cross-container-service-1
       - name: TLP_Connectivity
       - name: pan_form_demo-destination
+      - name: Plantmappingfinal-destination-service
       # - name: pan_form_demo-db
     provides:
       - name: srv-api
@@ -157,6 +158,13 @@ resources:
     parameters:
       service: hana
       service-plan: hdi-shared
+  - name: Plantmappingfinal-destination-service
+    type: org.cloudfoundry.existing-service
+    parameters:
+      version: 1.0.0
+      service: destination
+      service-name: Plantmappingfinal-destination-service
+      service-plan: lite
 parameters:
   deploy_mode: html5-repo
   enable-parallel-deployments: true

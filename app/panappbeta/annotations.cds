@@ -748,7 +748,7 @@ annotate service.tab1 with {
     Order_Value_BKTIn_Bid_CurrencyBKT @Common.FieldControl : #ReadOnly
 };
 annotate service.tab1 with {
-    Savings_achieved_btw_initial_and_final_quote @Common.FieldControl : #ReadOnly
+    Savings_achieved_btw_initial_and_final_quote @Common.FieldControl : #Optional
 };
 annotate service.tab1 with {
     Savings_against_base_line_spend_of_RFP @Common.FieldControl : #ReadOnly

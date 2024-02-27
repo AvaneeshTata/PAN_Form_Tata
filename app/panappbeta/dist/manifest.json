@@ -233,7 +233,19 @@
                                     },
                                     "columns": {
                                         "DataField::date": {
-                                            "width": "100px"
+                                            "width": "150px"
+                                        },
+                                        "DataField::eventNo": {
+                                            "width": "250px"
+                                        },
+                                        "DataField::number": {
+                                            "width": "250px"
+                                        },
+                                        "DataField::l1AmountObtained": {
+                                            "width": "200px"
+                                        },
+                                        "DataField::numberOfVendorsParticipated": {
+                                            "width": "250px"
                                         }
                                     }
                                 },
@@ -241,6 +253,23 @@
                                     "tableSettings": {
                                         "type": "GridTable",
                                         "selectAll": false
+                                    },
+                                    "columns": {
+                                        "DataField::typeNo": {
+                                            "width": "200px"
+                                        },
+                                        "DataField::required": {
+                                            "width": "200px"
+                                        },
+                                        "DataField::submittedOn": {
+                                            "width": "200px"
+                                        },
+                                        "DataField::receivedOn": {
+                                            "width": "200px"
+                                        },
+                                        "DataField::timeTakenForApproval": {
+                                            "width": "200px"
+                                        }
                                     }
                                 },
                                 "tab1tocom/@com.sap.vocabularies.UI.v1.LineItem#ApprovalComments": {

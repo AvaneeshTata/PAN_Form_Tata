@@ -804,7 +804,7 @@
         <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/ReadOnly"/>
       </Annotations>
       <Annotations Target="CatalogService.tab1/Savings_achieved_btw_initial_and_final_quote">
-        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/ReadOnly"/>
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
       </Annotations>
       <Annotations Target="CatalogService.tab1/Savings_against_base_line_spend_of_RFP">
         <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/ReadOnly"/>

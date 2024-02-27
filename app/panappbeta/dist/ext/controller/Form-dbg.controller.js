@@ -959,28 +959,28 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 
 					}
 					var frag4 = this.base.getView().getContent()[0]
-					function resize(id) { 
-					let subCol = sap.ui.getCore().byId(id).mAggregations.content.getContent().mAggregations.columns;
-				subCol.forEach(col =>{
-					let colName = col.mProperties.dataProperty;
-					var colHeader = col.getHeader();
-							var mLength = colHeader.length;	
-								let valuevendor = sap.ui.getCore().byId(id).mAggregations.content.getContent().mAggregations._content.mBindingInfos.rows.binding.oCache.getAllElements();
-								const maxLength = Math.max(...valuevendor.map(item => (item[colName]?.length ?? 8)));
-						if(maxLength > mLength)
-						mLength = maxLength; 
-				const width = mLength * 8 + 20 + "px"; 
+				// 	function resize(id) { 
+				// 	let subCol = sap.ui.getCore().byId(id).mAggregations.content.getContent().mAggregations.columns;
+				// subCol.forEach(col =>{
+				// 	let colName = col.mProperties.dataProperty;
+				// 	var colHeader = col.getHeader();
+				// 			var mLength = colHeader.length;	
+				// 				let valuevendor = sap.ui.getCore().byId(id).mAggregations.content.getContent().mAggregations._content.mBindingInfos.rows.binding.oCache.getAllElements();
+				// 				const maxLength = Math.max(...valuevendor.map(item => (item[colName]?.length ?? 8)));
+				// 		if(maxLength > mLength)
+				// 		mLength = maxLength; 
+				// const width = mLength * 8 + 20 + "px"; 
 
-				col.setWidth(width)
-							});	
-				}
+				// col.setWidth(width)
+				// 			});	
+				// }
 				
 					frag4.attachSectionChange(function(){ 
 						var section = this.getScrollingSectionId()
-						if(section == "panappbeta::tab1ObjectPage--fe::FacetSection::GeneralDetails1"){ 
-							resize("__block1");
-							resize("__block2");
-						};
+						// if(section == "panappbeta::tab1ObjectPage--fe::FacetSection::GeneralDetails1"){ 
+						// 	resize("__block1");
+						// 	resize("__block2");
+						// };
 
 							 
 							var columns = sap.ui.getCore().byId(`${section}`).mAggregations._grid.mAggregations.content[0].mAggregations._grid.mAggregations.content[0].mAggregations.content.mAggregations.content.mAggregations.columns;

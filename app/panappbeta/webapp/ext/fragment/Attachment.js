@@ -30,8 +30,8 @@ sap.ui.define([
 		
 
 				var settings = {
-					// url: baseuri + "odata/v4/catalog/attachments",
-					url: "/odata/v4/catalog/attachments",
+					url: baseuri + "odata/v4/catalog/attachments",
+					// url: baseuri+"odata/v4/catalog/attachments",
 					method: "POST",
 					headers: {
 						"Content-type": "application/json"
@@ -53,8 +53,8 @@ sap.ui.define([
 			_createEntity(item)
 				.then((id) => {
 					 
-					// var url = baseuri + `odata/v4/catalog/attachments(ID=${id},PAN_Number='${parentId}')/content`;
-					var url = `/odata/v4/catalog/attachments(ID=${id},PAN_Number='${parentId}')/content`;
+					var url = baseuri + `odata/v4/catalog/attachments(ID=${id},PAN_Number='${parentId}')/content`;
+					// var url = `/odata/v4/catalog/attachments(ID=${id},PAN_Number='${parentId}')/content`;
 					// var url = `/odata/v4/catalog/attachments(${id})/content`;
 					item.setUploadUrl(url);
 					var oUploadSet = this.byId("uploadSet");

@@ -13,6 +13,66 @@ const AribaSrv = await cds.connect.to('ARIBA_DEV');
 const c1re = await cds.connect.to('iflow1');
 
 this.before('READ',tab1,async (req)=>{ 
+    var vcap = JSON.parse(process.env.VCAP_SERVICES);
+        var panformDest;
+        // let auth = req?.headers?.authorization;
+        // console.log(auth);
+        console.log(vcap);
+        vcap.destination.forEach((dest)=>{
+            if (dest?.name != undefined && dest?.name == "Plantmappingfinal-destination-service"){
+                panformDest = dest;
+            }
+        })
+
+
+        var tokenurl = panformDest.credentials.url + "/oauth/token?grant_type=client_credentials";
+        var basicAuth = panformDest.credentials.clientid + ":" + panformDest.credentials.clientsecret;
+        var basicAuth = btoa(basicAuth);
+        var basicStr = "Basic " + basicAuth;
+         
+
+        var axiosTokenResp = await axios.request({
+            url: tokenurl,
+            method: 'get',
+            headers:{
+                Authorization : basicStr
+            }
+        })
+        var accesstoken = axiosTokenResp.data.access_token;
+        
+        var authDest = axiosTokenResp.data.token_type + " " + accesstoken;
+        console.log(authDest);
+
+        var destinationurl = panformDest.credentials.uri + "/destination-configuration/v1/destinations/Plantmappingfinal-srv-api"
+
+        var destinationResp = await axios.request({
+            url: destinationurl,
+            method: 'get',
+            headers:{
+                Authorization : authDest
+            }
+        })
+
+        var baseSrvUrl = destinationResp?.data?.destinationConfiguration?.URL;
+        let pan = await SELECT.from(tab1);
+//         try{
+//         // pan.forEach(async element => {
+//         for(let i =0;i<pan.length;i++){
+//         if(pan[i].PAN_Number!='pan12'){
+//         var reqUrl = baseSrvUrl + `/odata/v4/my/plant/${pan[i].Plant_Code}`
+//         var srvResp = await axios.request({
+//             url: reqUrl,
+//             method: 'get'
+//         });
+//         console.log(srvResp);
+//     }
+//     }
+// }catch(error){
+//     console.log(error);
+// }
+
+        // console.log(srvResp?.data?.value[1]);
+    // })
     // quality domain
     // https://tata-projects-limited-tpl-ariba-uat-dzu885iy-tpl-aruat-48c5f432.cfapps.eu10-004.hana.ondemand.com
     // test domain
@@ -22,12 +82,19 @@ this.before('READ',tab1,async (req)=>{
         // pan.forEach(async element => {
         for(let i =0;i<pan.length;i++){
             if(pan[i].Plant_Code){
-                let urlll = `/odata/v4/my/plant/${pan[i].Plant_Code}`;
+                var reqUrl = baseSrvUrl + `/odata/v4/my/plant/${pan[i].Plant_Code}`
+                
                 try{
-            var plantData = await c1re.get(urlll); 
+                    var srvResp = await axios.request({
+                        url: reqUrl,
+                        method: 'get'
+                    });
+                    console.log(srvResp);
             // console.log();
-            if(plantData)
-            await UPDATE(tab1,pan[i].PAN_Number).with({SBG:`${plantData.SBG}`,SBU:`${plantData.SBU}`})   
+            if(srvResp){
+            let srv = await UPDATE(tab1,pan[i].PAN_Number).with({SBG:`${srvResp.data.SBG}`,SBU:`${srvResp.data.SBU}`});  
+            console.log(srv);
+            }
                 }catch(error){ 
                     await UPDATE(tab1,pan[i].PAN_Number).with({SBG:null,SBU:null})   
                     console.log(error.message);

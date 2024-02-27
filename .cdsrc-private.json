@@ -29,6 +29,21 @@
         "vcap": {
           "name": "db"
         }
+      },
+      "destinations": {
+        "binding": {
+          "type": "cf",
+          "apiEndpoint": "https://api.cf.eu10-004.hana.ondemand.com",
+          "org": "Tata Projects Limited_btp-dev-0or0hi20",
+          "space": "DEV_SPACE",
+          "instance": "Plantmappingfinal-destination-service",
+          "key": "key",
+          "resolved": false
+        },
+        "kind": "destinations",
+        "vcap": {
+          "name": "destinations"
+        }
       }
     }
   }

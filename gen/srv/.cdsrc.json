@@ -6,7 +6,7 @@
         "iflow1": {
           "kind": "rest",
           "credentials": {
-            "url": "https://tata-projects-limited-btp-dev-0or0hi20-dev-space-plantm790a9887.cfapps.eu10-004.hana.ondemand.com"
+            "url": "https://tata-projects-limited-tpl-ariba-uat-dzu885iy-tpl-aruat-48c5f432.cfapps.eu10-004.hana.ondemand.com"
           }
         }
     } 

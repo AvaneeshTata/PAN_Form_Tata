@@ -1597,7 +1597,7 @@
         },
         "Savings_achieved_btw_initial_and_final_quote": {
           "@Common.FieldControl": {
-            "#": "ReadOnly"
+            "#": "Optional"
           },
           "type": "cds.String"
         },
