@@ -43,7 +43,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 								var colheader=col.getHeader();
 								var mLength = colheader.length;		
 								var valuevendor = sap.ui.getCore().byId(`${section}`).mAggregations._grid.mAggregations.content[0].mAggregations._grid.mAggregations.content[0].mAggregations.content.mAggregations.content.mAggregations._content.mBindingInfos.rows.binding.oCache.getValue()
-											const maxLength = Math.max(...valuevendor.map(item => (item[colName]?.length ?? 8)));
+											const maxLength = Math.max(...valuevendor.map(item => (item[colName].length ?? 8)));
 								if(maxLength > mLength)
 									mLength = maxLength; 
 							const width = (mLength+2) * 8 + 20 + "px"; 

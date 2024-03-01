@@ -17,11 +17,17 @@
           <NavigationPropertyBinding Path="tab1totab3/tab3totab1" Target="PAN_Details_APR"/>
           <NavigationPropertyBinding Path="tab1toWORKFLOW_HISTORY/WORKFLOW_HISTORYtotab1" Target="PAN_Details_APR"/>
           <NavigationPropertyBinding Path="tab1topdf" Target="PAN_attachments_APR"/>
-          <NavigationPropertyBinding Path="tab1tovendor_data/vendtovenr/venrtovend" Target="PAN_Details_APR/tab1tovendor_data"/>
+          <NavigationPropertyBinding Path="tab1tovendor_data/vendtovenr" Target="PAN_vendor_response_APR"/>
           <NavigationPropertyBinding Path="tab1tovendor_data/vendtoptd/ptdtovend" Target="PAN_Details_APR/tab1tovendor_data"/>
           <NavigationPropertyBinding Path="tab1tovendor_data/vendtopd/pdtovend" Target="PAN_Details_APR/tab1tovendor_data"/>
           <NavigationPropertyBinding Path="tab1tovendor_data/vendor_datatotab1" Target="PAN_Details_APR"/>
           <NavigationPropertyBinding Path="tab1tocom/comtotab1" Target="PAN_Details_APR"/>
+        </EntitySet>
+        <EntitySet Name="PAN_vendor_response_APR" EntityType="PanApproval.PAN_vendor_response_APR">
+          <NavigationPropertyBinding Path="venrtovend/vendtovenr" Target="PAN_vendor_response_APR"/>
+          <NavigationPropertyBinding Path="venrtovend/vendtoptd/ptdtovend" Target="PAN_vendor_response_APR/venrtovend"/>
+          <NavigationPropertyBinding Path="venrtovend/vendtopd/pdtovend" Target="PAN_vendor_response_APR/venrtovend"/>
+          <NavigationPropertyBinding Path="venrtovend/vendor_datatotab1" Target="PAN_Details_APR"/>
         </EntitySet>
         <EntitySet Name="PAN_attachments_APR" EntityType="PanApproval.PAN_attachments_APR">
           <NavigationPropertyBinding Path="pdftotab1" Target="PAN_Details_APR"/>
@@ -136,7 +142,9 @@
         <Property Name="Discount_Amount" Type="Edm.String"/>
         <Property Name="Discount_percentage" Type="Edm.String"/>
         <Property Name="Rank" Type="Edm.String"/>
-        <NavigationProperty Name="vendtovenr" Type="PanApproval.PAN_vendor_response_APR" ContainsTarget="true"/>
+        <NavigationProperty Name="vendtovenr" Type="PanApproval.PAN_vendor_response_APR">
+          <ReferentialConstraint Property="PAN_Number" ReferencedProperty="PAN_Number"/>
+        </NavigationProperty>
         <NavigationProperty Name="vendtoptd" Type="Collection(PanApproval.PAN_PAYMENT_TERM_DETAILS_APR)" ContainsTarget="true"/>
         <NavigationProperty Name="vendtopd" Type="Collection(PanApproval.PAN_PRICE_DETAILS_APR)" ContainsTarget="true"/>
         <NavigationProperty Name="vendor_datatotab1" Type="PanApproval.PAN_Details_APR" Partner="tab1tovendor_data"/>
@@ -190,7 +198,9 @@
         <Property Name="Commercial_Terms" Type="Edm.String"/>
         <Property Name="Compliance_Terms" Type="Edm.String"/>
         <Property Name="Others" Type="Edm.String"/>
-        <NavigationProperty Name="venrtovend" Type="PanApproval.PAN_vendor_data_APR"/>
+        <NavigationProperty Name="venrtovend" Type="PanApproval.PAN_vendor_data_APR">
+          <ReferentialConstraint Property="Proposed_Vendor_Code" ReferencedProperty="Proposed_Vendor_Code"/>
+        </NavigationProperty>
       </EntityType>
       <EntityType Name="PAN_PAYMENT_TERM_DETAILS_APR">
         <Key>

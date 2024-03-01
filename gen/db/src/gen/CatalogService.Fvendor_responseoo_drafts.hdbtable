@@ -49,6 +49,6 @@ COLUMN TABLE CatalogService_Fvendor_responseoo_drafts (
   DraftAdministrativeData_DraftUUID NVARCHAR(36) NOT NULL,
   PRIMARY KEY(Proposed_Vendor_Code, PAN_Number)
 ) WITH ASSOCIATIONS (
-  MANY TO ONE JOIN CatalogService_vendor_data_drafts AS venrtovend ON (venrtovend.Proposed_Vendor_Code = Proposed_Vendor_Code),
+  MANY TO ONE JOIN CatalogService_vendor_data AS venrtovend ON (venrtovend.Proposed_Vendor_Code = Proposed_Vendor_Code),
   MANY TO ONE JOIN CatalogService_DraftAdministrativeData AS DraftAdministrativeData ON (DraftAdministrativeData.DraftUUID = DraftAdministrativeData_DraftUUID)
 )

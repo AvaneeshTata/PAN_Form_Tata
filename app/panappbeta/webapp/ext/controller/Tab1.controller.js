@@ -47,7 +47,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 			
 			},
 			routing: {
-				onBeforeBinding:async function(oBindingContext){ 
+				onBeforeBinding:async function(oBindingContext){   
 					// setTimeout(function() {
 					// 	const LineItem1 = sap.ui.getCore().byId("project1::parentList--fe::table::parent::LineItem");
 					// 	// const longestString = getLongestString(LineItem1, 1); // Assuming the name column is at index 1

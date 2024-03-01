@@ -17,12 +17,14 @@ this.before('READ',tab1,async (req)=>{
         var panformDest;
         // let auth = req?.headers?.authorization;
         // console.log(auth);
-        console.log(vcap);
+        // console.log(vcap);
         vcap.destination.forEach((dest)=>{
             if (dest?.name != undefined && dest?.name == "Plantmappingfinal-destination-service"){
                 panformDest = dest;
             }
-        })
+        });
+        // panformDest = vcap.destination[0];
+        console.log(panformDest);
 
 
         var tokenurl = panformDest.credentials.url + "/oauth/token?grant_type=client_credentials";
@@ -33,7 +35,7 @@ this.before('READ',tab1,async (req)=>{
 
         var axiosTokenResp = await axios.request({
             url: tokenurl,
-            method: 'get',
+            method :'get',
             headers:{
                 Authorization : basicStr
             }
@@ -42,19 +44,20 @@ this.before('READ',tab1,async (req)=>{
         
         var authDest = axiosTokenResp.data.token_type + " " + accesstoken;
         console.log(authDest);
+        console.log(panformDest.credentials);
 
         var destinationurl = panformDest.credentials.uri + "/destination-configuration/v1/destinations/Plantmappingfinal-srv-api"
-
+        console.log(destinationurl);
         var destinationResp = await axios.request({
             url: destinationurl,
-            method: 'get',
+            method:'get',
             headers:{
                 Authorization : authDest
             }
         })
 
         var baseSrvUrl = destinationResp?.data?.destinationConfiguration?.URL;
-        let pan = await SELECT.from(tab1);
+        // let pan = await SELECT.from(tab1);
 //         try{
 //         // pan.forEach(async element => {
 //         for(let i =0;i<pan.length;i++){
@@ -106,8 +109,8 @@ this.before('READ',tab1,async (req)=>{
     } catch (error) {
         console.log(error);
     }
-    
-  return req;
+
+//   return req;
 
 });
 
@@ -166,9 +169,17 @@ this.on ("switch_control",async (req)=>{
 });
 this.on("draft",async (req)=>{
     let pan_number = JSON.parse(req.data.ID);
+    console.log(pan_number);
     let data = await SELECT.from(Fvendor_responseoo.drafts).where`PAN_Number=${pan_number}`;
-    if(data.length!=0){
-        var resp=await DELETE.from(Fvendor_responseoo).where`PAN_Number=${pan_number}`;
+    for(let i =0;i<data.length;i++){
+        let data1 = data[i];
+        // delete data[i].IsActiveEntity;
+        // delete data[i].HasActiveEntity;
+        // delete data[i].HasDraftEntity;
+        // delete data[i].DraftAdministrativeData_DraftUUID;
+        // delete data[i].Scope_and_Responsibilities;
+
+        var resp=await DELETE.from(Fvendor_responseoo).where`Proposed_Vendor_Code=${data1["Proposed_Vendor_Code"]} and PAN_Number=${data1["PAN_Number"]}`;
     }
     return JSON.stringify(resp);
     
@@ -244,9 +255,12 @@ this.on('InsertData',async (req)=>{
         });
         if(resp1[i].status=='New'){
             let hist = await SELECT.from(WORKFLOW_HISTORY).where`PAN_Number=${resp1[i].PAN_Number}`;
-            if(hist.length==0){
+            if(hist.length!=0){
+                let del = await DELETE.from(WORKFLOW_HISTORY).where`PAN_Number=${resp1[i].PAN_Number}`;
+                console.log(del);
+            }
                 
-                let url = "/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant=%27 %27&plantCode=%27"+resp2['Plant_Code']+"%27&sbg=%27"+resp2["SBG"]+"%27&sub=%27"+resp2["SBU"]+"%27"
+                let url = "/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant=%27"+resp2['Plant_Code']+"%27&docType=%27"+resp2["Order_Type_OR_Document_tyFuuidpe"]+"%27&amount=%27"+resp2["Final_proposed_Value"]+"%27&purGroup=%27"+resp2["BUORPurchasing_Group"]+"%27"
                 let response = await AribaSrv.get(url);
                 console.log(response);
                 for(j=0;j<response.length;j++){
@@ -270,7 +284,7 @@ this.on('InsertData',async (req)=>{
                     await INSERT.into(WORKFLOW_HISTORY).entries(a);
                 }
                 
-            }
+            
         }
         
     }
@@ -449,10 +463,14 @@ this.on('InsertData',async (req)=>{
             "panToAttachNavi" :main_data,
             "json":JSON.stringify(data_m)
         }
+        try{
         
         response = await AribaSrv.post('/opu/odata/sap/ZARB_BTP_ATTACHMENT_SRV/panHeaderSet',body);
         console.log(response);
         console.log("resssssssssssssssssssssssssssssssssssssssssssssssssssss");
+        }catch(error){
+            return "error"
+        }
         let srv = await UPDATE(tab1,data.PAN_Number).with({
             "status":"Pending for Approval",
             "total_levels_of_approval":response["totalLevel"],
@@ -509,7 +527,7 @@ this.on('InsertData',async (req)=>{
 
 
 /////
-        return JSON.stringify(response);
+        return JSON.stringify("response");
         // return "response"
 
     });
@@ -958,5 +976,38 @@ this.on('InsertData',async (req)=>{
         //check content-type
         console.log('content-type: ', req.headers['content-type'])
     });
+    this.on("flag",async (req) => {
+        if(req.data.case == 'discard')
+        {
+            // let del = await DELETE.from(Files).where `size=${1}`;
+            let del = await DELETE.from(attachments).where `size=${1} and PAN_Number=${req.data.ID}`;
+            // let data = await SELECT.from(Files).where  `id1=${req.data.ID}`;
+            console.log(del);
+            return "deleted successfully";
+        }
+        else {
+            const val = 2;
+            var check = await SELECT.from(attachments).where `PAN_Number=${req.data.ID}`;
+            console.log(check);
+            for (let i = 0; i < check.length; i++) {
+                if (check[i].size !=2)  
+                {
+                    var sel_id = check[i].PAN_Number;
+                    const saved = await UPDATE(attachments).set({size: val}).where({PAN_Number : sel_id});
+                        console.log(saved);
+                return "saved successfully";
+                }
+            }
+            // const saved = await UPDATE(Files).set({size: val}).where({id1 : req.data.ID});
+            // console.log(saved);
+            // return "saved successfully";
+        }
+    
+            });
 
 });
+
+
+///////attachemnt code start
+
+////attachment code end

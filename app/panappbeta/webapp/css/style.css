@@ -1,6 +1,9 @@
 /* .sapMIBar{
     visibility: hidden;
 } */
+.sapMLabel .sapMLabelTextWrapper {
+    font-weight: bolder;
+}
 .sapMListTbl{
     border : solid 0.5px;
     }

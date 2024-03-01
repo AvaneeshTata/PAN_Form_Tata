@@ -252,7 +252,7 @@ annotate service.vendor_data with @(
         {
             $Type : 'UI.DataField',
             Value : Vendor_Location,
-            Label : 'Vendor Location',
+            Label : 'Awarded Value',
         },
         {
             $Type : 'UI.DataField',
@@ -787,15 +787,6 @@ annotate service.Fvendor_responseoo with {
     Vendor_GST_Number @Common.FieldControl : #ReadOnly
 };
 annotate service.Fvendor_responseoo with {
-    Vendor_CE_Score @Common.FieldControl : #ReadOnly
-};
-annotate service.Fvendor_responseoo with {
-    Vendor_CE_Date @Common.FieldControl : #ReadOnly
-};
-annotate service.Fvendor_responseoo with {
-    Technical_Committee_who_cleared_the_proposal @Common.FieldControl : #ReadOnly
-};
-annotate service.Fvendor_responseoo with {
     Shortlisted_Vendors_Response_summary @Common.FieldControl : #ReadOnly
 };
 annotate service.Fvendor_responseoo with {
@@ -1083,9 +1074,6 @@ annotate service.vendor_data with {
     Vendor_Location @Common.FieldControl : #ReadOnly
 };
 annotate service.vendor_data with {
-    Technically_Approved @Common.FieldControl : #ReadOnly
-};
-annotate service.vendor_data with {
     Discount_Amount @Common.FieldControl : #ReadOnly
 };
 annotate service.vendor_data with {
@@ -1156,3 +1144,9 @@ annotate service.PAYMENT_TERM_DETAILS with {
         },
         Common.ValueListWithFixedValues : true
 )};
+annotate service.Fvendor_responseoo with {
+    Vendor_CE_Score @Common.FieldControl : #Mandatory
+};
+annotate service.tab1 with {
+    Comments @Common.FieldControl : #Mandatory
+};

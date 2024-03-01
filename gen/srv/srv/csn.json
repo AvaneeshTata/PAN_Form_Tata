@@ -414,7 +414,7 @@
           "type": "cds.String"
         },
         "vendtovenr": {
-          "type": "cds.Composition",
+          "type": "cds.Association",
           "cardinality": {
             "max": 1
           },
@@ -1677,6 +1677,9 @@
         },
         "Comments": {
           "@UI.MultiLineText": true,
+          "@Common.FieldControl": {
+            "#": "Mandatory"
+          },
           "type": "cds.LargeString"
         },
         "submitted_by": {
@@ -2067,7 +2070,7 @@
           "Value": {
             "=": "Vendor_Location"
           },
-          "Label": "Vendor Location"
+          "Label": "Awarded Value"
         },
         {
           "$Type": "UI.DataField",
@@ -2491,9 +2494,6 @@
           "type": "cds.String"
         },
         "Technically_Approved": {
-          "@Common.FieldControl": {
-            "#": "ReadOnly"
-          },
           "type": "cds.String"
         },
         "Client_Approved": {
@@ -2536,7 +2536,7 @@
           "type": "cds.String"
         },
         "vendtovenr": {
-          "type": "cds.Composition",
+          "type": "cds.Association",
           "cardinality": {
             "max": 1
           },
@@ -2662,6 +2662,7 @@
     },
     "CatalogService.Fvendor_responseoo": {
       "kind": "entity",
+      "@odata.draft.enabled": true,
       "projection": {
         "from": {
           "ref": [
@@ -2701,14 +2702,11 @@
         },
         "Vendor_CE_Score": {
           "@Common.FieldControl": {
-            "#": "ReadOnly"
+            "#": "Mandatory"
           },
           "type": "cds.String"
         },
         "Vendor_CE_Date": {
-          "@Common.FieldControl": {
-            "#": "ReadOnly"
-          },
           "type": "cds.String"
         },
         "Vendor_PE_Score": {
@@ -2727,9 +2725,6 @@
           "type": "cds.String"
         },
         "Technical_Committee_who_cleared_the_proposal": {
-          "@Common.FieldControl": {
-            "#": "ReadOnly"
-          },
           "type": "cds.String"
         },
         "Commercial_Committee_who_cleared_the_proposal": {
@@ -3769,6 +3764,20 @@
         "type": "cds.String"
       }
     },
+    "CatalogService.flag": {
+      "kind": "function",
+      "params": {
+        "ID": {
+          "type": "cds.String"
+        },
+        "case": {
+          "type": "cds.String"
+        }
+      },
+      "returns": {
+        "type": "cds.String"
+      }
+    },
     "PanApproval": {
       "@source": "srv/service.cds",
       "kind": "service"
@@ -4210,7 +4219,7 @@
           "type": "cds.String"
         },
         "vendtovenr": {
-          "type": "cds.Composition",
+          "type": "cds.Association",
           "cardinality": {
             "max": 1
           },

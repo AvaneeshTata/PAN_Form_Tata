@@ -118,7 +118,6 @@ submitted_date :String;
 
 // PAN_RA_Details changed as PAN_WEB_EVENT
 @cds.persistence.exists
-
 entity  PAN_WEB_EVENT{
 key idd : String;
 key PAN_Number : String;
@@ -135,7 +134,6 @@ l1AmountObtained : String;
 tab2totab1 : Association to one PAN_Details on tab2totab1.PAN_Number = PAN_Number; 
 }
 @cds.persistence.exists
-
 entity  PAN_TYPE{
 key idd : String;
 key PAN_Number : String;
@@ -147,7 +145,6 @@ timeTakenForApproval:String;
 tab3totab1 : Association to one PAN_Details on tab3totab1.PAN_Number = PAN_Number; 
 }
 @cds.persistence.exists
-
 entity PAN_vendor_data {
     //vendor response summary table
 key Proposed_Vendor_Code : String; //disp
@@ -164,7 +161,7 @@ Order_amount_OR_Split_order_amount : String;
 Discount_Amount : String;  
 Discount_percentage : String;  
 Rank : String; 
-vendtovenr :  Composition of one PAN_vendor_response on vendtovenr.venrtovend = $self and PAN_Number = vendtovenr.PAN_Number;
+vendtovenr :  Association to  one PAN_vendor_response on vendtovenr.venrtovend = $self and PAN_Number = vendtovenr.PAN_Number;
 // vendtotnc :  Composition of many Terms_and_Conditions_Compared_with on vendtotnc.tnctovend = $self;
 vendtoptd:  Composition of many PAN_PAYMENT_TERM_DETAILS on vendtoptd.ptdtovend = $self  and PAN_Number = vendtoptd.PAN_Number;
 vendtopd:  Composition of many PAN_PRICE_DETAILS on vendtopd.pdtovend = $self  and PAN_Number = vendtopd.PAN_Number;
@@ -178,7 +175,6 @@ vendor_datatotab1 :  Association to one PAN_Details on vendor_datatotab1.PAN_Num
 
 
 @cds.persistence.exists
-
 entity PAN_vendor_response{
     
 key Proposed_Vendor_Code : String; 
@@ -236,7 +232,6 @@ Number_of_Back_to_back_Terms_agreed_with_Vendor_as_per_GPC_OR_GCC : String;
  }
  
 @cds.persistence.exists
-
 entity PAN_PAYMENT_TERM_DETAILS {
           
 key Proposed_Vendor_Code : String; 
@@ -279,7 +274,6 @@ entity PAN_attachments:cuid,managed{
 
 
 @cds.persistence.exists
-
 entity PAN_WORKFLOW_HISTORY { 
    key idd : String;
    key PAN_Number :String;
@@ -303,7 +297,6 @@ entity PAN_WORKFLOW_HISTORY {
 
 
 @cds.persistence.exists
-
 entity PAN_PRICE_DETAILS{
   
   key Proposed_Vendor_Code : String; 
@@ -323,7 +316,6 @@ entity PAN_PRICE_DETAILS{
 }
 
 @cds.persistence.exists
-
 entity PAN_Payment_Method_Drop {
   
   key id :UUID;

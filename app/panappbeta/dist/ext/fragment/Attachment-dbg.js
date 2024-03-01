@@ -20,18 +20,19 @@ sap.ui.define([
 			var id1 = oEvent.oSource.oPropagatedProperties.oModels.pageInternal.mContexts["/pages/panappbeta::tab1ObjectPage/relatedApps"].oModel.oData.currentCtxt.sPath;
 			var parentId = id1.match(/PAN_Number='(.*?)'/)[1];
 			console.log(parentId);
+			var draft = 1;
 			var _createEntity = function(item) {
 				var data = {
 					mediaType: item.getMediaType(),
 					fileName: item.getFileName(),
-					size: item.getFileObject().size,
+					size: draft,
 					PAN_Number : parentId,
 				};
 		
 
 				var settings = {
 					url: baseuri + "odata/v4/catalog/attachments",
-					// url: baseuri+"odata/v4/catalog/attachments",
+					// url: "/odata/v4/catalog/attachments",
 					method: "POST",
 					headers: {
 						"Content-type": "application/json"
@@ -73,13 +74,16 @@ sap.ui.define([
 			},
 
 			onRemovePressed: function (oEvent) {
-				oEvent.preventDefault();
-				oEvent.getParameter("item").getBindingContext().delete();
-				MessageToast.show("Selected file has been deleted");
+				  ;
+				// oEvent.preventDefault();
+				// oEvent.getParameter("item").getBindingContext().delete();
+				// MessageToast.show("Selected file has been deleted");
+				// sap.ui.getCore.byId("panappbeta::tab1ObjectPage--fe::CustomSubSection::Attachment--uploadSet-deleteDialog").destroy();
+				// oEvent.getParameter("item").destroy();
 			},
 
 			onOpenPressed: function(oEvent) {
-				 ;
+				 
 				oEvent.preventDefault();
 				var item = oEvent.getSource();
 				var fileName = item.getFileName();

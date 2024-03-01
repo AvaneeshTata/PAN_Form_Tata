@@ -1,4 +1,4 @@
-sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/core/Fragment", "sap/m/library", "sap/m/MessageToast"], function (ControllerExtension, Dialog, Fragment, library, MessageToast) {
+sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/core/Fragment", "sap/m/library", "sap/m/MessageToast","sap/ui/core/routing/History"], function (ControllerExtension, Dialog, Fragment, library, MessageToast,History) {
 	'use strict';
 	// var oUserInfoService = sap.ushell.Container.getService("UserInfo");
 	// var oUser = oUserInfoService.getUser();
@@ -39,29 +39,6 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 			 */
 			onInit: async function () {
 				 
-				// you can access the Fiori elements extensionAPI via this.base.getExtensionAPI
-				// var oModel = this.base.getExtensionAPI().getModel();
-				// let oExtensionAPI = this.base.getExtensionAPI();
-				// 	// this.getView().getContent()[0].getHeader().getContent()[0].getItems()[0].getContent().addFilterItem(new sap.m.Button({
-				// 	// 	text:"Sync",
-				// 	// 	press: async function(oEvent){ 
-				// 	// 		console.log(oEvent);
-				// 	// 	}
-				// 	// }));
-				// 	// let oModel = oExtensionAPI.getModel();
-				// 	let sFunctionName = "InsertData";
-				// 	let oFunction = sap.ui.getCore().byId("panappbeta::tab1List--fe::table::tab1::LineItem").getModel().bindContext(`/${sFunctionName}(...)`);
-				// 	// let oFunction = oModel.bindContext(`/Books`);
-				// 	let data = {some: "data"};
-				// 	oFunction.setParameter("ID",JSON.stringify(data));
-				// 	// oFunction.setParameter("Book",{ID:3, title: "BookTitle", stock:10000});
-				// 	await oFunction.execute();
-				// 	// console.log(response);
-
-				// 	let oContext = oFunction.getBoundContext();
-
-				// 	let result = oContext.getObject();
-				// 	console.log(result);
 			},
 			onBeforeRendering: async function () {
 				 
@@ -82,7 +59,69 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 				console.log(result);
 			},
 			editFlow: {
+
+				///attachment code start 
+				onBeforeDiscard : async function(oEvent) {
+					  
+					// var data = window.location.href;
+					// const regex = /PAN_Number='([^']+)'/;;
+					// const match = data.match(regex);
+					// console.log();
+					// if (match) {
+					// 	var extractedNumber = match[1];
+					// 	console.log(extractedNumber); // Output: 1
+					// } else {
+					// 	console.log("Number not found in URL");
+					// }
+
+					let appr_url = window.location.href;
+					var pieces = appr_url.split("(");
+					var res = pieces[1];
+					var res1 = res.split("'");
+					let extractedNumber = res1[1];
+					  
+					let func = 'flag';
+					const val = 'discard'
+					let path = oEvent.context.getModel().bindContext(`/${func}(...)`);
+					path.setParameter('ID',extractedNumber);
+					path.setParameter('case',val);
+					await path.execute();
+					const bound = path.getBoundContext();
+					var get_val = bound.getValue();
+					console.log(get_val);
+					sap.ui.getCore().byId("panappbeta::tab1ObjectPage--fe::CustomSubSection::Attachment--uploadSet").mBindingInfos.items.binding.refresh();
+					  
+				},
+				///attachment code on before discard end
 				onAfterSave: async function (oEvent) {
+
+					//on after save attachment code
+					// var data = window.location.href;
+					// const regex =/PAN_Number='([^']+)'/;;
+					// const match = data.match(regex);
+					// console.log();
+					// if (match) {
+					// 	var extractedNumber = match[1];
+					// 	console.log(extractedNumber); // Output: 1
+					// } else {
+					// 	console.log("Number not found in URL");
+					// }
+					let appr_url = window.location.href;
+					var pieces = appr_url.split("(");
+					var res = pieces[1];
+					var res1 = res.split("'");
+					let extractedNumber = res1[1];
+					  
+					let func = 'flag';
+					const val = 'saved'
+					let path = oEvent.context.getModel().bindContext(`/${func}(...)`);
+					path.setParameter('ID',extractedNumber);
+					path.setParameter('case',val);
+					await path.execute();
+					const bound = path.getBoundContext();
+					var get_val = bound.getValue();
+					console.log(get_val);
+					// on after save attachment code end
 					 
 					dialog = new sap.m.Dialog({
 						title: "Confirm",
@@ -127,29 +166,40 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 
 								// await oFunction.execute();
 								// let oContext = oFunction.getBoundContext();
-
-								 
+								debugger
+								var result;
 								// let result = oContext.getObject();
-								let result = await Fimport(oModel, sFunctionName, body, "data")
-								let value = JSON.parse(result);
-								console.log(value);
+								// try{
+								result = await Fimport(oModel, sFunctionName, body, "data");
+								// }catch(error){debugger
+									// console.log(error);
+									// result = error;
+								// }
+								// let value = JSON.parse(result);
+								// console.log(value);
 								dialog.close();
 								dialog.destroy();
+								oBusyDialog.close();
+								if(result == "error"){
+									window.alert("Sorry.. Please try again after sometime")
+								}else{
 								// dialog.exit();
 								MessageToast.show("PANForm Submitted for Approval");
-								// let oRouter=sap.ui.core.UIComponent.getRouterFor(this);
-
-								oBusyDialog.close();
-								// oRouter.navTo("tab1List");
-								// this.extensionAPI.refresh()
-								// this.getBindingContext().refresh();
-								// if (sPreviousHash !== undefined) {
-								// window.history.go(-1);
 								var href_For_Product_display = await sap.ushell.Container.getServiceAsync("Navigation");
 
 								href_For_Product_display.navigate({
 									target: { semanticObject: "obj1", action: "display" }
 								});
+								}
+								// let oRouter=sap.ui.core.UIComponent.getRouterFor(this);
+
+								
+								// oRouter.navTo("tab1List");
+								// this.extensionAPI.refresh()
+								// this.getBindingContext().refresh();
+								// if (sPreviousHash !== undefined) {
+								// window.history.go(-1);
+								
 								// };
 
 								console.log(result);
@@ -182,12 +232,30 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 								dialog.close();
 								dialog.destroy();
 								oBusyDialog.close();
-								// window.history.go(-1);
+								
+								  
+							// 	debugger
+							// 	var backlen = window.history.length;  
+							// // 	// window.history.go(-backlen);
+							// // 	if(backlen>2){
+							// 	for(let i =0;i<backlen-1;i++){
+							// 		window.history.back();
+							// 	}
+							// 	window.history.deleteAll();
+							// }else{
+							// 	let len = backlen-1;
+							// 	window.history.go(-len);
+							// }
+
+								// let len = window.history.length - 1;
+								// window.history.go(-len);
+								
 								var href_For_Product_display = await sap.ushell.Container.getServiceAsync("Navigation");
 
 								href_For_Product_display.navigate({
 									target: { semanticObject: "obj1", action: "display" }
 								});
+								// window.location.reload();
 								// dialog.exit();
 								// }
 							}.bind(this)
@@ -206,160 +274,60 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 				onBeforeSave: async function (oEvent) {
 					 
 					// return this._createDialog("Do you want to submit this really nice... object ?");
-					let sFunctionName = "draft";
-					let oFunction = oEvent.context.getModel();
-					let appr_url = window.location.href;
-					var pieces = appr_url.split("(");
-					var res = pieces[1];
-					var res1 = res.split("'");
-					let data = res1[1];
-					// oFunction.setParameter("ID", data);
+					// let sFunctionName = "draft";
+					// let oFunction = oEvent.context.getModel();
+					// let appr_url = window.location.href;
+					// var pieces = appr_url.split("(");
+					// var res = pieces[1];
+					// var res1 = res.split("'");
+					// let data = res1[1];
+					// // oFunction.setParameter("ID", data);
 
-					// await oFunction.execute();
-					// let oContext = oFunction.getBoundContext();
+					// // await oFunction.execute();
+					// // let oContext = oFunction.getBoundContext();
 					 
 
-					let result = await Fimport(oFunction, sFunctionName, data, "ID");
-					console.log(result);
-				},
+					// let result = await Fimport(oFunction, sFunctionName, data, "ID");
+					// console.log(result);
+					///on before save attachment code 
+					// onBeforeSave: async function (oEvent) {
+						  ;
+						var allItems = this.base.getView().mAggregations.content[0].mAggregations.sections[2].mAggregations._grid.mAggregations.content[0].mAggregations._grid.mAggregations.content[0].mAggregations.content.mAggregations.items[1].mAggregations.items
+						var ocacheItemscache = this.base.getView().mAggregations.content[0].mAggregations.sections[2].mAggregations._grid.mAggregations.content[0].mAggregations._grid.mAggregations.content[0].mAggregations.content.mAggregations.items[1].mBindingInfos.items.binding.oCache.aElements.$byPredicate
+						var obitems = this.base.getView().mAggregations.content[0].mAggregations.sections[2].mAggregations._grid.mAggregations.content[0].mAggregations._grid.mAggregations.content[0].mAggregations.content.mAggregations.items[1].mBindingInfos.items.binding.oCache.aElements.$byPredicate
+	
+						var valuesArraycache = Object.values(obitems);
+	
+						// this.base.getView().mAggregations.content[0].mAggregations.sections[1].mAggregations._grid.mAggregations.content[0].mAggregations._grid.mAggregations.content[0].mAggregations.content.mAggregations.items[1].mBindingInfos.items.binding.aContexts[0].delete()
+						for (var i = 0; i < valuesArraycache.length; i++) {
+							  ;
+							var isFound = false; 
+							for (var j = 0; j < allItems.length; j++) {
+								  
+								var url =allItems[j].mProperties.url
+								// Regular expression to match the ID
+								var regex = /ID=([a-f\d-]+)/i;
+	
+								// Extract the ID using the regular expression
+								var match = url.match(regex);
+								if (valuesArraycache[i].ID === match[1]) {
+									isFound = true; 
+	
+									break;
+								}
+							}
+								
+								if (!isFound) {
+								this.base.getView().mAggregations.content[0].mAggregations.sections[2].mAggregations._grid.mAggregations.content[0].mAggregations._grid.mAggregations.content[0].mAggregations.content.mAggregations.items[1].mBindingInfos.items.binding.aContexts[i].delete()
+								}
+						}
+						///on before save attachment code end
+	
+					},
+	
+				// }
+				// },
 			},
-			// onAfterRendering: function () {
-			// 	// this.base.editFlow.onBeforeEdit(function(){
-			// 	// 	 ;
-			// 	// });
-			// 	 
-			// 	let uploadsetitem = this.base.getView().mAggregations.content[0].mAggregations.sections[2].mAggregations._grid.mAggregations.content[0].mAggregations._grid.mAggregations.content[0].mAggregations.content.mAggregations.items[1].mBindingInfos.items.path;
-			// 	uploadsetitem = "/attachments?$filter=PAN_Number eq 'pan123'";
-			// 	// this.func = async function (oEvent) {
-			// 	// 	 
-			// 		// if(!dialog){
-			// 	// 	dialog = new sap.m.Dialog({
-			// 	// 		title: "Confirm",
-			// 	// 		content: new sap.m.Text({ text: "   Submit PAN Form For Approval  " }),
-			// 	// 		beginButton: new sap.m.Button({
-			// 	// 			type: ButtonType.Emphasized,
-			// 	// 			text: "OK",
-			// 	// 			press: async function () {
-			// 	// 				 
-			// 	// 				// for(let i=0;i<2;i++){
-			// 	// 				oBusyDialog.open();
-			// 	// 				const oModel = this.base.getExtensionAPI().getModel();
-			// 	// 				let sFunctionName = "sendforapproval";
-			// 	// 				// let oFunction = oModel.bindContext(`/${sFunctionName}(...)`);
-			// 	// 				let appr_url = window.location.href;
-			// 	// 				var pieces = appr_url.split("(");
-			// 	// 				var res = pieces[1];
-			// 	// 				var res1 = res.split("'");
-			// 	// 				let comp_url = "https://btp-dev-0or0hi20.launchpad.cfapps.eu10.hana.ondemand.com/site?siteId=94a17d9a-05b5-425d-b51d-2cd74a2c2762#pan_approval-display?sap-ui-app-id-hint=saas_approuter_panapproval&/PAN_Details_APR('" + res1[1] + "')";
-			// 	// 				// let oFunction = oModel.bindContext(`/Books`);
-			// 	// 				// let data = {some: "data"};
-			// 	// 				let body = {
-			// 	// 					"url": comp_url,
-			// 	// 					"PAN_Number": res1[1],
-			// 	// 					"buttonclicked": "sendforApproval"
-			// 	// 				};
-			// 	// 				// oFunction.setParameter("data", JSON.stringify(body));
-
-			// 	// 				// await oFunction.execute();
-			// 	// 				// let oContext = oFunction.getBoundContext();
-
-			// 	// 				 
-			// 	// 				// let result = oContext.getObject();
-			// 	// 				let result = await Fimport(oModel,sFunctionName,body,"data")
-			// 	// 				let value = JSON.parse(result);
-			// 	// 				console.log(value);
-			// 	// 				dialog.close();
-			// 	// 				dialog.destroy();
-			// 	// 				// dialog.exit();
-			// 	// 				MessageToast.show("PANForm Submitted for Approval");
-			// 	// 				// let oRouter=sap.ui.core.UIComponent.getRouterFor(this);
-
-			// 	// 				oBusyDialog.close();
-			// 	// 				// oRouter.navTo("tab1List");
-			// 	// 				// this.extensionAPI.refresh()
-			// 	// 				// this.getBindingContext().refresh();
-			// 	// 				// if (sPreviousHash !== undefined) {
-			// 	// 				// window.history.go(-1);
-			// 	// 				var href_For_Product_display = await sap.ushell.Container.getServiceAsync("Navigation");
-
-			// 	// 				href_For_Product_display.navigate({
-			// 	// 					target: { semanticObject: "obj1", action: "display" }
-			// 	// 				});
-			// 	// 				// };
-
-			// 	// 				console.log(result);
-
-			// 	// 				// }
-			// 	// 			}.bind(this)
-			// 	// 		}),
-			// 	// 		endButton: new sap.m.Button({
-			// 	// 			text: "Close",
-			// 	// 			press: async function () {
-			// 	// 				 
-			// 	// 				// for(let i=0;i<2;i++){
-			// 	// 				oBusyDialog.open();
-			// 	// 				const oModel = this.base.getExtensionAPI().getModel();
-			// 	// 				let sFunctionName = "getuserinfo";
-			// 	// 				// let oFunction = oModel.bindContext(`/${sFunctionName}(...)`);
-			// 	// 				let appr_url = window.location.href;
-			// 	// 				var pieces = appr_url.split("(");
-			// 	// 				var res = pieces[1];
-			// 	// 				var res1 = res.split("'");
-			// 	// 				let data = res1[1];
-			// 	// 				// oFunction.setParameter("ID", data);
-
-			// 	// 				// await oFunction.execute();
-			// 	// 				// let oContext = oFunction.getBoundContext();
-
-			// 	// 				// let result = oContext.getObject();
-			// 	// 				 
-			// 	// 				let result = await Fimport(oModel,sFunctionName,data,"ID");
-			// 	// 				dialog.close();
-			// 	// 				dialog.destroy();
-			// 	// 				oBusyDialog.close();
-			// 	// 				// window.history.go(-1);
-			// 	// 				var href_For_Product_display = await sap.ushell.Container.getServiceAsync("Navigation");
-
-			// 	// 				href_For_Product_display.navigate({
-			// 	// 					target: { semanticObject: "obj1", action: "display" }
-			// 	// 				});
-			// 	// 				// dialog.exit();
-			// 	// 				// }
-			// 	// 			}.bind(this)
-			// 	// 		})
-			// 	// 	});
-			// 	// 	// }
-			// 	// 	// this.getView().addDependent(dialog); 
-			// 	// 	dialog.open();
-
-			// 	// }
-			// 	// if (this.base.getExtensionAPI().getEditFlow() !== undefined) {
-			// 	// 	 
-			// 	// 	this.base.getExtensionAPI().getEditFlow().attachonAfterSave(this.func.bind(this));
-			// 	// }
-			// 	// this.draft = async function (oEvent) {
-			// 	// 	 
-			// 	// 	let sFunctionName = "draft";
-			// 	// 	let oFunction = oModel.bindContext(`/${sFunctionName}(...)`);
-			// 	// 	let appr_url = window.location.href;
-			// 	// 	var pieces = appr_url.split("(");
-			// 	// 	var res = pieces[1];
-			// 	// 	var res1 = res.split("'");
-			// 	// 	let data = res1[1];
-			// 	// 	oFunction.setParameter("ID", data);
-
-			// 	// 	await oFunction.execute();
-			// 	// 	let oContext = oFunction.getBoundContext();
-
-			// 	// 	let result = oContext.getObject();
-			// 	// 	console.log(result);
-			// 	// }
-			// 	// if(this.base.getExtensionAPI().getEditFlow()!== undefined){ 
-			// 	// 	this.base.getExtensionAPI().getEditFlow().onBeforeSave(this.draft.bind(this));
-			// 	// }
-
-			// 	// this.base.getExtensionAPI().getEditFlow().attachonAfterSave(this.onDialog.bind(this));
-			// },
 
 			routing: {
 				onBeforeBinding: async function (oBindingContext) {
@@ -490,7 +458,16 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 						let oSection = that.base.getView().getContent()[0].getSections()[4];
 
 						//   SORT DATA BY LEVEL
-						let sortedData = data.sort((d1, d2) => (d1.level > d2.level) ? 1 : (d1.level < d2.level) ? -1 : 0);
+						// let sortedData = data.sort((d1, d2) => (d1.level > d2.level) ? 1 : (d1.level < d2.level) ? -1 : 0);
+						let sortedData = data.sort((d1, d2) => {
+							if (d1.level > d2.level) {
+								return 1;
+							} else if (d1.level < d2.level) {
+								return -1;
+							} else {
+								return 0;
+							}
+						});
 
 						// this.sortedData = sortedData;
 
@@ -901,27 +878,6 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 						})
 
 					}
-					// let oContext = oFunction.getBoundContext();
-
-					// let result = oContext.getObject();
-					// var oUserInfoService = sap.ushell.Container.getService("UserInfo");
-					// var oUser = oUserInfoService.getUser();
-					// var email = oUser.getEmail();
-					// if(email===result.value){
-
-					// that.getView().getContent()[0].setVisible(true);
-					// let oFunction = oModel.bindContext(`/${sFunctionName}(...)`);
-					// oFunction.setParameter("ID", data);
-					// await oFunction.execute();  
-					//  var oContext = oFunction.getBoundContext();
-
-					//  var res = oContext.getObject();
-					//   
-					// await oFunction.execute();
-					 
-					// let oContext1 = oFunction.getBoundContext();
-
-					// let result1 = oContext1.getObject();
 					let result1 = await Fimport(oModel, sFunctionName, data, "ID");
 
 
@@ -989,7 +945,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 								let colName = col.mProperties.dataProperty;
 								let mLength = colName.length;
 											let valuevendor = sap.ui.getCore().byId(`${section}`).mAggregations._grid.mAggregations.content[0].mAggregations._grid.mAggregations.content[0].mAggregations.content.mAggregations.content.mAggregations._content.mBindingInfos.rows.binding.oCache.getValue()
-											const maxLength = Math.max(...valuevendor.map(item => (item[colName]?.length ?? 8)));
+											const maxLength = Math.max(...valuevendor.map(item => (item[colName].length ?? 8)));
 									if(maxLength > mLength)
 									mLength = maxLength; 
 							const width = mLength * 8 + 20 + "px"; 

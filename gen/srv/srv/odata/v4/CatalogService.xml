@@ -20,8 +20,7 @@
           <NavigationPropertyBinding Path="tab1toWORKFLOW_HISTORY/WORKFLOW_HISTORYtotab1" Target="tab1"/>
           <NavigationPropertyBinding Path="tab1toWORKFLOW_HISTORY/SiblingEntity" Target="tab1/tab1toWORKFLOW_HISTORY"/>
           <NavigationPropertyBinding Path="tab1topdf" Target="attachments"/>
-          <NavigationPropertyBinding Path="tab1tovendor_data/vendtovenr/venrtovend" Target="tab1/tab1tovendor_data"/>
-          <NavigationPropertyBinding Path="tab1tovendor_data/vendtovenr/SiblingEntity" Target="tab1/tab1tovendor_data/vendtovenr"/>
+          <NavigationPropertyBinding Path="tab1tovendor_data/vendtovenr" Target="Fvendor_responseoo"/>
           <NavigationPropertyBinding Path="tab1tovendor_data/vendtoptd/ptdtovend" Target="tab1/tab1tovendor_data"/>
           <NavigationPropertyBinding Path="tab1tovendor_data/vendtoptd/SiblingEntity" Target="tab1/tab1tovendor_data/vendtoptd"/>
           <NavigationPropertyBinding Path="tab1tovendor_data/vendtopd/pdtovend" Target="tab1/tab1tovendor_data"/>
@@ -31,6 +30,16 @@
           <NavigationPropertyBinding Path="tab1tocom/comtotab1" Target="tab1"/>
           <NavigationPropertyBinding Path="tab1tocom/SiblingEntity" Target="tab1/tab1tocom"/>
           <NavigationPropertyBinding Path="SiblingEntity" Target="tab1"/>
+        </EntitySet>
+        <EntitySet Name="Fvendor_responseoo" EntityType="CatalogService.Fvendor_responseoo">
+          <NavigationPropertyBinding Path="venrtovend/vendtovenr" Target="Fvendor_responseoo"/>
+          <NavigationPropertyBinding Path="venrtovend/vendtoptd/ptdtovend" Target="Fvendor_responseoo/venrtovend"/>
+          <NavigationPropertyBinding Path="venrtovend/vendtoptd/SiblingEntity" Target="Fvendor_responseoo/venrtovend/vendtoptd"/>
+          <NavigationPropertyBinding Path="venrtovend/vendtopd/pdtovend" Target="Fvendor_responseoo/venrtovend"/>
+          <NavigationPropertyBinding Path="venrtovend/vendtopd/SiblingEntity" Target="Fvendor_responseoo/venrtovend/vendtopd"/>
+          <NavigationPropertyBinding Path="venrtovend/vendor_datatotab1" Target="tab1"/>
+          <NavigationPropertyBinding Path="venrtovend/SiblingEntity" Target="Fvendor_responseoo/venrtovend"/>
+          <NavigationPropertyBinding Path="SiblingEntity" Target="Fvendor_responseoo"/>
         </EntitySet>
         <EntitySet Name="attachments" EntityType="CatalogService.attachments">
           <NavigationPropertyBinding Path="pdftotab1" Target="tab1"/>
@@ -45,6 +54,7 @@
         <FunctionImport Name="getsync" Function="CatalogService.getsync"/>
         <FunctionImport Name="draft" Function="CatalogService.draft"/>
         <FunctionImport Name="Listdata" Function="CatalogService.Listdata"/>
+        <FunctionImport Name="flag" Function="CatalogService.flag"/>
       </EntityContainer>
       <EntityType Name="tab1">
         <Key>
@@ -164,7 +174,9 @@
         <Property Name="Discount_Amount" Type="Edm.String"/>
         <Property Name="Discount_percentage" Type="Edm.String"/>
         <Property Name="Rank" Type="Edm.String"/>
-        <NavigationProperty Name="vendtovenr" Type="CatalogService.Fvendor_responseoo" ContainsTarget="true"/>
+        <NavigationProperty Name="vendtovenr" Type="CatalogService.Fvendor_responseoo">
+          <ReferentialConstraint Property="PAN_Number" ReferencedProperty="PAN_Number"/>
+        </NavigationProperty>
         <NavigationProperty Name="vendtoptd" Type="Collection(CatalogService.PAYMENT_TERM_DETAILS)" ContainsTarget="true"/>
         <NavigationProperty Name="vendtopd" Type="Collection(CatalogService.PAN_PRICE_DETAILS)" ContainsTarget="true"/>
         <NavigationProperty Name="vendor_datatotab1" Type="CatalogService.tab1" Partner="tab1tovendor_data"/>
@@ -224,7 +236,9 @@
         <Property Name="Commercial_Terms" Type="Edm.String"/>
         <Property Name="Compliance_Terms" Type="Edm.String"/>
         <Property Name="Others" Type="Edm.String"/>
-        <NavigationProperty Name="venrtovend" Type="CatalogService.vendor_data"/>
+        <NavigationProperty Name="venrtovend" Type="CatalogService.vendor_data">
+          <ReferentialConstraint Property="Proposed_Vendor_Code" ReferencedProperty="Proposed_Vendor_Code"/>
+        </NavigationProperty>
         <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
         <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
         <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
@@ -418,10 +432,19 @@
         <Parameter Name="in" Type="CatalogService.tab1"/>
         <ReturnType Type="CatalogService.tab1"/>
       </Action>
+      <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
+        <Parameter Name="in" Type="CatalogService.Fvendor_responseoo"/>
+        <ReturnType Type="CatalogService.Fvendor_responseoo"/>
+      </Action>
       <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
         <Parameter Name="in" Type="CatalogService.tab1"/>
         <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
         <ReturnType Type="CatalogService.tab1"/>
+      </Action>
+      <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
+        <Parameter Name="in" Type="CatalogService.Fvendor_responseoo"/>
+        <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
+        <ReturnType Type="CatalogService.Fvendor_responseoo"/>
       </Action>
       <Function Name="sendforapproval" IsBound="false" IsComposable="false">
         <Parameter Name="data" Type="Edm.String"/>
@@ -457,6 +480,11 @@
       </Function>
       <Function Name="Listdata" IsBound="false" IsComposable="false">
         <Parameter Name="ID" Type="Edm.String"/>
+        <ReturnType Type="Edm.String"/>
+      </Function>
+      <Function Name="flag" IsBound="false" IsComposable="false">
+        <Parameter Name="ID" Type="Edm.String"/>
+        <Parameter Name="case" Type="Edm.String"/>
         <ReturnType Type="Edm.String"/>
       </Function>
       <Annotations Target="CatalogService.tab1">
@@ -820,6 +848,7 @@
       </Annotations>
       <Annotations Target="CatalogService.tab1/Comments">
         <Annotation Term="UI.MultiLineText" Bool="true"/>
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
       </Annotations>
       <Annotations Target="CatalogService.tab1/IsActiveEntity">
         <Annotation Term="UI.Hidden" Bool="true"/>
@@ -962,7 +991,7 @@
             </Record>
             <Record Type="UI.DataField">
               <PropertyValue Property="Value" Path="Vendor_Location"/>
-              <PropertyValue Property="Label" String="Vendor Location"/>
+              <PropertyValue Property="Label" String="Awarded Value"/>
             </Record>
             <Record Type="UI.DataField">
               <PropertyValue Property="Value" Path="Technically_Approved"/>
@@ -1246,9 +1275,6 @@
       <Annotations Target="CatalogService.vendor_data/Vendor_Location">
         <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/ReadOnly"/>
       </Annotations>
-      <Annotations Target="CatalogService.vendor_data/Technically_Approved">
-        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/ReadOnly"/>
-      </Annotations>
       <Annotations Target="CatalogService.vendor_data/Original_quote">
         <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/ReadOnly"/>
       </Annotations>
@@ -1279,6 +1305,15 @@
       <Annotations Target="CatalogService.vendor_data/DraftAdministrativeData">
         <Annotation Term="UI.Hidden" Bool="true"/>
       </Annotations>
+      <Annotations Target="CatalogService.EntityContainer/Fvendor_responseoo">
+        <Annotation Term="Common.DraftRoot">
+          <Record Type="Common.DraftRootType">
+            <PropertyValue Property="ActivationAction" String="CatalogService.draftActivate"/>
+            <PropertyValue Property="EditAction" String="CatalogService.draftEdit"/>
+            <PropertyValue Property="PreparationAction" String="CatalogService.draftPrepare"/>
+          </Record>
+        </Annotation>
+      </Annotations>
       <Annotations Target="CatalogService.Fvendor_responseoo/Proposed_Vendor_Name">
         <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/ReadOnly"/>
       </Annotations>
@@ -1289,16 +1324,10 @@
         <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/ReadOnly"/>
       </Annotations>
       <Annotations Target="CatalogService.Fvendor_responseoo/Vendor_CE_Score">
-        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/ReadOnly"/>
-      </Annotations>
-      <Annotations Target="CatalogService.Fvendor_responseoo/Vendor_CE_Date">
-        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/ReadOnly"/>
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
       </Annotations>
       <Annotations Target="CatalogService.Fvendor_responseoo/Vendor_Contact_PersonDASH1">
         <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
-      </Annotations>
-      <Annotations Target="CatalogService.Fvendor_responseoo/Technical_Committee_who_cleared_the_proposal">
-        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/ReadOnly"/>
       </Annotations>
       <Annotations Target="CatalogService.Fvendor_responseoo/Shortlisted_Vendors_Response_summary">
         <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/ReadOnly"/>
