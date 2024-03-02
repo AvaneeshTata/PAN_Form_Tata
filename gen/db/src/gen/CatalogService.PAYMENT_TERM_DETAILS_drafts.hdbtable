@@ -1,7 +1,8 @@
 COLUMN TABLE CatalogService_PAYMENT_TERM_DETAILS_drafts (
-  Proposed_Vendor_Code NVARCHAR(5000) NOT NULL,
-  PAN_Number NVARCHAR(5000) NOT NULL,
-  iddd NVARCHAR(5000) NOT NULL,
+  ptdkey NVARCHAR(36) NOT NULL,
+  Proposed_Vendor_Code NVARCHAR(5000) NULL,
+  PAN_Number NVARCHAR(5000) NULL,
+  iddd NVARCHAR(5000) NULL,
   slNo INTEGER NULL,
   Payment_methord NVARCHAR(5000) NULL DEFAULT 'RTGS payment',
   Percentage NVARCHAR(5000) NULL,
@@ -13,7 +14,7 @@ COLUMN TABLE CatalogService_PAYMENT_TERM_DETAILS_drafts (
   HasActiveEntity BOOLEAN,
   HasDraftEntity BOOLEAN,
   DraftAdministrativeData_DraftUUID NVARCHAR(36) NOT NULL,
-  PRIMARY KEY(Proposed_Vendor_Code, PAN_Number, iddd)
+  PRIMARY KEY(ptdkey)
 ) WITH ASSOCIATIONS (
   MANY TO ONE JOIN CatalogService_vendor_data_drafts AS ptdtovend ON (ptdtovend.Proposed_Vendor_Code = Proposed_Vendor_Code),
   MANY TO ONE JOIN CatalogService_DraftAdministrativeData AS DraftAdministrativeData ON (DraftAdministrativeData.DraftUUID = DraftAdministrativeData_DraftUUID)

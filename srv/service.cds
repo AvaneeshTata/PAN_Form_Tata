@@ -6,10 +6,11 @@ service CatalogService {
  entity tab1 as projection on my.PAN_Details where created_by = $user and ltrim(rtrim(task_id))!='';
  entity tab2 as projection on my.PAN_WEB_EVENT;
  entity tab3 as projection on my.PAN_TYPE;
+//  @odata.draft.enabled
  entity vendor_data as projection on my.PAN_vendor_data;
- @odata.draft.enabled
  entity Fvendor_responseoo as projection on my.PAN_vendor_response; 
  entity PAYMENT_TERM_DETAILS as projection on my.PAN_PAYMENT_TERM_DETAILS;
+  //  @odata.draft.enabled
  entity PAN_PRICE_DETAILS as projection on my.PAN_PRICE_DETAILS;
  entity WORKFLOW_HISTORY as projection on my.PAN_WORKFLOW_HISTORY;
  entity attachments as projection on my.PAN_attachments;

@@ -169,12 +169,12 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 								debugger
 								var result;
 								// let result = oContext.getObject();
-								// try{
+								try{
 								result = await Fimport(oModel, sFunctionName, body, "data");
-								// }catch(error){debugger
-									// console.log(error);
-									// result = error;
-								// }
+								 }catch(error){debugger
+									console.log(error);
+									result = error;
+								}
 								// let value = JSON.parse(result);
 								// console.log(value);
 								dialog.close();
@@ -272,7 +272,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 
 				},
 				onBeforeSave: async function (oEvent) {
-					 
+					 debugger
 					// return this._createDialog("Do you want to submit this really nice... object ?");
 					// let sFunctionName = "draft";
 					// let oFunction = oEvent.context.getModel();

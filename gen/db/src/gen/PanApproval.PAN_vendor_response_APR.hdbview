@@ -42,8 +42,10 @@ VIEW PanApproval_PAN_vendor_response_APR AS SELECT
   PAN_vendor_response_0.Scope_and_Responsibilities,
   PAN_vendor_response_0.Commercial_Terms,
   PAN_vendor_response_0.Compliance_Terms,
-  PAN_vendor_response_0.Others
+  PAN_vendor_response_0.Others,
+  PAN_vendor_response_0.venrtovend_Proposed_Vendor_Code,
+  PAN_vendor_response_0.venrtovend_PAN_Number
 FROM proj_schema_PAN_vendor_response AS PAN_vendor_response_0
 WITH ASSOCIATIONS (
-  MANY TO ONE JOIN PanApproval_PAN_vendor_data_APR AS venrtovend ON (venrtovend.Proposed_Vendor_Code = Proposed_Vendor_Code)
+  MANY TO ONE JOIN PanApproval_PAN_vendor_data_APR AS venrtovend ON (venrtovend.Proposed_Vendor_Code = venrtovend_Proposed_Vendor_Code AND venrtovend.PAN_Number = venrtovend_PAN_Number)
 )

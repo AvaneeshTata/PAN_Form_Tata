@@ -43,12 +43,14 @@ COLUMN TABLE CatalogService_Fvendor_responseoo_drafts (
   Commercial_Terms NCLOB NULL,
   Compliance_Terms NCLOB NULL,
   Others NCLOB NULL,
+  venrtovend_Proposed_Vendor_Code NVARCHAR(5000) NULL,
+  venrtovend_PAN_Number NVARCHAR(5000) NULL,
   IsActiveEntity BOOLEAN,
   HasActiveEntity BOOLEAN,
   HasDraftEntity BOOLEAN,
   DraftAdministrativeData_DraftUUID NVARCHAR(36) NOT NULL,
   PRIMARY KEY(Proposed_Vendor_Code, PAN_Number)
 ) WITH ASSOCIATIONS (
-  MANY TO ONE JOIN CatalogService_vendor_data AS venrtovend ON (venrtovend.Proposed_Vendor_Code = Proposed_Vendor_Code),
+  MANY TO ONE JOIN CatalogService_vendor_data_drafts AS venrtovend ON (venrtovend.Proposed_Vendor_Code = venrtovend_Proposed_Vendor_Code AND venrtovend.PAN_Number = venrtovend_PAN_Number),
   MANY TO ONE JOIN CatalogService_DraftAdministrativeData AS DraftAdministrativeData ON (DraftAdministrativeData.DraftUUID = DraftAdministrativeData_DraftUUID)
 )

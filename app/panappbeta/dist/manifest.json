@@ -334,10 +334,6 @@
                                         "enableExport": false,
                                         "creationMode": {
                                             "inlineCreationRowsHiddenInEditMode": true
-                                        },
-                                        "personalization": {
-                                            "sort": false,
-                                            "filter": false
                                         }
                                     }
                                 },

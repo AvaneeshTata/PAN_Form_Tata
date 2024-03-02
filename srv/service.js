@@ -170,6 +170,7 @@ this.on ("switch_control",async (req)=>{
 this.on("draft",async (req)=>{
     let pan_number = JSON.parse(req.data.ID);
     console.log(pan_number);
+    var ret=0;
     let data = await SELECT.from(Fvendor_responseoo.drafts).where`PAN_Number=${pan_number}`;
     for(let i =0;i<data.length;i++){
         let data1 = data[i];
@@ -180,8 +181,9 @@ this.on("draft",async (req)=>{
         // delete data[i].Scope_and_Responsibilities;
 
         var resp=await DELETE.from(Fvendor_responseoo).where`Proposed_Vendor_Code=${data1["Proposed_Vendor_Code"]} and PAN_Number=${data1["PAN_Number"]}`;
+        ret = ret + resp;
     }
-    return JSON.stringify(resp);
+    return JSON.stringify(ret);
     
 })
 this.on('getsync',async (req)=>{
@@ -418,6 +420,21 @@ this.on('InsertData',async (req)=>{
         //     "media" : "PDF",
         //     "buttonClicked" : "sendforApproval"
         //   };
+        let comm = await SELECT.from(tab1).where`PAN_Number = ${data.PAN_Number}`
+        var commentss = null;
+        if(comm[0].Comments){
+            let ComEnt = {
+                PAN_Number : data.PAN_Number,
+                user : decoded['user_name'],
+                Comments : comm[0].Comments, 
+                status:data.buttonclicked
+            };
+         commentss = comm[0].Comments;
+         await INSERT.into(PAN_Comments).entries(ComEnt);
+         await UPDATE(tab1,data.PAN_Number).with({
+            "Comments":""
+         });
+        }
         let data_m = await SELECT.from(tab1).where`PAN_Number=${data.PAN_Number}`;
         data_m = data_m[0];
         data_m.created_by=decoded['user_name'];
@@ -483,21 +500,21 @@ this.on('InsertData',async (req)=>{
             "submitted_date":currentDate1
         });
     }
-        let comm = await SELECT.from(tab1).where`PAN_Number = ${data.PAN_Number}`
-        var commentss = null;
-        if(comm[0].Comments){
-            let ComEnt = {
-                PAN_Number : data.PAN_Number,
-                user : decoded['user_name'],
-                Comments : comm[0].Comments, 
-                status:data.buttonclicked
-            };
-         commentss = comm[0].Comments;
-         await INSERT.into(PAN_Comments).entries(ComEnt);
-         await UPDATE(tab1,data.PAN_Number).with({
-            "Comments":""
-         });
-        }
+        // let comm = await SELECT.from(tab1).where`PAN_Number = ${data.PAN_Number}`
+        // var commentss = null;
+        // if(comm[0].Comments){
+        //     let ComEnt = {
+        //         PAN_Number : data.PAN_Number,
+        //         user : decoded['user_name'],
+        //         Comments : comm[0].Comments, 
+        //         status:data.buttonclicked
+        //     };
+        //  commentss = comm[0].Comments;
+        //  await INSERT.into(PAN_Comments).entries(ComEnt);
+        //  await UPDATE(tab1,data.PAN_Number).with({
+        //     "Comments":""
+        //  });
+        // }
         
         let up={
             "Begin_DateAND_Time": currentDate1.toString(),

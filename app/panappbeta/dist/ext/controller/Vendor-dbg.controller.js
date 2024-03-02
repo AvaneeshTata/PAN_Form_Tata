@@ -31,30 +31,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 				var oModel = this.base.getExtensionAPI().getModel();
 			},
 			routing:{
-				onAfterBinding:async function(oBindingContext){ 
-					var frag4 = this.base.getView().getContent()[0]
-					frag4.attachSectionChange(function(){ 
-						var section = this.getScrollingSectionId()
-						
-							var columns = sap.ui.getCore().byId(`${section}`).mAggregations._grid.mAggregations.content[0].mAggregations._grid.mAggregations.content[0].mAggregations.content.mAggregations.content.mAggregations.columns;
-							if(columns != undefined )
-							columns.forEach(col =>{ 
-								var colName = col.mProperties.dataProperty;
-								var colheader=col.getHeader();
-								var mLength = colheader.length;		
-								var valuevendor = sap.ui.getCore().byId(`${section}`).mAggregations._grid.mAggregations.content[0].mAggregations._grid.mAggregations.content[0].mAggregations.content.mAggregations.content.mAggregations._content.mBindingInfos.rows.binding.oCache.getValue()
-											const maxLength = Math.max(...valuevendor.map(item => (item[colName].length ?? 8)));
-								if(maxLength > mLength)
-									mLength = maxLength; 
-							const width = (mLength+2) * 8 + 20 + "px"; 
-
-							col.setWidth(width);
-										});	
-						
-					   });
-					   let sObj = {sorters : [{descending: false , name:"Property::slNo"}]}; 
-					   await sap.ui.getCore().byId('panappbeta::tab1_tab1tovendor_dataObjectPage--fe::table::vendtoptd::LineItem::PAYMENT_TERM_DETAILS').setSortConditions(sObj);
-				},
+				
 				onBeforeBinding:async function(oBindingContext){ 
 					const oModel = this.base.getExtensionAPI().getModel();
 					var that = this;
@@ -87,7 +64,48 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 						that.getView().getContent()[0].getHeaderTitle().mAggregations._actionsToolbar.getContent()[1].setVisible(false);
 						that.getView().getContent()[0].getHeaderTitle().mAggregations._actionsToolbar.getContent()[1].destroy();
 					   }
-				}
+				},
+				onAfterBinding:async function(oBindingContext){ 
+					
+					var frag4 = this.base.getView().getContent()[0]
+					frag4.attachSectionChange(function(){ 
+						var section = this.getScrollingSectionId()
+						
+							var columns = sap.ui.getCore().byId(`${section}`).mAggregations._grid.mAggregations.content[0].mAggregations._grid.mAggregations.content[0].mAggregations.content.mAggregations.content.mAggregations.columns;
+							if(columns != undefined )
+							columns.forEach(col =>{ 
+								var colName = col.mProperties.dataProperty;
+								var colheader=col.getHeader();
+								var mLength = colheader.length;		
+								var valuevendor = sap.ui.getCore().byId(`${section}`).mAggregations._grid.mAggregations.content[0].mAggregations._grid.mAggregations.content[0].mAggregations.content.mAggregations.content.mAggregations._content.mBindingInfos.rows.binding.oCache.getValue()
+											const maxLength = Math.max(...valuevendor.map(item => (item[colName].length ?? 8)));
+								if(maxLength > mLength)
+									mLength = maxLength; 
+							const width = (mLength+2) * 8 + 20 + "px"; 
+
+							col.setWidth(width);
+										});	
+						
+					   });
+					   let sObj = {sorters : [{descending: false , name:"Property::slNo"}]}; 
+					   await sap.ui.getCore().byId('panappbeta::tab1_tab1tovendor_dataObjectPage--fe::table::vendtoptd::LineItem::PAYMENT_TERM_DETAILS').setSortConditions(sObj);
+					   const url =location.href;
+					const regex = /PAN_Number='([^']+)'/;
+					const match = url.match(regex);
+					const filter_Number = match ? match[1] : null;
+
+					let filter = {PAN_Number:[
+						{
+							"operator": "EQ",
+							"values": [
+								filter_Number
+							],
+							"validated": "NotValidated"
+						}
+					]};
+					sap.ui.getCore().byId('panappbeta::tab1_tab1tovendor_dataObjectPage--fe::table::vendtopd::LineItem::PAN_PRICE_DETAILS').setFilterConditions(filter);
+					sap.ui.getCore().byId('panappbeta::tab1_tab1tovendor_dataObjectPage--fe::table::vendtoptd::LineItem::PAYMENT_TERM_DETAILS').setFilterConditions(filter);
+				},
 			}
 		}
 	});

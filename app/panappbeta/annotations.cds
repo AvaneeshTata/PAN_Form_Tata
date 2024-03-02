@@ -424,87 +424,87 @@ annotate service.vendor_data with @(
         Data : [
             {
                 $Type : 'UI.DataField',
-                Value : vendtovenr.Proposed_Vendor_Name,
+                Value : Proposed_Vendor_Name,
                 Label : 'Proposed Vendor Name',
             },{
                 $Type : 'UI.DataField',
-                Value : vendtovenr.Supplier_Origin_State,
+                Value : Supplier_Origin_State,
                 Label : 'Supplier Origin State',
             },{
                 $Type : 'UI.DataField',
-                Value : vendtovenr.Destination_State_BKTShipDASHto_LocationBKT,
+                Value : Destination_State_BKTShipDASHto_LocationBKT,
                 Label : 'Destination State (Ship-to Location)',
             },{
                 $Type : 'UI.DataField',
-                Value : vendtovenr.Vendor_GST_Number,
+                Value : Vendor_GST_Number,
                 Label : 'Vendor GST Number',
             },{
                 $Type : 'UI.DataField',
-                Value : vendtovenr.Vendor_CE_Score,
+                Value : Vendor_CE_Score,
                 Label : 'Vendor CE Score',
             },{
                 $Type : 'UI.DataField',
-                Value : vendtovenr.Vendor_CE_Date,
+                Value : Vendor_CE_Date,
                 Label : 'Vendor CE Date',
             },{
                 $Type : 'UI.DataField',
-                Value : vendtovenr.Vendor_PE_Score,
+                Value : Vendor_PE_Score,
                 Label : 'Vendor PE Score',
             },{
                 $Type : 'UI.DataField',
-                Value : vendtovenr.Vendor_PE_Date,
+                Value : Vendor_PE_Date,
                 Label : 'Vendor PE Date',
             },{
                 $Type : 'UI.DataField',
-                Value : vendtovenr.Vendor_Contact_PersonDASH1,
+                Value : Vendor_Contact_PersonDASH1,
                 Label : 'Vendor Contact Person 1',
             },{
                 $Type : 'UI.DataField',
-                Value : vendtovenr.Vendor_Contact_PersonDASH2,
+                Value : Vendor_Contact_PersonDASH2,
                 Label : 'Vendor Contact Person 2',
             },{
                 $Type : 'UI.DataField',
-                Value : vendtovenr.Technical_Committee_who_cleared_the_proposal,
+                Value : Technical_Committee_who_cleared_the_proposal,
                 Label : 'Technical Committee who cleared the proposal',
             },{
                 $Type : 'UI.DataField',
-                Value : vendtovenr.Commercial_Committee_who_cleared_the_proposal,
+                Value : Commercial_Committee_who_cleared_the_proposal,
                 Label : 'Commercial Committee who cleared the proposal',
             },{
                 $Type : 'UI.DataField',
-                Value : vendtovenr.Vendor_References_to_be_displayed_in_Order,
+                Value : Vendor_References_to_be_displayed_in_Order,
                 Label : 'Vendor References to be displayed in Order',
             },{
                 $Type : 'UI.DataField',
-                Value : vendtovenr.Incoterms,
+                Value : Incoterms,
                 Label : 'Incoterms',
             },
             {
                 $Type : 'UI.DataField',
-                Value : vendtovenr.Order_Value_BKTIn_Bid_CurrencyBKT,
+                Value : Order_Value_BKTIn_Bid_CurrencyBKT,
                 Label : 'Order Value (In Bid Currency)',
             },
             {
                 $Type : 'UI.DataField',
-                Value : vendtovenr.Order_Value_BKTIn_Project_CurrencyBKT,
+                Value : Order_Value_BKTIn_Project_CurrencyBKT,
                 Label : 'Order Value (In Project Currency)',
             },
             {
                 $Type : 'UI.DataField',
-                Value : vendtovenr.Vendor_Final_Quotation_Amount,
+                Value : Vendor_Final_Quotation_Amount,
                 Label : 'Vendor Final Quotation Amount',
             },
             {
                 $Type : 'UI.DataField',
-                Value : vendtovenr.Vendor_Final_Quotation_Date,
+                Value : Vendor_Final_Quotation_Date,
                 Label : 'Vendor Final Quotation Date',
             },{
                 $Type : 'UI.DataField',
-                Value : vendtovenr.Project_CurrencyORBase_Currency,
+                Value : Project_CurrencyORBase_Currency,
                 Label : 'Project Currency/Base Currency',
             },{
                 $Type : 'UI.DataField',
-                Value : vendtovenr.Order_CurrencyORBid_currency,
+                Value : Order_CurrencyORBid_currency,
                 Label : 'Order Currency/Bid Currency',
             },],
     }
@@ -515,71 +515,71 @@ annotate service.vendor_data with @(
         Data : [
             {
                 $Type : 'UI.DataField',
-                Value : vendtovenr.Number_of_Back_to_back_Terms_agreed_with_Vendor_as_per_GPC_OR_GCC,
+                Value : Number_of_Back_to_back_Terms_agreed_with_Vendor_as_per_GPC_OR_GCC,
                 Label : 'Number of Back to back Terms agreed with Vendor as per GPC / GCC',
             },{
                 $Type : 'UI.DataField',
-                Value : vendtovenr.Details_of_deviated_or_better_terms_agreed_with_the_Vendor,
+                Value : Details_of_deviated_or_better_terms_agreed_with_the_Vendor,
                 Label : 'Details of deviated or better terms agreed with the Vendor',
             },{
                 $Type : 'UI.DataField',
-                Value : vendtovenr.Market_Scenario_and_Demand,
+                Value : Market_Scenario_and_Demand,
                 Label : 'Market Scenario and Demand',
             },{
                 $Type : 'UI.DataField',
-                Value : vendtovenr.Companys_Position_and_Market_dynamics_of_this_purchase,
+                Value : Companys_Position_and_Market_dynamics_of_this_purchase,
                 Label : 'Companys Position and Market dynamics of this purchase',
             },{
                 $Type : 'UI.DataField',
-                Value : vendtovenr.Should_Be_Cost_estimated,
+                Value : Should_Be_Cost_estimated,
                 Label : 'Should Be Cost estimated',
             },{
                 $Type : 'UI.DataField',
-                Value : vendtovenr.Highlights_of_this_proposal_and_Price_Justification_for_this_proposal,
+                Value : Highlights_of_this_proposal_and_Price_Justification_for_this_proposal,
                 Label : 'Highlights of this proposal and Price Justification for this proposal',
             },{
                 $Type : 'UI.DataField',
-                Value : vendtovenr.Price_Escalation_Agreed_if_any,
+                Value : Price_Escalation_Agreed_if_any,
                 Label : 'Price Escalation Agreed if any',
             },{
                 $Type : 'UI.DataField',
-                Value : vendtovenr.Particulars_of_any_Free_Service_OR_Supply_Guarantees_OR_Warrant_yfrom_Vendor,
+                Value : Particulars_of_any_Free_Service_OR_Supply_Guarantees_OR_Warrant_yfrom_Vendor,
                 Label : 'Particulars of any Free Service / Supply Guarantees / Warrant yfrom Vendor',
             },{
                 $Type : 'UI.DataField',
-                Value : vendtovenr.Transportation,
+                Value : Transportation,
                 Label : 'Transportation',
             },{
                 $Type : 'UI.DataField',
-                Value : vendtovenr.Logistics_Cost,
+                Value : Logistics_Cost,
                 Label : 'Logistics Cost',
             },{
                 $Type : 'UI.DataField',
-                Value : vendtovenr.Delivery_Schedule,
+                Value : Delivery_Schedule,
                 Label : 'Delivery Schedule',
             },{
                 $Type : 'UI.DataField',
-                Value : vendtovenr.Tax_Details,
+                Value : Tax_Details,
                 Label : 'Tax Details',
             },{
                 $Type : 'UI.DataField',
-                Value : vendtovenr.Additional_Remarks,
+                Value : Additional_Remarks,
                 Label : 'Additional Remarks',
             },{
                 $Type : 'UI.DataField',
-                Value : vendtovenr.ABG,
+                Value : ABG,
                 Label : 'ABG',
             },{
                 $Type : 'UI.DataField',
-                Value : vendtovenr.ABG_Value,
+                Value : ABG_Value,
                 Label : 'ABG Value',
             },{
                 $Type : 'UI.DataField',
-                Value : vendtovenr.CPBG,
+                Value : CPBG,
                 Label : 'CPBG',
             },{
                 $Type : 'UI.DataField',
-                Value : vendtovenr.CPBG_Value,
+                Value : CPBG_Value,
                 Label : 'CPBG Value',
             },],
     }
@@ -594,10 +594,12 @@ annotate service.PAYMENT_TERM_DETAILS with @UI.PresentationVariant: {
             Descending: true
         }
     ],
+    
 };
 annotate service.PAYMENT_TERM_DETAILS with @(
     UI.CreateHidden:true,
     UI.DeleteHidden:true,
+    SelectionFields:[Proposed_Vendor_Code],
      UI.LineItem #PAYMENT_TERM_DETAILS : [
         {
             $Type : 'UI.DataField',
@@ -648,19 +650,19 @@ annotate service.vendor_data with @(
         Data : [
             {
                 $Type : 'UI.DataField',
-                Value : vendtovenr.Scope_and_Responsibilities,
+                Value : Scope_and_Responsibilities,
                 Label : 'Scope and Responsibilities',
             },{
                 $Type : 'UI.DataField',
-                Value : vendtovenr.Commercial_Terms,
+                Value : Commercial_Terms,
                 Label : 'Commercial Terms',
             },{
                 $Type : 'UI.DataField',
-                Value : vendtovenr.Compliance_Terms,
+                Value : Compliance_Terms,
                 Label : 'Compliance Terms',
             },{
                 $Type : 'UI.DataField',
-                Value : vendtovenr.Others,
+                Value : Others,
                 Label : 'Others',
             },],
     }
@@ -671,39 +673,39 @@ annotate service.vendor_data with @(
 //         Data : [
 //             {
 //                 $Type : 'UI.DataField',
-//                 Value : vendtovenr.HSN_OR_SAC_Code,
+//                 Value : HSN_OR_SAC_Code,
 //                 Label : 'HSN / SAC Code',
 //             },{
 //                 $Type : 'UI.DataField',
-//                 Value : vendtovenr.Item_Code,
+//                 Value : Item_Code,
 //                 Label : 'Item Code',
 //             },{
 //                 $Type : 'UI.DataField',
-//                 Value : vendtovenr.Item_Short_Description,
+//                 Value : Item_Short_Description,
 //                 Label : 'Item Short Description',
 //             },{
 //                 $Type : 'UI.DataField',
-//                 Value : vendtovenr.UOM,
+//                 Value : UOM,
 //                 Label : 'UOM',
 //             },{
 //                 $Type : 'UI.DataField',
-//                 Value : vendtovenr.Quantity,
+//                 Value : Quantity,
 //                 Label : 'Quantity',
 //             },{
 //                 $Type : 'UI.DataField',
-//                 Value : vendtovenr.Unit_Price,
+//                 Value : Unit_Price,
 //                 Label : 'Unit Price',
 //             },{
 //                 $Type : 'UI.DataField',
-//                 Value : vendtovenr.Amount,
+//                 Value : Amount,
 //                 Label : 'Amount',
 //             },{
 //                 $Type : 'UI.DataField',
-//                 Value : vendtovenr.Indian_Tax_PER,
+//                 Value : Indian_Tax_PER,
 //                 Label : 'Indian Tax PER',
 //             },{
 //                 $Type : 'UI.DataField',
-//                 Value : vendtovenr.Quantity_Over_Delivery_Tolerance,
+//                 Value : Quantity_Over_Delivery_Tolerance,
 //                 Label : 'Quantity Over Delivery Tolerance',
 //             },],
 //     }
@@ -777,25 +779,25 @@ annotate service.vendor_data with {
 annotate service.vendor_data with {
     Final_Quote @Common.FieldControl : #ReadOnly
 };
-annotate service.Fvendor_responseoo with {
+annotate service.vendor_data with {
     Proposed_Vendor_Name @Common.FieldControl : #ReadOnly
 };
-annotate service.Fvendor_responseoo with {
+annotate service.vendor_data with {
     Destination_State_BKTShipDASHto_LocationBKT @Common.FieldControl : #ReadOnly
 };
-annotate service.Fvendor_responseoo with {
+annotate service.vendor_data with {
     Vendor_GST_Number @Common.FieldControl : #ReadOnly
 };
-annotate service.Fvendor_responseoo with {
+annotate service.vendor_data with {
     Shortlisted_Vendors_Response_summary @Common.FieldControl : #ReadOnly
 };
-annotate service.Fvendor_responseoo with {
+annotate service.vendor_data with {
     Incoterms @Common.FieldControl : #ReadOnly
 };
-annotate service.Fvendor_responseoo with {
+annotate service.vendor_data with {
     ABG @Common.FieldControl : #ReadOnly
 };
-annotate service.Fvendor_responseoo with {
+annotate service.vendor_data with {
     CPBG @Common.FieldControl : #ReadOnly
 };
 annotate service.PAYMENT_TERM_DETAILS with {
@@ -816,16 +818,16 @@ annotate service.PAYMENT_TERM_DETAILS with {
 annotate service.PAYMENT_TERM_DETAILS with {
     Percentage_Payment @Common.FieldControl : #ReadOnly
 };
-annotate service.Fvendor_responseoo with {
+annotate service.vendor_data with {
     Scope_and_Responsibilities @Common.FieldControl : #ReadOnly
 };
-annotate service.Fvendor_responseoo with {
+annotate service.vendor_data with {
     Commercial_Terms @Common.FieldControl : #ReadOnly
 };
-annotate service.Fvendor_responseoo with {
+annotate service.vendor_data with {
     Compliance_Terms @Common.FieldControl : #ReadOnly
 };
-annotate service.Fvendor_responseoo with {
+annotate service.vendor_data with {
     Others @Common.FieldControl : #ReadOnly
 };
 annotate service.PAN_PRICE_DETAILS with {
@@ -858,10 +860,10 @@ annotate service.PAYMENT_TERM_DETAILS with {
 annotate service.PAYMENT_TERM_DETAILS with {
     Mandatory_Documents_OR_Submissions_for_Progress @Common.FieldControl : #Mandatory
 };
-annotate service.Fvendor_responseoo with {
+annotate service.vendor_data with {
     Delivery_Schedule @Common.FieldControl : #Mandatory
 };
-annotate service.Fvendor_responseoo with {
+annotate service.vendor_data with {
     Vendor_Contact_PersonDASH1 @Common.FieldControl : #Mandatory
 };
 annotate service.tab1 with {
@@ -924,16 +926,16 @@ annotate service.WORKFLOW_HISTORY with {
 annotate service.WORKFLOW_HISTORY with {
     Remarks @Common.FieldControl : #ReadOnly
 };
-annotate service.Fvendor_responseoo with {
+annotate service.vendor_data with {
     Scope_and_Responsibilities @UI.MultiLineText : true
 };
-annotate service.Fvendor_responseoo with {
+annotate service.vendor_data with {
     Commercial_Terms @UI.MultiLineText : true
 };
-annotate service.Fvendor_responseoo with {
+annotate service.vendor_data with {
     Compliance_Terms @UI.MultiLineText : true
 };
-annotate service.Fvendor_responseoo with {
+annotate service.vendor_data with {
     Others @UI.MultiLineText : true
 };
 annotate service.PAN_PRICE_DETAILS with @(
@@ -1144,7 +1146,7 @@ annotate service.PAYMENT_TERM_DETAILS with {
         },
         Common.ValueListWithFixedValues : true
 )};
-annotate service.Fvendor_responseoo with {
+annotate service.vendor_data with {
     Vendor_CE_Score @Common.FieldControl : #Mandatory
 };
 annotate service.tab1 with {
