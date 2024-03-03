@@ -332,6 +332,7 @@
                                     "tableSettings": {
                                         "type": "GridTable",
                                         "enableExport": false,
+                                        "hideFilterBar": true,
                                         "creationMode": {
                                             "inlineCreationRowsHiddenInEditMode": true
                                         }
@@ -339,7 +340,8 @@
                                 },
                                 "vendtopd/@com.sap.vocabularies.UI.v1.LineItem#PAN_PRICE_DETAILS": {
                                     "tableSettings": {
-                                        "type": "GridTable"
+                                        "type": "GridTable",
+                                        "hideFilterBar": true
                                     }
                                 }
                             }

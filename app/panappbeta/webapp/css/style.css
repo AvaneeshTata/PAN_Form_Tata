@@ -10,10 +10,18 @@
 .sapMEmptyIndicator{
     visibility: hidden ;
 }
+#panappbeta\:\:tab1_tab1tovendor_dataObjectPage--fe\:\:StandardAction\:\:Delete{
+    display: none;
+}
 /* #tab1List--fe\:\:table\:\:tab1\:\:LineItem-toolbar{
  visibility: hidden
 } */
-
+#panappbeta\:\:tab1_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtopd\:\:LineItem\:\:PAN_PRICE_DETAILS-filterInfoBar{
+    visibility: hidden;
+}
+#panappbeta\:\:tab1_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtoptd\:\:LineItem\:\:PAYMENT_TERM_DETAILS-filterInfoBar{
+    visibility: hidden;
+}
 .sapMIllustratedMessageAdditionalContent{
     display: none;
 }

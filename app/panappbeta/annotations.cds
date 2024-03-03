@@ -374,6 +374,7 @@ annotate service.WORKFLOW_HISTORY with @(
         },]
 );
 annotate service.vendor_data with @(
+    // UI.DeleteHidden:true,
     UI.HeaderInfo:{
         TypeName:'Vendor Details',
         TypeNamePlural:'Vendor Details',
@@ -386,7 +387,6 @@ annotate service.vendor_data with @(
             Value:Vendor_Name
         }
     },
-    
     UI.Facets : [
         {
             $Type : 'UI.ReferenceFacet',
@@ -599,7 +599,6 @@ annotate service.PAYMENT_TERM_DETAILS with @UI.PresentationVariant: {
 annotate service.PAYMENT_TERM_DETAILS with @(
     UI.CreateHidden:true,
     UI.DeleteHidden:true,
-    SelectionFields:[Proposed_Vendor_Code],
      UI.LineItem #PAYMENT_TERM_DETAILS : [
         {
             $Type : 'UI.DataField',

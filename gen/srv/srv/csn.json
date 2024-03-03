@@ -3060,11 +3060,6 @@
       ],
       "@UI.CreateHidden": true,
       "@UI.DeleteHidden": true,
-      "@SelectionFields": [
-        {
-          "=": "Proposed_Vendor_Code"
-        }
-      ],
       "@UI.LineItem#PAYMENT_TERM_DETAILS": [
         {
           "$Type": "UI.DataField",
