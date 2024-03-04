@@ -262,8 +262,8 @@ this.on('InsertData',async (req)=>{
                 console.log(del);
             }
                 
-                // let url = "/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant=%27"+resp2['Plant_Code']+"%27&docType=%27"+resp2["Order_Type_OR_Document_tyFuuidpe"]+"%27&amount=%27"+resp2["Final_proposed_Value"]+"%27&purGroup=%27"+resp2["BUORPurchasing_Group"]+"%27"
-                let url = "/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant=%27 %27&plantCode=%27"+resp2["Plant_Code"]+"%27&sbg=%27"+resp2["SBG"]+"%27&sub=%27"+resp2["SBU"]+"%27"
+                let url = "/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant=%27"+resp2['Plant_Code']+"%27&docType=%27"+resp2["Order_Type_OR_Document_tyFuuidpe"]+"%27&amount=%27"+resp2["Final_proposed_Value"]+"%27&purGroup=%27"+resp2["BUORPurchasing_Group"]+"%27"
+                // let url = "/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant=%27 %27&plantCode=%27"+resp2["Plant_Code"]+"%27&sbg=%27"+resp2["SBG"]+"%27&sub=%27"+resp2["SBU"]+"%27"
                 let response = await AribaSrv.get(url);
                 console.log(response);
                 for(j=0;j<response.length;j++){
@@ -499,6 +499,18 @@ this.on('InsertData',async (req)=>{
             "created_by":decoded['user_name'],
             "submitted_date":currentDate1
         });
+        let up={
+            "Begin_DateAND_Time": currentDate1.toString(),
+            "Remarks": currentDate1.toString()
+        }
+        let key = await SELECT.from(WORKFLOW_HISTORY).where`PAN_Number=${data.PAN_Number}`
+        var wh;
+        for(let i=0;i<key.length;i++){
+        wh=await UPDATE(WORKFLOW_HISTORY,({
+            "idd":key[i].idd,
+            "PAN_Number":data.PAN_Number
+        })).with(up);
+        }
     }
         // let comm = await SELECT.from(tab1).where`PAN_Number = ${data.PAN_Number}`
         // var commentss = null;
@@ -516,18 +528,7 @@ this.on('InsertData',async (req)=>{
         //  });
         // }
         
-        let up={
-            "Begin_DateAND_Time": currentDate1.toString(),
-            "Remarks": currentDate1.toString()
-        }
-        let key = await SELECT.from(WORKFLOW_HISTORY).where`PAN_Number=${data.PAN_Number}`
-        var wh;
-        for(let i=0;i<key.length;i++){
-        wh=await UPDATE(WORKFLOW_HISTORY,({
-            "idd":key[i].idd,
-            "PAN_Number":data.PAN_Number
-        })).with(up);
-        }
+        
 
         // let change_stat = await c5re.get(`/tab1?$filter=PAN_Number eq '${data.PAN_Number}'`);
         // change_stat.value[0].status = "Pending for Approval";
@@ -545,7 +546,7 @@ this.on('InsertData',async (req)=>{
 
 
 /////
-        return JSON.stringify("response");
+        return JSON.stringify(response);
         // return "response"
 
     });

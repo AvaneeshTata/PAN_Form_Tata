@@ -103,7 +103,7 @@ modules:
           name: pan_form_demo-srv
           URL: {srv-api/srv-url}
           HTML5.ForwardAuthToken: true
-          timeout: 30000
+          timeout: 60000
 resources:
   - name: pan_form_demo-destination-service
     type: org.cloudfoundry.managed-service
@@ -125,6 +125,7 @@ resources:
                 ProxyType: Internet
                 Type: HTTP
                 URL: ~{srv-api/srv-url}
+                HTML5.Timeout: 60000
             existing_destinations_policy: update
         version: 1.0.0
       service: destination

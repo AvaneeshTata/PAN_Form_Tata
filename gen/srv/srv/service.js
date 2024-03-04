@@ -499,6 +499,18 @@ this.on('InsertData',async (req)=>{
             "created_by":decoded['user_name'],
             "submitted_date":currentDate1
         });
+        let up={
+            "Begin_DateAND_Time": currentDate1.toString(),
+            "Remarks": currentDate1.toString()
+        }
+        let key = await SELECT.from(WORKFLOW_HISTORY).where`PAN_Number=${data.PAN_Number}`
+        var wh;
+        for(let i=0;i<key.length;i++){
+        wh=await UPDATE(WORKFLOW_HISTORY,({
+            "idd":key[i].idd,
+            "PAN_Number":data.PAN_Number
+        })).with(up);
+        }
     }
         // let comm = await SELECT.from(tab1).where`PAN_Number = ${data.PAN_Number}`
         // var commentss = null;
@@ -516,18 +528,7 @@ this.on('InsertData',async (req)=>{
         //  });
         // }
         
-        let up={
-            "Begin_DateAND_Time": currentDate1.toString(),
-            "Remarks": currentDate1.toString()
-        }
-        let key = await SELECT.from(WORKFLOW_HISTORY).where`PAN_Number=${data.PAN_Number}`
-        var wh;
-        for(let i=0;i<key.length;i++){
-        wh=await UPDATE(WORKFLOW_HISTORY,({
-            "idd":key[i].idd,
-            "PAN_Number":data.PAN_Number
-        })).with(up);
-        }
+        
 
         // let change_stat = await c5re.get(`/tab1?$filter=PAN_Number eq '${data.PAN_Number}'`);
         // change_stat.value[0].status = "Pending for Approval";
@@ -545,7 +546,7 @@ this.on('InsertData',async (req)=>{
 
 
 /////
-        return JSON.stringify("response");
+        return JSON.stringify(response);
         // return "response"
 
     });

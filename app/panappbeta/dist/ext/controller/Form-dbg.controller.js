@@ -170,7 +170,19 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 								var result;
 								// let result = oContext.getObject();
 								try{
-								result = await Fimport(oModel, sFunctionName, body, "data");
+								// result = setTimeout(Fimport(oModel, sFunctionName, body, "data"),60000);
+								console.log(oModel);
+								let oFunction = oModel.bindContext(`/${sFunctionName}(...)`);
+								// let oFunction = oModel.bindContext(`/Books`);
+
+								oFunction.setParameter("data", JSON.stringify(body));
+								// oFunction.setParameter("Book",{ID:3, title: "BookTitle", stock:10000});
+								await oFunction.execute();
+								// console.log(response);
+
+								let oContext = oFunction.getBoundContext();
+
+								var result = oContext.getObject();
 								 }catch(error){debugger
 									console.log(error);
 									result = error;
@@ -180,7 +192,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 								dialog.close();
 								dialog.destroy();
 								oBusyDialog.close();
-								if(result == "error"){
+								if(result.value == "error"){
 									window.alert("Sorry.. Please try again after sometime")
 								}else{
 								// dialog.exit();
@@ -250,11 +262,11 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 								// let len = window.history.length - 1;
 								// window.history.go(-len);
 								
-								var href_For_Product_display = await sap.ushell.Container.getServiceAsync("Navigation");
+								// var href_For_Product_display = await sap.ushell.Container.getServiceAsync("Navigation");
 
-								href_For_Product_display.navigate({
-									target: { semanticObject: "obj1", action: "display" }
-								});
+								// href_For_Product_display.navigate({
+								// 	target: { semanticObject: "obj1", action: "display" }
+								// });
 								// window.location.reload();
 								// dialog.exit();
 								// }
