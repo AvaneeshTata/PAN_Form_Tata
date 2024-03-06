@@ -142,6 +142,9 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 											const maxLength = Math.max(...valuevendor.map(item => (item[colName].length ?? 8)));
 								if(maxLength > mLength)
 									mLength = maxLength; 
+							if(mLength>50){
+								mLength=50;
+							}
 							const width = (mLength+2) * 8 + 20 + "px"; 
 
 							col.setWidth(width);

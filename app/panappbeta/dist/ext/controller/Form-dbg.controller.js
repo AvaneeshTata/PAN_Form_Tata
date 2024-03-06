@@ -447,7 +447,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 					});
 
 					// Define a function to process the result data
-					function processData(result) {
+					function processData(result) {debugger
 						 
 
 						var dataa = result.value[0].tab1toWORKFLOW_HISTORY;

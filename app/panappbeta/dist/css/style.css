@@ -106,26 +106,30 @@ width: 300%;
 } */
 
 
-/* #panappbeta\:\:tab1_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtoptd\:\:LineItem\:\:PAYMENT_TERM_DETAILS-innerTable-rows-row0-col4 .sapUiTableCellInner,
-#panappbeta\:\:tab1_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtoptd\:\:LineItem\:\:PAYMENT_TERM_DETAILS-innerTable-rows-row1-col4 .sapUiTableCellInner,
-#panappbeta\:\:tab1_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtoptd\:\:LineItem\:\:PAYMENT_TERM_DETAILS-innerTable-rows-row2-col4 .sapUiTableCellInner,
-#panappbeta\:\:tab1_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtoptd\:\:LineItem\:\:PAYMENT_TERM_DETAILS-innerTable-rows-row3-col4 .sapUiTableCellInner {
+#panappbeta\:\:tab1_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtoptd\:\:LineItem\:\:PAYMENT_TERM_DETAILS-innerTable-rows-row0-col2 .sapUiTableCellInner,
+#panappbeta\:\:tab1_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtoptd\:\:LineItem\:\:PAYMENT_TERM_DETAILS-innerTable-rows-row1-col2 .sapUiTableCellInner,
+#panappbeta\:\:tab1_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtoptd\:\:LineItem\:\:PAYMENT_TERM_DETAILS-innerTable-rows-row2-col2 .sapUiTableCellInner,
+#panappbeta\:\:tab1_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtoptd\:\:LineItem\:\:PAYMENT_TERM_DETAILS-innerTable-rows-row3-col2 .sapUiTableCellInner {
     overflow: visible !important;
     
   position: relative;
   
   
-  } */
-   /* panappbeta::tab1_tab1tovendor_dataObjectPage--fe::table::vendtoptd::LineItem::PAYMENT_TERM_DETAILS-innerTable_col4 */
-   /* #panappbeta\:\:tab1_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtoptd\:\:LineItem\:\:PAYMENT_TERM_DETAILS-innerTable-rows-row0-col4 .sapUiTableCellInner:hover span,
+  } 
+   /* #panappbeta::tab1_tab1tovendor_dataObjectPage--fe::table::vendtoptd::LineItem::PAYMENT_TERM_DETAILS-innerTable_col4 */
+   #panappbeta\:\:tab1_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtoptd\:\:LineItem\:\:PAYMENT_TERM_DETAILS-innerTable-rows-row0-col4 .sapUiTableCellInner:hover span, 
    #panappbeta\:\:tab1_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtoptd\:\:LineItem\:\:PAYMENT_TERM_DETAILS-innerTable-rows-row1-col4 .sapUiTableCellInner:hover span,
    #panappbeta\:\:tab1_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtoptd\:\:LineItem\:\:PAYMENT_TERM_DETAILS-innerTable-rows-row2-col4 .sapUiTableCellInner:hover span,
-   #panappbeta\:\:tab1_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtoptd\:\:LineItem\:\:PAYMENT_TERM_DETAILS-innerTable-rows-row3-col4 .sapUiTableCellInner:hover span {
+   #panappbeta\:\:tab1_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtoptd\:\:LineItem\:\:PAYMENT_TERM_DETAILS-innerTable-rows-row3-col4 .sapUiTableCellInner:hover span ,
+   #panappbeta\:\:tab1_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtoptd\:\:LineItem\:\:PAYMENT_TERM_DETAILS-innerTable-rows-row0-col2 .sapUiTableCellInner:hover span, 
+   #panappbeta\:\:tab1_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtoptd\:\:LineItem\:\:PAYMENT_TERM_DETAILS-innerTable-rows-row1-col2 .sapUiTableCellInner:hover span,
+   #panappbeta\:\:tab1_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtoptd\:\:LineItem\:\:PAYMENT_TERM_DETAILS-innerTable-rows-row2-col2 .sapUiTableCellInner:hover span,
+   #panappbeta\:\:tab1_tab1tovendor_dataObjectPage--fe\:\:table\:\:vendtoptd\:\:LineItem\:\:PAYMENT_TERM_DETAILS-innerTable-rows-row3-col2 .sapUiTableCellInner:hover span {
     
-    overflow-y: scroll !important; */
+    overflow-y: scroll !important;
     /* overflow-x: hidden; */
     /* padding: unset; */
-    /* text-wrap: wrap;
+    text-wrap: wrap;
     max-height: 100px; 
     width: 100%;
     position: absolute;
@@ -133,7 +137,7 @@ width: 300%;
     z-index: 99999;
     border: 1px solid black;
     
-  } */
+  }
   
   /* #panappbeta\:\:tab1ObjectPage--fe\:\:table\:\:tab1toWORKFLOW_HISTORY\:\:LineItem\:\:WORKFLOWHISTORY-innerTable-rows-row0-col8 {
     position: relative;
