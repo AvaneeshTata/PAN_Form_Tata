@@ -26,9 +26,10 @@ function getsync(data:String) returns String;
 function draft(ID:String) returns String;
 function Listdata(ID:String) returns String;
 function flag (ID:String,case:String) returns String;
+function updatee(ID:String) returns String;
 }
 service PanApproval {
- entity PAN_Details_APR as projection on my.PAN_Details ;
+ entity PAN_Details_APR as projection on my.PAN_Details;
  entity PAN_WEB_EVENT_APR as projection on my.PAN_WEB_EVENT;
  entity PAN_TYPE_APR as projection on my.PAN_TYPE;
  entity PAN_vendor_data_APR as projection on my.PAN_vendor_data;

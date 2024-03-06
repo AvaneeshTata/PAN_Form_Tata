@@ -46,6 +46,7 @@
         <FunctionImport Name="draft" Function="CatalogService.draft"/>
         <FunctionImport Name="Listdata" Function="CatalogService.Listdata"/>
         <FunctionImport Name="flag" Function="CatalogService.flag"/>
+        <FunctionImport Name="updatee" Function="CatalogService.updatee"/>
       </EntityContainer>
       <EntityType Name="tab1">
         <Key>
@@ -503,6 +504,10 @@
       <Function Name="flag" IsBound="false" IsComposable="false">
         <Parameter Name="ID" Type="Edm.String"/>
         <Parameter Name="case" Type="Edm.String"/>
+        <ReturnType Type="Edm.String"/>
+      </Function>
+      <Function Name="updatee" IsBound="false" IsComposable="false">
+        <Parameter Name="ID" Type="Edm.String"/>
         <ReturnType Type="Edm.String"/>
       </Function>
       <Annotations Target="CatalogService.tab1">

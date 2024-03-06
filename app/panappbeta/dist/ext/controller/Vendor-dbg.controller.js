@@ -15,7 +15,11 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 
 		let result = oContext.getObject();
 		// console.log(result);
-		return result.value;
+		if (result) {
+			return result.value;
+		} else {
+			return "";
+		}
 	};
 
 	return ControllerExtension.extend('panappbeta.ext.controller.Vendor', {
@@ -30,6 +34,57 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 				// you can access the Fiori elements extensionAPI via this.base.getExtensionAPI
 				var oModel = this.base.getExtensionAPI().getModel();
 			},
+			// editFlow: {
+
+			// 	onBeforeSave: async function (mParameters) {
+			// 		debugger
+
+			// 		sap.ui.getCore().byId('plantproject1::plantObjectPage--fe::FormContainer::GeneratedFacet1').getFormElements()[1].getFields()[1].setVisible(false);
+			// 		sap.ui.getCore().byId('plantproject1::plantObjectPage--fe::FormContainer::GeneratedFacet1').getFormElements()[1].getFields()[0].setVisible(true);
+			// 		return null;
+			// 	},
+			// 	// onBeforeEdit: function (mParameters) {debugger
+
+			// 	// 	// return this._createDialog("Do y//ou want to edit this really nice... object ?");
+			// 	// 	// return MessageToast.show("Edit successful");
+			// 	// },
+			// 	onBeforeDiscard: function (mParameters) {
+			// 		debugger
+			// 		// return this._createDialog("Do you want to cancel this really nice... object ?");
+			// 		// sap.ui.getCore().byId('plantproject1::plantObjectPage--fe::FormContainer::GeneratedFacet1').getFormElements()[1].getFields()[1].setValue(null)
+			// 		// return MessageToast.show("Edit successful");
+			// 		sap.ui.getCore().byId('plantproject1::plantObjectPage--fe::FormContainer::GeneratedFacet1').getFormElements()[1].getFields()[1].setVisible(false);
+			// 		sap.ui.getCore().byId('plantproject1::plantObjectPage--fe::FormContainer::GeneratedFacet1').getFormElements()[1].getFields()[0].setVisible(true);
+			// 		return null;
+			// 	},
+			// 	// onBeforeCreate: function (mParameters) {debugger
+			// 	// 	// return this._createDialog("Do you want to create ?");
+			// 	// },
+			// 	// onBeforeDelete: function (mParameters) {debugger
+			// 	// 	// return this._createDialog("Do you want to delete this really nice... object ?");
+			// 	// },
+			// 	// onAfterSave: function (mParameters) {debugger
+			// 	// 	return MessageToast.show("Save successful");
+			// 	// },
+			// 	onAfterEdit: function (mParameters) {
+			// 		debugger
+			// 		sap.ui.getCore().byId('plantproject1::plantObjectPage--fe::FormContainer::GeneratedFacet1').getFormElements()[1].getFields()[1].setValue(sap.ui.getCore().byId('plantproject1::plantObjectPage--fe::FormContainer::GeneratedFacet1').getFormElements()[1].getFields()[0].getValue());
+			// 		sap.ui.getCore().byId('plantproject1::plantObjectPage--fe::FormContainer::GeneratedFacet1').getFormElements()[1].getFields()[1].setVisible(true);
+			// 		sap.ui.getCore().byId('plantproject1::plantObjectPage--fe::FormContainer::GeneratedFacet1').getFormElements()[1].getFields()[0].setVisible(false);
+
+			// 		return null;
+
+			// 	},
+			// 	// onAfterDiscard: function (mParameters) {debugger
+			// 	// 	return MessageToast.show("Discard successful");
+			// 	// },
+			// 	// onAfterCreate: function (mParameters) {debugger
+			// 	// 	return MessageToast.show("Create successful");
+			// 	// },
+			// 	// onAfterDelete: function (mParameters) {debugger
+			// 	// 	return MessageToast.show("Delete successful");
+			// 	// }
+			// },
 			routing:{
 				
 				onBeforeBinding:async function(oBindingContext){ 
@@ -37,6 +92,9 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 					var that = this;
 					this.getView().getContent()[0].getSections()[0].setVisible(false);
 					const v =this.getView().getContent()[0].getHeaderTitle().mAggregations._actionsToolbar.getContent()[4].mProperties.visible;
+					debugger
+					var result1;
+					if(this.getView().getContent()[0].getHeaderTitle().mAggregations._actionsToolbar.getContent()[4].mProperties.visible==true){
 					var sFunctionName = "getData";
 					// oFunction = oModel.bindContext(`/${Name}(...)`);
 					   var complete_url = window.location.href;
@@ -45,6 +103,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 					//    var res = pieces[1];
             		   var res1 = res.split("'");
 					   var data = res1[1];
+					
 					//    let oFunction = oModel.bindContext(`/${sFunctionName}(...)`);
 					//    oFunction.setParameter("ID",data);
 					//    await oFunction.execute(); 
@@ -57,7 +116,8 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 					//    let oContext1 = oFunction.getBoundContext();
 						// 
 					//    let result1 = oContext1.getObject();
-					let result1 = await Fimport(oModel,sFunctionName,data);
+					result1 = await Fimport(oModel,sFunctionName,data);
+					}
 					   if ((result1==='Pending for Approval')||(result1==='Approved')||(result1==='Rejected')){
 						that.getView().getContent()[0].setShowEditHeaderButton(false);
 						that.getView().getContent()[0].getHeaderTitle().mAggregations._actionsToolbar.getContent()[1].setEnabled(false);
@@ -72,11 +132,12 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 						var section = this.getScrollingSectionId()
 						
 							var columns = sap.ui.getCore().byId(`${section}`).mAggregations._grid.mAggregations.content[0].mAggregations._grid.mAggregations.content[0].mAggregations.content.mAggregations.content.mAggregations.columns;
+							debugger
 							if(columns != undefined )
 							columns.forEach(col =>{ 
 								var colName = col.mProperties.dataProperty;
 								var colheader=col.getHeader();
-								var mLength = colheader.length;		
+								var mLength = colheader.length;	debugger	
 								var valuevendor = sap.ui.getCore().byId(`${section}`).mAggregations._grid.mAggregations.content[0].mAggregations._grid.mAggregations.content[0].mAggregations.content.mAggregations.content.mAggregations._content.mBindingInfos.rows.binding.oCache.getValue()
 											const maxLength = Math.max(...valuevendor.map(item => (item[colName].length ?? 8)));
 								if(maxLength > mLength)
@@ -84,6 +145,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 							const width = (mLength+2) * 8 + 20 + "px"; 
 
 							col.setWidth(width);
+							
 										});	
 						
 					   });
@@ -105,6 +167,26 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 					]};
 					sap.ui.getCore().byId('panappbeta::tab1_tab1tovendor_dataObjectPage--fe::table::vendtopd::LineItem::PAN_PRICE_DETAILS').setFilterConditions(filter);
 					sap.ui.getCore().byId('panappbeta::tab1_tab1tovendor_dataObjectPage--fe::table::vendtoptd::LineItem::PAYMENT_TERM_DETAILS').setFilterConditions(filter);
+				// 	debugger
+				// 	// sap.ui.getCore().byId('plantproject1::plantObjectPage--fe::FormContainer::GeneratedFacet1').addFormElement(new sap.ui.layout.form.FormElement({
+				// 	// 	label:"hello"
+				// 	// }));
+				// 	var oModel = this.base.getExtensionAPI().getModel();
+				// 	// sap.ui.getCore().byId('plantproject1::plantObjectPage--fe::FormContainer::GeneratedFacet1').getFormElements()[1].setVisible(false)
+				// 	// sap.ui.getCore().byId('plantproject1::plantObjectPage--fe::FormContainer::GeneratedFacet1').getFormElements()[1].removeAllFields();
+
+				// 	sap.ui.getCore().byId('plantproject1::plantObjectPage--fe::FormContainer::GeneratedFacet1').getFormElements()[1].addField(new sap.m.DatePicker("id1", {
+				// 		change: async function (event) {
+				// 			debugger
+				// 			// var oModel = this.base.getExtensionAPI().getModel();
+				// 			// sap.ui.getCore().byId('plantproject1::plantObjectPage--fe::FormContainer::GeneratedFacet1').getFormElements()[1].getFields()[0].setValue(sap.ui.getCore().byId('plantproject1::plantObjectPage--fe::FormContainer::GeneratedFacet1').getFormElements()[1].getFields()[1].getValue());
+				// 			var Name = 'updatee';
+				// 			let oFunction = oModel.bindContext(`/${Name}(...)`);
+				// 			oFunction.setParameter("ID", event.mParameters.value + "," + event.oSource.oPropagatedProperties.oBindingContexts.undefined.oBinding.sReducedPath);
+				// 			await oFunction.execute();
+				// 		}
+				// 	}));
+				// 	sap.ui.getCore().byId('plantproject1::plantObjectPage--fe::FormContainer::GeneratedFacet1').getFormElements()[1].getFields()[1].setVisible(false);
 				},
 			}
 		}

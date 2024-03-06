@@ -7,6 +7,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 	var oBusyDialog = new sap.m.BusyDialog("oBusyDialog");
 	let dialog;
 	var cdialog;
+	var status;
 	const Fimport = async function (oModel, name, data, param) {
 		 
 		console.log(oModel);
@@ -463,7 +464,9 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 								"Begin_Date/_Time": element.Begin_DateAND_Time,
 								"End_Date/_Time": element.End_DateAND_Time,
 								Days_Taken: element.Days_Taken,
-								Approved_by: element.Approved_by,
+								Status: element.Result,
+								"By User": element.Approved_by
+								
 							});
 						});
 
@@ -891,6 +894,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 
 					}
 					let result1 = await Fimport(oModel, sFunctionName, data, "ID");
+					status = result1;
 
 
 					 
@@ -943,29 +947,29 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 				// 			});	
 				// }
 				
-					frag4.attachSectionChange(function(){ 
-						var section = this.getScrollingSectionId()
-						// if(section == "panappbeta::tab1ObjectPage--fe::FacetSection::GeneralDetails1"){ 
-						// 	resize("__block1");
-						// 	resize("__block2");
-						// };
+					// frag4.attachSectionChange(function(){ 
+					// 	var section = this.getScrollingSectionId()
+					// 	// if(section == "panappbeta::tab1ObjectPage--fe::FacetSection::GeneralDetails1"){ 
+					// 	// 	resize("__block1");
+					// 	// 	resize("__block2");
+					// 	// };
 
 							 
-							var columns = sap.ui.getCore().byId(`${section}`).mAggregations._grid.mAggregations.content[0].mAggregations._grid.mAggregations.content[0].mAggregations.content.mAggregations.content.mAggregations.columns;
-							if(columns != undefined )
-							columns.forEach(col =>{
-								let colName = col.mProperties.dataProperty;
-								let mLength = colName.length;
-											let valuevendor = sap.ui.getCore().byId(`${section}`).mAggregations._grid.mAggregations.content[0].mAggregations._grid.mAggregations.content[0].mAggregations.content.mAggregations.content.mAggregations._content.mBindingInfos.rows.binding.oCache.getValue()
-											const maxLength = Math.max(...valuevendor.map(item => (item[colName].length ?? 8)));
-									if(maxLength > mLength)
-									mLength = maxLength; 
-							const width = mLength * 8 + 20 + "px"; 
+					// 		var columns = sap.ui.getCore().byId(`${section}`).mAggregations._grid.mAggregations.content[0].mAggregations._grid.mAggregations.content[0].mAggregations.content.mAggregations.content.mAggregations.columns;
+					// 		if(columns != undefined )
+					// 		columns.forEach(col =>{
+					// 			let colName = col.mProperties.dataProperty;
+					// 			let mLength = colName.length;
+					// 						let valuevendor = sap.ui.getCore().byId(`${section}`).mAggregations._grid.mAggregations.content[0].mAggregations._grid.mAggregations.content[0].mAggregations.content.mAggregations.content.mAggregations._content.mBindingInfos.rows.binding.oCache.getValue()
+					// 						const maxLength = Math.max(...valuevendor.map(item => (item[colName].length ?? 8)));
+					// 				if(maxLength > mLength)
+					// 				mLength = maxLength; 
+					// 		const width = mLength * 8 + 20 + "px"; 
 
-							col.setWidth(width)
-										});	
+					// 		col.setWidth(width)
+					// 					});	
 						
-					   });
+					//    });
 
 
 
@@ -1015,27 +1019,27 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 					// // frag4.attachSectionChange(function () {
 					// 	 
 						
-					// 	function tableresize(section){
-					// 	// if(sap.ui.getCore().byId(`${section}`).mAggregations._grid.mAggregations.content[0].getTitle()=="Vendor Details"){
-					// 		// oBusyDialog.open();
-					// 	var columns = sap.ui.getCore().byId(`${section}`).mAggregations._grid.mAggregations.content[0].getContent().getContent().getColumns();
-					// 	if (columns != undefined)
-					// 		columns.forEach(col => {
-					// 			var colName = col.mProperties.dataProperty;
-					// 			var colHeader = col.getHeader();
-					// 			var mLength = colHeader.length;
-					// 			var valuevendor = sap.ui.getCore().byId(`${section}`).mAggregations._grid.mAggregations.content[0].getContent().getContent().mAggregations._content.mBindingInfos.rows.binding.oCache.getValue();
-					// 			const maxLength = Math.max(...valuevendor.map(item => (item[colName]?.length ?? 8)));
-					// 			if (maxLength > mLength)
-					// 				mLength = maxLength;
-					// 			const width = (mLength+2) * 8 + 20 + "px";
+						function tableresize(section){
+						// if(sap.ui.getCore().byId(`${section}`).mAggregations._grid.mAggregations.content[0].getTitle()=="Vendor Details"){
+							// oBusyDialog.open();
+						var columns = sap.ui.getCore().byId(`${section}`).mAggregations._grid.mAggregations.content[0].getContent().getContent().getColumns();
+						if (columns != undefined)
+							columns.forEach(col => {
+								var colName = col.mProperties.dataProperty;
+								var colHeader = col.getHeader();
+								var mLength = colHeader.length;
+								var valuevendor = sap.ui.getCore().byId(`${section}`).mAggregations._grid.mAggregations.content[0].getContent().getContent().mAggregations._content.mBindingInfos.rows.binding.oCache.getValue();
+								const maxLength = Math.max(...valuevendor.map(item => (item[colName]?.length ?? 8)));
+								if (maxLength > mLength)
+									mLength = maxLength;
+								const width = (mLength+2) * 8 + 20 + "px";
 
-					// 			col.setWidth(width)
-					// 		});
-					// 		// oBusyDialog.close();
-					// 	// }
-					// }
-					// tableresize("panappbeta::tab1ObjectPage--fe::FacetSubSection::VendorData");
+								col.setWidth(width)
+							});
+							// oBusyDialog.close();
+						// }
+					}
+					tableresize("panappbeta::tab1ObjectPage--fe::FacetSubSection::VendorData");
 							
 
 					// });
@@ -1053,7 +1057,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 						function(oEvent){
 							var attach_items = oEvent.getSource().mAggregations.sections[2].mAggregations._grid.mAggregations.content[0].mAggregations._grid.mAggregations.content[0].mAggregations.content.mAggregations.items[1].getItems();
 							var edit_visible = oEvent.getSource().mAggregations.headerTitle.mAggregations._actionsToolbar.getContent()[4].mProperties.visible;
-						if(edit_visible == true)
+						if((edit_visible == true) || ((status === 'Pending for Approval') || (status === 'Approved') || (status === 'Rejected'))) 
 						{
 							oEvent.getSource().mAggregations.sections[2].mAggregations._grid.mAggregations.content[0].mAggregations._grid.mAggregations.content[0].mAggregations.content.getItems()[1].setUploadEnabled(false);
 							for (let i = 0; i < attach_items.length; i++) {

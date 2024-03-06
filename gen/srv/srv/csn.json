@@ -3950,6 +3950,17 @@
         "type": "cds.String"
       }
     },
+    "CatalogService.updatee": {
+      "kind": "function",
+      "params": {
+        "ID": {
+          "type": "cds.String"
+        }
+      },
+      "returns": {
+        "type": "cds.String"
+      }
+    },
     "PanApproval": {
       "@source": "srv/service.cds",
       "kind": "service"
