@@ -47,7 +47,8 @@
         "csrf": true,
         "csrfInBatch": true,
         "credentials": {
-          "destination": "TEST_DEST"
+          "destination": "TEST_DEST",
+          "requestTimeout": 120000
         },
         "destinationOptions": {
           "selectionStrategy": "alwaysProvider",

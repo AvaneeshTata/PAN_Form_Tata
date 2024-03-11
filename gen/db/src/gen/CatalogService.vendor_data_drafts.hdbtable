@@ -61,8 +61,8 @@ COLUMN TABLE CatalogService_vendor_data_drafts (
   PRIMARY KEY(Proposed_Vendor_Code, PAN_Number)
 ) WITH ASSOCIATIONS (
   MANY TO MANY JOIN CatalogService_Fvendor_responseoo_drafts AS vendtovenr ON (vendtovenr.venrtovend_Proposed_Vendor_Code = Proposed_Vendor_Code AND vendtovenr.venrtovend_PAN_Number = PAN_Number),
-  MANY TO MANY JOIN CatalogService_PAYMENT_TERM_DETAILS_drafts AS vendtoptd ON (Proposed_Vendor_Code = vendtoptd.Proposed_Vendor_Code),
-  MANY TO MANY JOIN CatalogService_PAN_PRICE_DETAILS_drafts AS vendtopd ON (Proposed_Vendor_Code = vendtopd.Proposed_Vendor_Code),
+  MANY TO MANY JOIN CatalogService_PAYMENT_TERM_DETAILS_drafts AS vendtoptd ON (Proposed_Vendor_Code = vendtoptd.Proposed_Vendor_Code AND vendtoptd.PAN_Number = PAN_Number),
+  MANY TO MANY JOIN CatalogService_PAN_PRICE_DETAILS_drafts AS vendtopd ON (Proposed_Vendor_Code = vendtopd.Proposed_Vendor_Code AND vendtopd.PAN_Number = PAN_Number),
   MANY TO ONE JOIN CatalogService_tab1_drafts AS vendor_datatotab1 ON (vendor_datatotab1.PAN_Number = PAN_Number),
   MANY TO ONE JOIN CatalogService_DraftAdministrativeData AS DraftAdministrativeData ON (DraftAdministrativeData.DraftUUID = DraftAdministrativeData_DraftUUID)
 )

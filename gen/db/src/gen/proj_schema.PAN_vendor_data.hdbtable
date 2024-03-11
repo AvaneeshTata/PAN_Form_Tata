@@ -57,7 +57,7 @@ COLUMN TABLE proj_schema_PAN_vendor_data (
   PRIMARY KEY(Proposed_Vendor_Code, PAN_Number)
 ) WITH ASSOCIATIONS (
   MANY TO MANY JOIN proj_schema_PAN_vendor_response AS vendtovenr ON (vendtovenr.venrtovend_Proposed_Vendor_Code = Proposed_Vendor_Code AND vendtovenr.venrtovend_PAN_Number = PAN_Number),
-  MANY TO MANY JOIN proj_schema_PAN_PAYMENT_TERM_DETAILS AS vendtoptd ON (Proposed_Vendor_Code = vendtoptd.Proposed_Vendor_Code),
-  MANY TO MANY JOIN proj_schema_PAN_PRICE_DETAILS AS vendtopd ON (Proposed_Vendor_Code = vendtopd.Proposed_Vendor_Code),
+  MANY TO MANY JOIN proj_schema_PAN_PAYMENT_TERM_DETAILS AS vendtoptd ON (Proposed_Vendor_Code = vendtoptd.Proposed_Vendor_Code AND vendtoptd.PAN_Number = PAN_Number),
+  MANY TO MANY JOIN proj_schema_PAN_PRICE_DETAILS AS vendtopd ON (Proposed_Vendor_Code = vendtopd.Proposed_Vendor_Code AND vendtopd.PAN_Number = PAN_Number),
   MANY TO ONE JOIN proj_schema_PAN_Details AS vendor_datatotab1 ON (vendor_datatotab1.PAN_Number = PAN_Number)
 )

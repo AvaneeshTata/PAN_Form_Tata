@@ -653,7 +653,7 @@
           "type": "cds.String"
         },
         "Vendor_CE_Date": {
-          "type": "cds.String"
+          "type": "cds.Date"
         },
         "Vendor_PE_Score": {
           "type": "cds.String"
@@ -839,6 +839,19 @@
             {
               "ref": [
                 "Proposed_Vendor_Code"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "PAN_Number"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "ptdtovend",
+                "PAN_Number"
               ]
             }
           ]
@@ -1077,6 +1090,19 @@
             {
               "ref": [
                 "Proposed_Vendor_Code"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "PAN_Number"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "pdtovend",
+                "PAN_Number"
               ]
             }
           ]
@@ -2579,6 +2605,9 @@
           "type": "cds.String"
         },
         "Technically_Approved": {
+          "@Common.FieldControl": {
+            "#": "Mandatory"
+          },
           "type": "cds.String"
         },
         "Client_Approved": {
@@ -2913,7 +2942,7 @@
           "type": "cds.String"
         },
         "Vendor_CE_Date": {
-          "type": "cds.String"
+          "type": "cds.Date"
         },
         "Vendor_PE_Score": {
           "type": "cds.String"
@@ -3211,6 +3240,19 @@
               "ref": [
                 "Proposed_Vendor_Code"
               ]
+            },
+            "and",
+            {
+              "ref": [
+                "PAN_Number"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "ptdtovend",
+                "PAN_Number"
+              ]
             }
           ]
         }
@@ -3372,6 +3414,19 @@
             {
               "ref": [
                 "Proposed_Vendor_Code"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "PAN_Number"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "pdtovend",
+                "PAN_Number"
               ]
             }
           ]
@@ -4652,7 +4707,7 @@
           "type": "cds.String"
         },
         "Vendor_CE_Date": {
-          "type": "cds.String"
+          "type": "cds.Date"
         },
         "Vendor_PE_Score": {
           "type": "cds.String"
@@ -4846,6 +4901,19 @@
               "ref": [
                 "Proposed_Vendor_Code"
               ]
+            },
+            "and",
+            {
+              "ref": [
+                "PAN_Number"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "ptdtovend",
+                "PAN_Number"
+              ]
             }
           ]
         }
@@ -4916,6 +4984,19 @@
             {
               "ref": [
                 "Proposed_Vendor_Code"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "PAN_Number"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "pdtovend",
+                "PAN_Number"
               ]
             }
           ]

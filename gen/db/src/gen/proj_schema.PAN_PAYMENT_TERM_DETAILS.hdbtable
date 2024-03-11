@@ -12,5 +12,5 @@ COLUMN TABLE proj_schema_PAN_PAYMENT_TERM_DETAILS (
   To_be_certified_in_Company NVARCHAR(5000),
   PRIMARY KEY(ptdkey)
 ) WITH ASSOCIATIONS (
-  MANY TO ONE JOIN proj_schema_PAN_vendor_data AS ptdtovend ON (ptdtovend.Proposed_Vendor_Code = Proposed_Vendor_Code)
+  MANY TO ONE JOIN proj_schema_PAN_vendor_data AS ptdtovend ON (ptdtovend.Proposed_Vendor_Code = Proposed_Vendor_Code AND PAN_Number = ptdtovend.PAN_Number)
 )

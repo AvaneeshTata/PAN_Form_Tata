@@ -113,15 +113,20 @@ this.before('READ',tab1,async (req)=>{
 //   return req;
 
 });
+
+// this.on('CREATE',PAYMENT_TERM_DETAILS.drafts,async(req)=>{
+//     let data = 'anything';
+//     console.log(data);
+// });
 this.on('updatee', async (req) => {
-    let value = req.data.ID;
-    console.log(value);
-    let dat = req.data.ID;
-    var parts = dat.split(',');
-    console.log(parts[0]);
-    await UPDATE(vendor_data.drafts, value).with({ sbg: parts[0] });
-    console.log("update fi hit");
-    return "abc";
+    let value = JSON.parse(req.data.ID);
+    
+    let res=await UPDATE(vendor_data.drafts, {
+        PAN_Number:value.PAN_Number,
+        Proposed_Vendor_Code:value.Proposed_Vendor_Code
+    }).with({ Vendor_CE_Date: value.Vendor_CE_Date });
+    console.log(res);
+    return res;
 });
 
 this.on('Listdata', async (req)=>{

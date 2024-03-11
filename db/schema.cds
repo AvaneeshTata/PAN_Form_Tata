@@ -211,7 +211,7 @@ Number_of_Back_to_back_Terms_agreed_with_Vendor_as_per_GPC_OR_GCC : String;
    Others :LargeString;
 vendtovenr :  Composition of many PAN_vendor_response on vendtovenr.venrtovend = $self ;
 // vendtotnc :  Composition of many Terms_and_Conditions_Compared_with on vendtotnc.tnctovend = $self;
-vendtoptd:  Composition of many PAN_PAYMENT_TERM_DETAILS on vendtoptd.ptdtovend = $self ;
+vendtoptd:  Composition of many PAN_PAYMENT_TERM_DETAILS on vendtoptd.ptdtovend = $self;
 vendtopd:  Composition of many PAN_PRICE_DETAILS on vendtopd.pdtovend = $self  ;
 vendor_datatotab1 :  Association to one PAN_Details on vendor_datatotab1.PAN_Number =  PAN_Number ; 
 
@@ -234,9 +234,9 @@ Supplier_Origin_State : String;
 Destination_State_BKTShipDASHto_LocationBKT : String; 
 Vendor_GST_Number : String; 
 Vendor_CE_Score : String; 
-Vendor_CE_Date : String; 
+Vendor_CE_Date : Date; 
 Vendor_PE_Score : String; 
-Vendor_PE_Date : String; 
+Vendor_PE_Date : Date; 
 Vendor_Contact_PersonDASH1 : String; 
 Vendor_Contact_PersonDASH2 : String; 
 Technical_Committee_who_cleared_the_proposal : String; 
@@ -285,8 +285,8 @@ Number_of_Back_to_back_Terms_agreed_with_Vendor_as_per_GPC_OR_GCC : String;
 entity PAN_PAYMENT_TERM_DETAILS {
           
 key ptdkey:UUID;
- Proposed_Vendor_Code : String; 
-    PAN_Number : String;
+Proposed_Vendor_Code : String; 
+PAN_Number : String;
     iddd : String;
    
    
@@ -303,7 +303,7 @@ key ptdkey:UUID;
 //    percentage_payment_for_progress : String;
 // percentage_payment_for_retention :String;
 
-   ptdtovend : Association to PAN_vendor_data on ptdtovend.Proposed_Vendor_Code=Proposed_Vendor_Code; 
+   ptdtovend : Association to PAN_vendor_data on ptdtovend.Proposed_Vendor_Code=Proposed_Vendor_Code and PAN_Number = ptdtovend.PAN_Number; 
 //    PAYMENT_TERM_DETAILStotab1 :  Association to one tab1 on PAYMENT_TERM_DETAILStotab1.id = idd; 
 }
 
@@ -368,7 +368,7 @@ entity PAN_PRICE_DETAILS{
    Amount : String;
    Indian_Tax_PER : String;
    Quantity_Over_Delivery_Tolerance : String;
-   pdtovend : Association to PAN_vendor_data on pdtovend.Proposed_Vendor_Code = Proposed_Vendor_Code;
+   pdtovend : Association to PAN_vendor_data on pdtovend.Proposed_Vendor_Code = Proposed_Vendor_Code and  PAN_Number = pdtovend.PAN_Number;
 }
 
 

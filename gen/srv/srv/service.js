@@ -5,7 +5,7 @@ const { getMaxListeners } = require('events');
 const axios = require('axios');
 module.exports = cds.service.impl(async function () {
     let {
-        attachments,tab1,tab2,tab3,vendor_data,Fvendor_responseoo,PAYMENT_TERM_DETAILS,WORKFLOW_HISTORY,PAN_PRICE_DETAILS,PAN_Payment_Method_Drop,PAN_Comments ,
+        drafts,attachments,tab1,tab2,tab3,vendor_data,Fvendor_responseoo,PAYMENT_TERM_DETAILS,WORKFLOW_HISTORY,PAN_PRICE_DETAILS,PAN_Payment_Method_Drop,PAN_Comments ,
         PAN_Details_APR,PAN_WEB_EVENT_APR,PAN_TYPE_APR,PAN_vendor_data_APR,PAN_vendor_response_APR,PAN_PAYMENT_TERM_DETAILS_APR,PAN_PRICE_DETAILS_APR,PAN_WORKFLOW_HISTORY_APR,PAN_attachments_APR,PAN_Payment_Method_Drop_APR,PAN_Comments_APR
     } = this.entities;
 
@@ -23,7 +23,7 @@ this.before('READ',tab1,async (req)=>{
                 panformDest = dest;
             }
         });
-        // panformDest = vcap.destination[0];
+        panformDest = vcap.destination[0];
         console.log(panformDest);
 
 
@@ -113,15 +113,20 @@ this.before('READ',tab1,async (req)=>{
 //   return req;
 
 });
+
+// this.on('CREATE',PAYMENT_TERM_DETAILS.drafts,async(req)=>{
+//     let data = 'anything';
+//     console.log(data);
+// });
 this.on('updatee', async (req) => {
-    let value = req.data.ID;
-    console.log(value);
-    let dat = req.data.ID;
-    var parts = dat.split(',');
-    console.log(parts[0]);
-    await UPDATE(vendor_data.drafts, value).with({ sbg: parts[0] });
-    console.log("update fi hit");
-    return "abc";
+    let value = JSON.parse(req.data.ID);
+    
+    let res=await UPDATE(vendor_data.drafts, {
+        PAN_Number:value.PAN_Number,
+        Proposed_Vendor_Code:value.Proposed_Vendor_Code
+    }).with({ Vendor_CE_Date: value.Vendor_CE_Date });
+    console.log(res);
+    return res;
 });
 
 this.on('Listdata', async (req)=>{

@@ -18,6 +18,6 @@ COLUMN TABLE CatalogService_PAN_PRICE_DETAILS_drafts (
   DraftAdministrativeData_DraftUUID NVARCHAR(36) NOT NULL,
   PRIMARY KEY(pdkey)
 ) WITH ASSOCIATIONS (
-  MANY TO ONE JOIN CatalogService_vendor_data_drafts AS pdtovend ON (pdtovend.Proposed_Vendor_Code = Proposed_Vendor_Code),
+  MANY TO ONE JOIN CatalogService_vendor_data_drafts AS pdtovend ON (pdtovend.Proposed_Vendor_Code = Proposed_Vendor_Code AND PAN_Number = pdtovend.PAN_Number),
   MANY TO ONE JOIN CatalogService_DraftAdministrativeData AS DraftAdministrativeData ON (DraftAdministrativeData.DraftUUID = DraftAdministrativeData_DraftUUID)
 )

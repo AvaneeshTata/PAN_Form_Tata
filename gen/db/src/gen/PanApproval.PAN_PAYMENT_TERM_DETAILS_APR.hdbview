@@ -12,5 +12,5 @@ VIEW PanApproval_PAN_PAYMENT_TERM_DETAILS_APR AS SELECT
   PAN_PAYMENT_TERM_DETAILS_0.To_be_certified_in_Company
 FROM proj_schema_PAN_PAYMENT_TERM_DETAILS AS PAN_PAYMENT_TERM_DETAILS_0
 WITH ASSOCIATIONS (
-  MANY TO ONE JOIN PanApproval_PAN_vendor_data_APR AS ptdtovend ON (ptdtovend.Proposed_Vendor_Code = Proposed_Vendor_Code)
+  MANY TO ONE JOIN PanApproval_PAN_vendor_data_APR AS ptdtovend ON (ptdtovend.Proposed_Vendor_Code = Proposed_Vendor_Code AND PAN_Number = ptdtovend.PAN_Number)
 )

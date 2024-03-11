@@ -1151,3 +1151,6 @@ annotate service.vendor_data with {
 annotate service.tab1 with {
     Comments @Common.FieldControl : #Mandatory
 };
+annotate service.vendor_data with {
+    Technically_Approved @Common.FieldControl : #Mandatory
+};

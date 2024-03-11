@@ -57,7 +57,7 @@ VIEW PanApproval_PAN_vendor_data_APR AS SELECT
 FROM proj_schema_PAN_vendor_data AS PAN_vendor_data_0
 WITH ASSOCIATIONS (
   MANY TO MANY JOIN PanApproval_PAN_vendor_response_APR AS vendtovenr ON (vendtovenr.venrtovend_Proposed_Vendor_Code = Proposed_Vendor_Code AND vendtovenr.venrtovend_PAN_Number = PAN_Number),
-  MANY TO MANY JOIN PanApproval_PAN_PAYMENT_TERM_DETAILS_APR AS vendtoptd ON (Proposed_Vendor_Code = vendtoptd.Proposed_Vendor_Code),
-  MANY TO MANY JOIN PanApproval_PAN_PRICE_DETAILS_APR AS vendtopd ON (Proposed_Vendor_Code = vendtopd.Proposed_Vendor_Code),
+  MANY TO MANY JOIN PanApproval_PAN_PAYMENT_TERM_DETAILS_APR AS vendtoptd ON (Proposed_Vendor_Code = vendtoptd.Proposed_Vendor_Code AND vendtoptd.PAN_Number = PAN_Number),
+  MANY TO MANY JOIN PanApproval_PAN_PRICE_DETAILS_APR AS vendtopd ON (Proposed_Vendor_Code = vendtopd.Proposed_Vendor_Code AND vendtopd.PAN_Number = PAN_Number),
   MANY TO ONE JOIN PanApproval_PAN_Details_APR AS vendor_datatotab1 ON (vendor_datatotab1.PAN_Number = PAN_Number)
 )

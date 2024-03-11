@@ -57,7 +57,7 @@ VIEW CatalogService_vendor_data AS SELECT
 FROM proj_schema_PAN_vendor_data AS PAN_vendor_data_0
 WITH ASSOCIATIONS (
   MANY TO MANY JOIN CatalogService_Fvendor_responseoo AS vendtovenr ON (vendtovenr.venrtovend_Proposed_Vendor_Code = Proposed_Vendor_Code AND vendtovenr.venrtovend_PAN_Number = PAN_Number),
-  MANY TO MANY JOIN CatalogService_PAYMENT_TERM_DETAILS AS vendtoptd ON (Proposed_Vendor_Code = vendtoptd.Proposed_Vendor_Code),
-  MANY TO MANY JOIN CatalogService_PAN_PRICE_DETAILS AS vendtopd ON (Proposed_Vendor_Code = vendtopd.Proposed_Vendor_Code),
+  MANY TO MANY JOIN CatalogService_PAYMENT_TERM_DETAILS AS vendtoptd ON (Proposed_Vendor_Code = vendtoptd.Proposed_Vendor_Code AND vendtoptd.PAN_Number = PAN_Number),
+  MANY TO MANY JOIN CatalogService_PAN_PRICE_DETAILS AS vendtopd ON (Proposed_Vendor_Code = vendtopd.Proposed_Vendor_Code AND vendtopd.PAN_Number = PAN_Number),
   MANY TO ONE JOIN CatalogService_tab1 AS vendor_datatotab1 ON (vendor_datatotab1.PAN_Number = PAN_Number)
 )
