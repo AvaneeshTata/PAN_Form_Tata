@@ -123,7 +123,7 @@ this.on('updatee', async (req) => {
     
     let resp = await SELECT.from(tab1).where `PAN_Number=${value}`;
     let resp2 = resp[0];
-    if((resp2['status']!='Approved')||(resp2['status']!='Rejected')){
+    if((resp2['status']!='Approved')&&(resp2['status']!='Rejected')){
     let url = "/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant=%27"+resp2['Plant_Code']+"%27&docType=%27"+resp2["Order_Type_OR_Document_tyFuuidpe"]+"%27&amount=%27"+resp2["Final_proposed_Value"]+"%27&purGroup=%27"+resp2["BUORPurchasing_Group"]+"%27";
                 // let url = "/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant=%27 %27&plantCode=%27"+resp2["Plant_Code"]+"%27&sbg=%27"+resp2["SBG"]+"%27&sub=%27"+resp2["SBU"]+"%27";
                 var response = await AribaSrv.get(url);
