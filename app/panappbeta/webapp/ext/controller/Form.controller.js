@@ -1,9 +1,11 @@
-sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/core/Fragment", "sap/m/library", "sap/m/MessageToast","sap/ui/core/routing/History"], function (ControllerExtension, Dialog, Fragment, library, MessageToast,History) {
+sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/core/Fragment", "sap/m/library", "sap/m/MessageToast","sap/ui/core/routing/History","sap/ui/core/library"], function (ControllerExtension, Dialog, Fragment, library, MessageToast,History,Corelibrary) {
 	'use strict';
 	// var oUserInfoService = sap.ushell.Container.getService("UserInfo");
 	// var oUser = oUserInfoService.getUser();
 	var ButtonType = library.ButtonType;
 	var DialogType = library.DialogType;
+	var ValueState = Corelibrary.ValueState;
+	// var Text = new sap.m.Text;
 	var oBusyDialog = new sap.m.BusyDialog("oBusyDialog");
 	let dialog;
 	var cdialog;
@@ -53,8 +55,14 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 				// 	}
 				// }));
 				// let oModel = oExtensionAPI.getModel();
+				var complete_url = window.location.href;
+					var pieces = complete_url.split("(");
+					var res = pieces[1];
+					//    var res = pieces[1];
+					var res1 = res.split("'");
+					var data = res1[1];
 				let sFunctionName = "InsertData";
-				let data = { some: "data" };
+				// let data = { some: "data" };
 				 
 				let result = await Fimport(oModel, sFunctionName, data, "ID")
 				console.log(result);
@@ -136,6 +144,8 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 								// for(let i=0;i<2;i++){
 								oBusyDialog.open();
 								const oModel = this.base.getExtensionAPI().getModel();
+								// let fname = 'getsync';
+
 								let sFunctionName = "sendforapproval";
 								// let oFunction = oModel.bindContext(`/${sFunctionName}(...)`);
 								let appr_url = window.location.href;
@@ -152,6 +162,10 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 								var pieces = appr_url.split("(");
 								var res = pieces[1];
 								var res1 = res.split("'");
+								let worflowdata =await Fimport(oModel, "getsync", res1[1], "data");
+								worflowdata = JSON.parse(worflowdata);
+								debugger
+								if(worflowdata.length!=0){
 
 								let comp_url = "https://btp-dev-0or0hi20.launchpad.cfapps.eu10.hana.ondemand.com/site?siteId=94a17d9a-05b5-425d-b51d-2cd74a2c2762#pan_approval-display?sap-ui-app-id-hint=saas_approuter_panapproval&/PAN_Details_APR('" + res1[1] + "')";
 								// let comp = nav_url[0]+"pan_approval-display?sap-ui-app-id-hint=saas_approuter_panapproval&/PAN_Details_APR('" + res1[1] + "')";
@@ -217,7 +231,28 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 
 								console.log(result);
 
-								// }
+								}else{
+									if (!this.oErrorMessageDialog) {
+										this.oErrorMessageDialog = new sap.m.Dialog({
+											type: DialogType.Message,
+											title: "Error",
+											state: ValueState.Error,
+											content: new sap.m.Text({ text: "Cannot Submit for approval When Approvers are Empty" }),
+											beginButton: new sap.m.Button({
+												type: ButtonType.Emphasized,
+												text: "OK",
+												press: function () {
+													this.oErrorMessageDialog.close();
+												}.bind(this)
+											})
+										});
+									}
+									dialog.close();
+									dialog.destroy();
+									oBusyDialog.close();
+									this.oErrorMessageDialog.open();
+									
+								}
 							}.bind(this)
 						}),
 						endButton: new sap.m.Button({
@@ -368,10 +403,16 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 					// // console.log(response);
 
 					// let oContext = Function.getBoundContext();
+					var complete_url = window.location.href;
+					var pieces = complete_url.split("(");
+					var res = pieces[1];
+					//    var res = pieces[1];
+					var res1 = res.split("'");
+					var data = res1[1];
 					let FunctionName = "InsertData";
 					let dat = { some: "data" };
 					 
-					let result = await Fimport(oModel, FunctionName, dat, "ID")
+					let result = await Fimport(oModel, FunctionName, data, "ID")
 					console.log(result);
 
 					// let result = oContext.getObject();
@@ -405,12 +446,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 
 					var sFunctionName = "getData";
 					// oFunction = oModel.bindContext(`/${Name}(...)`);
-					var complete_url = window.location.href;
-					var pieces = complete_url.split("(");
-					var res = pieces[1];
-					//    var res = pieces[1];
-					var res1 = res.split("'");
-					var data = res1[1];
+					
 					// 	oFunction.setParameter("ID",data);
 					// await oFunction.execute(); 
 					//  var oContext = oFunction.getBoundContext();
@@ -450,7 +486,12 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 					function processData(result) {debugger
 						 
 
-						var dataa = result.value[0].tab1toWORKFLOW_HISTORY;
+						var dataa ;
+						if(result.length){
+							dataa= result;
+						}else{debugger
+							dataa = result.value[0].tab1toWORKFLOW_HISTORY;
+						}
 						var data = [];
 						dataa.forEach(element => {
 							 
@@ -468,8 +509,8 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 								"By User": element.Approved_by
 								
 							});
-						});
-
+						});debugger
+						that.base.getView().getContent()[0].getSections()[4].setBusy(true);
 						let oSection = that.base.getView().getContent()[0].getSections()[4];
 
 						//   SORT DATA BY LEVEL
@@ -552,9 +593,31 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 						}))
 						ButtonHbox.addItem(new sap.m.Button({
 							text: "Refresh",
-							visible: !(that.getView().getContent()[0].getHeaderTitle().mAggregations._actionsToolbar.getContent()[4].mProperties.visible),
+							// visible: !(that.getView().getContent()[0].getHeaderTitle().mAggregations._actionsToolbar.getContent()[4].mProperties.visible),
 							press: async function (oEvent) {
 								console.log(oEvent);
+								let functionname = 'updatee';
+								// let oFunction = oEvent.getSource().getModel().bindContext(`/${functionname}(...)`);
+								let oFunction = oEvent.getSource().getModel();
+								console.log();
+								var complete_url = window.location.href;
+								var pieces = complete_url.split("(");
+								var res = pieces[1];
+								//    var res = pieces[1];
+								var res1 = res.split("'");
+								var panNumber = res1[1];
+								// oFunction.setParameter('ID', panNumber);
+								// await oFunction.execute();
+								// const oContext = oFunction.getBoundContext();
+								// let resVal = oContext.getValue();
+								 
+								let resVal = await Fimport(oFunction, functionname, panNumber, "ID")
+								resVal = JSON.parse(resVal);
+								debugger
+								this.getParent().getParent().getParent().getParent().getParent().destroySubSections();
+								processData(resVal);
+								
+
 							}
 						}));
 						ButtonHbox.addItem(new sap.m.HBox({
@@ -891,11 +954,16 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 							})
 							i = i + 1;
 						})
-
+						that.base.getView().getContent()[0].getSections()[4].setBusy(false);
 					}
+					
 					let result1 = await Fimport(oModel, sFunctionName, data, "ID");
 					status = result1;
-
+					// if( (result1 === 'Approved') || (result1 === 'Rejected')){debugger
+					// 	sap.ui.getCore().byId("__button24").setVisible(false);
+					// }else{debugger
+					// 	sap.ui.getCore().byId("__button24").setVisible(true);
+					// }
 
 					 
 					if ((result1 === 'Pending for Approval') || (result1 === 'Approved') || (result1 === 'Rejected')) {
@@ -1032,14 +1100,23 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 								const maxLength = Math.max(...valuevendor.map(item => (item[colName]?.length ?? 8)));
 								if (maxLength > mLength)
 									mLength = maxLength;
+									// if(mLength>50){
+									// 	mLength=50;
+									// }
 								const width = (mLength+2) * 8 + 20 + "px";
 
 								col.setWidth(width)
 							});
 							// oBusyDialog.close();
 						// }
-					}
+					}debugger
 					tableresize("panappbeta::tab1ObjectPage--fe::FacetSubSection::VendorData");
+					// let loop = sap.ui.getCore().byId("panappbeta::tab1ObjectPage--fe::FacetSubSection::VendorData").mAggregations._grid.mAggregations.content[0].getContent().getContent().mAggregations._content.getRows().length;
+					// for(let i =0 ; i<loop; i++){
+					// 	let str = "panappbeta::tab1ObjectPage--fe::table::tab1tovendor_data::LineItem::VendorData-innerTable-rows-row"+i.toString()+"-col4"+" .sapUiTableCellInner";
+					// 	sap.ui.getCore().byId(str);
+					// }
+
 							
 
 					// });

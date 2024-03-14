@@ -5,7 +5,7 @@ const { getMaxListeners } = require('events');
 const axios = require('axios');
 module.exports = cds.service.impl(async function () {
     let {
-        drafts,attachments,tab1,tab2,tab3,vendor_data,Fvendor_responseoo,PAYMENT_TERM_DETAILS,WORKFLOW_HISTORY,PAN_PRICE_DETAILS,PAN_Payment_Method_Drop,PAN_Comments ,
+        attachments,tab1,tab2,tab3,vendor_data,Fvendor_responseoo,PAYMENT_TERM_DETAILS,WORKFLOW_HISTORY,PAN_PRICE_DETAILS,PAN_Payment_Method_Drop,PAN_Comments ,
         PAN_Details_APR,PAN_WEB_EVENT_APR,PAN_TYPE_APR,PAN_vendor_data_APR,PAN_vendor_response_APR,PAN_PAYMENT_TERM_DETAILS_APR,PAN_PRICE_DETAILS_APR,PAN_WORKFLOW_HISTORY_APR,PAN_attachments_APR,PAN_Payment_Method_Drop_APR,PAN_Comments_APR
     } = this.entities;
 
@@ -23,7 +23,7 @@ this.before('READ',tab1,async (req)=>{
                 panformDest = dest;
             }
         });
-        panformDest = vcap.destination[0];
+        // panformDest = vcap.destination[0];
         console.log(panformDest);
 
 
@@ -121,12 +121,71 @@ this.before('READ',tab1,async (req)=>{
 this.on('updatee', async (req) => {
     let value = JSON.parse(req.data.ID);
     
-    let res=await UPDATE(vendor_data.drafts, {
-        PAN_Number:value.PAN_Number,
-        Proposed_Vendor_Code:value.Proposed_Vendor_Code
-    }).with({ Vendor_CE_Date: value.Vendor_CE_Date });
-    console.log(res);
-    return res;
+    let resp = await SELECT.from(tab1).where `PAN_Number=${value}`;
+    let resp2 = resp[0];
+    if((resp2['status']!='Approved')||(resp2['status']!='Rejected')){
+    let url = "/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant=%27"+resp2['Plant_Code']+"%27&docType=%27"+resp2["Order_Type_OR_Document_tyFuuidpe"]+"%27&amount=%27"+resp2["Final_proposed_Value"]+"%27&purGroup=%27"+resp2["BUORPurchasing_Group"]+"%27";
+                // let url = "/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant=%27 %27&plantCode=%27"+resp2["Plant_Code"]+"%27&sbg=%27"+resp2["SBG"]+"%27&sub=%27"+resp2["SBU"]+"%27";
+                var response = await AribaSrv.get(url);
+                console.log(response);
+                for(j=0;j<response.length;j++){
+                    let a=[];
+                    let b={
+                        "idd":j.toString(),
+                        "PAN_Number":resp2.PAN_Number,
+                        "Employee_ID" : response[j].empId,
+                        "level" : response[j].level,
+                        "Approved_by": "",
+                        "Employee_Name" : response[j].empName,
+                            "Title" : response[j].title,                         
+                            "Notification_Status" : "false",
+                            "Result" : "",
+                            "Begin_DateAND_Time": "",
+                            "End_DateAND_Time": "",
+                            "Days_Taken" : "",
+                            "Remarks" : ""
+                    }
+                let resp1=await SELECT.from(WORKFLOW_HISTORY).where`PAN_Number=${value} and level = ${response[j].level} and idd = ${j.toString()}`;
+                resp1=resp1[0];
+                let lev;
+                console.log(resp2["Current_level_of_approval"]);
+                if(resp2["Current_level_of_approval"]){
+                    lev = parseInt(resp2["Current_level_of_approval"]);
+                    console.log("not empty");
+                }else{
+                lev = -1;
+                console.log("empty");
+                }
+                lev = lev+1;
+                if(((resp1['End_DateAND_Time']) || (resp1['Days_Taken']))&&(b.level>lev)){
+                    console.log("no need to reinsert");
+                }else if(b.level>lev){
+                    b.Begin_DateAND_Time = resp1["Begin_DateAND_Time"];
+                    let deleteresp = await DELETE.from(WORKFLOW_HISTORY).where`PAN_Number=${value} and level = ${response[j].level} and idd = ${j.toString()}`;
+                    console.log(deleteresp);
+                    let draftresp = await SELECT.from(WORKFLOW_HISTORY.drafts).where`PAN_Number=${value} and level = ${response[j].level} and idd = ${j.toString()}`;
+                    let deletedraftresp = await DELETE.from(WORKFLOW_HISTORY.drafts).where`PAN_Number=${value} and level = ${response[j].level} and idd = ${j.toString()}`;
+                    console.log(deletedraftresp);
+                    a.push(b);
+                    await INSERT.into(WORKFLOW_HISTORY).entries(a);
+                    let c=[]
+                    if(draftresp.length>0){
+                    draftresp=draftresp[0];
+                    // draftresp["idd"]=b.idd;
+                    draftresp["Employee_ID"]=b.Employee_ID;
+                    draftresp["level"]=b.level;
+                    draftresp["Employee_Name"]=b.Employee_Name;
+                    draftresp["Title"]=b.Title;
+                    c.push(draftresp);
+                    await INSERT.into(WORKFLOW_HISTORY.drafts).entries(c);
+                    }
+                }
+            }
+        }
+        let ret = await SELECT.from(WORKFLOW_HISTORY).where`PAN_Number=${value}`;
+        return JSON.stringify(ret);
+
+                
 });
 
 this.on('Listdata', async (req)=>{
@@ -203,38 +262,18 @@ this.on("draft",async (req)=>{
 })
 this.on('getsync',async (req)=>{
     let data = JSON.parse(req.data.data);
-    let auth = req?.headers?.authorization;
-        // let response;
-        if(auth != undefined){
-            let token = auth.split(" ");
-            if (token[0]=='Basic'){
-                let decod = atob(token[1]);
-                let decode = decod.split(":");
-                var decoded={
-                    "user_name":decode[0]
-                }
-            }else if(token[0]=='Bearer'){
-            var decoded = jwtDecode(token[1]);
-            }
-        }
-    try{
-    let url = "https://tata-projects-limited-btp-dev-0or0hi20-dev-space-sync-p3561cac7.cfapps.eu10-004.hana.ondemand.com/odata/v4/catalog/postUserDataDate(userName='VGR',fromDate='"+data.fromdate+"',toDate='"+data.todate+"')";
-    const res = await axios.get(url,{
-        timeout:120000
-    });
-}catch(error){
- return JSON.stringify(error);
-}
-    console.log(res)
-    return JSON.stringify(res.data);
-    // let body={
-    //     "fromdate":data.fromdate,
-    //     "todate":data.todate,
-    //     "user_name"
-    // }  
+    let response =  await SELECT.from(WORKFLOW_HISTORY).where`PAN_Number=${data}`;
+    return JSON.stringify(response);
 })
 this.on('InsertData',async (req)=>{
-    let resp1=await SELECT.from(tab1);
+    var resp1;
+    req.data.ID = JSON.parse(req.data.ID)
+    if(req.data.ID?.some){
+        resp1=await SELECT.from(tab1);
+    }else{
+        let id = req.data.ID;
+        resp1 = await SELECT.from(tab1).where`PAN_Number=${id}`;
+        }
     for(let i = 0;i<resp1.length;i++){
         let ind  = 0;
         let status = ""

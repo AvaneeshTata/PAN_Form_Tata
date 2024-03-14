@@ -251,13 +251,13 @@ annotate service.vendor_data with @(
         },
         {
             $Type : 'UI.DataField',
-            Value : Vendor_Location,
-            Label : 'Awarded Value',
+            Value : Technically_Approved,
+            Label : 'Technically Approved',
         },
         {
             $Type : 'UI.DataField',
-            Value : Technically_Approved,
-            Label : 'Technically Approved',
+            Value : Vendor_Location,
+            Label : 'Technical Rank / Remarks',
         },
         {
             $Type : 'UI.DataField',

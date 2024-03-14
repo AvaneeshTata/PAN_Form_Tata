@@ -429,7 +429,7 @@
           "type": "cds.String"
         },
         "Vendor_CE_Date": {
-          "type": "cds.String"
+          "type": "cds.Date"
         },
         "Vendor_PE_Score": {
           "type": "cds.String"
@@ -659,7 +659,7 @@
           "type": "cds.String"
         },
         "Vendor_PE_Date": {
-          "type": "cds.String"
+          "type": "cds.Date"
         },
         "Vendor_Contact_PersonDASH1": {
           "type": "cds.String"
@@ -2178,16 +2178,16 @@
         {
           "$Type": "UI.DataField",
           "Value": {
-            "=": "Vendor_Location"
+            "=": "Technically_Approved"
           },
-          "Label": "Awarded Value"
+          "Label": "Technically Approved"
         },
         {
           "$Type": "UI.DataField",
           "Value": {
-            "=": "Technically_Approved"
+            "=": "Vendor_Location"
           },
-          "Label": "Technically Approved"
+          "Label": "Technical Rank / Remarks"
         },
         {
           "$Type": "UI.DataField",
@@ -2677,7 +2677,7 @@
           "type": "cds.String"
         },
         "Vendor_CE_Date": {
-          "type": "cds.String"
+          "type": "cds.Date"
         },
         "Vendor_PE_Score": {
           "type": "cds.String"
@@ -2948,7 +2948,7 @@
           "type": "cds.String"
         },
         "Vendor_PE_Date": {
-          "type": "cds.String"
+          "type": "cds.Date"
         },
         "Vendor_Contact_PersonDASH1": {
           "type": "cds.String"
@@ -4476,7 +4476,7 @@
           "type": "cds.String"
         },
         "Vendor_CE_Date": {
-          "type": "cds.String"
+          "type": "cds.Date"
         },
         "Vendor_PE_Score": {
           "type": "cds.String"
@@ -4713,7 +4713,7 @@
           "type": "cds.String"
         },
         "Vendor_PE_Date": {
-          "type": "cds.String"
+          "type": "cds.Date"
         },
         "Vendor_Contact_PersonDASH1": {
           "type": "cds.String"
