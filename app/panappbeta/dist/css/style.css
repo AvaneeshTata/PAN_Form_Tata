@@ -217,3 +217,29 @@ width: 300%;
 /* .uploadcss{
     height: 100px;
 } */
+
+.css1{
+    overflow: visible !important;
+    /* background: cadetblue; */
+  /* / position: ; / */
+  
+  /* / z-index: 0; / */
+ }
+   /* / panappbeta::tab1_tab1tovendor_dataObjectPage--fe::table::vendtoptd::LineItem::PAYMENT_TERM_DETAILS-innerTable_col4 / */
+   /* / #plantproject2\:\:plantObjectPage--fe\:\:table\:\:planttobplant\:\:LineItem\:\:bplant-innerTable-rows-row0-col1 .sapUiTableCellInner:hover span, / */
+.css1:hover span{
+    
+    overflow-y: scroll !important;
+    /* / overflow-x: hidden; / */
+    /* / padding: unset; / */
+    padding: 10px;
+    text-wrap: wrap;
+    max-height: 150px; 
+    width: 100%;
+    position: absolute;
+    background-color: white;
+    z-index: 1;
+    border: 2px solid gray;
+    border-radius: 5px;
+    
+  }

@@ -379,6 +379,9 @@
         <Parameter Name="ID" Type="Edm.String"/>
         <ReturnType Type="Edm.String"/>
       </Function>
+      <Annotations Target="PanApproval.PAN_Details_APR/Comments">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
       <Annotations Target="PanApproval.PAN_PAYMENT_TERM_DETAILS_APR/ptdkey">
         <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
       </Annotations>

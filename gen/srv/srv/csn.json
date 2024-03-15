@@ -132,6 +132,7 @@
           "type": "cds.String"
         },
         "Comments": {
+          "@mandatory": true,
           "type": "cds.LargeString"
         },
         "submitted_by": {
@@ -1788,6 +1789,7 @@
           "@Common.FieldControl": {
             "#": "Mandatory"
           },
+          "@mandatory": true,
           "type": "cds.LargeString"
         },
         "submitted_by": {
@@ -4158,6 +4160,7 @@
           "type": "cds.String"
         },
         "Comments": {
+          "@mandatory": true,
           "type": "cds.LargeString"
         },
         "submitted_by": {

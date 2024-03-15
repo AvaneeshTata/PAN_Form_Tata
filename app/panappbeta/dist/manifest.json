@@ -189,6 +189,38 @@
                                     "tableSettings": {
                                         "type": "GridTable",
                                         "enableExport": false
+                                    },
+                                    "columns": {
+                                        "DataField::Awarded_Vendor": {
+                                            "width": "130px"
+                                        },
+                                        "DataField::Vendor_Name": {
+                                            "width": "300px"
+                                        },
+                                        "DataField::Original_quote": {
+                                            "width": "150px"
+                                        },
+                                        "DataField::Final_Quote": {
+                                            "width": "150px"
+                                        },
+                                        "DataField::Technically_Approved": {
+                                            "width": "200px"
+                                        },
+                                        "DataField::Vendor_Location": {
+                                            "width": "400px"
+                                        },
+                                        "DataField::Order_amount_OR_Split_order_amount": {
+                                            "width": "250px"
+                                        },
+                                        "DataField::Discount_Amount": {
+                                            "width": "175px"
+                                        },
+                                        "DataField::Discount_percentage": {
+                                            "width": "175px"
+                                        },
+                                        "DataField::Rank": {
+                                            "width": "60px"
+                                        }
                                     }
                                 },
                                 "tab1topdf/@com.sap.vocabularies.UI.v1.LineItem#ATTACHMENTSINTERNALTOPANFORAPPROVERS": {

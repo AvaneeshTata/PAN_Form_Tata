@@ -998,7 +998,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 						// }
 
 					}
-					var frag4 = this.base.getView().getContent()[0]
+					// var frag4 = this.base.getView().getContent()[0]
 				// 	function resize(id) { 
 				// 	let subCol = sap.ui.getCore().byId(id).mAggregations.content.getContent().mAggregations.columns;
 				// subCol.forEach(col =>{
@@ -1086,36 +1086,40 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 					// resize("__block2");
 					// // frag4.attachSectionChange(function () {
 					// 	 
-						
-						function tableresize(section){
-						// if(sap.ui.getCore().byId(`${section}`).mAggregations._grid.mAggregations.content[0].getTitle()=="Vendor Details"){
-							// oBusyDialog.open();
-						var columns = sap.ui.getCore().byId(`${section}`).mAggregations._grid.mAggregations.content[0].getContent().getContent().getColumns();
-						if (columns != undefined)
-							columns.forEach(col => {
-								var colName = col.mProperties.dataProperty;
-								var colHeader = col.getHeader();
-								var mLength = colHeader.length;
-								var valuevendor = sap.ui.getCore().byId(`${section}`).mAggregations._grid.mAggregations.content[0].getContent().getContent().mAggregations._content.mBindingInfos.rows.binding.oCache.getValue();
-								const maxLength = Math.max(...valuevendor.map(item => (item[colName]?.length ?? 8)));
-								if (maxLength > mLength)
-									mLength = maxLength;
-									// if(mLength>50){
-									// 	mLength=50;
-									// }
-								const width = (mLength+2) * 8 + 20 + "px";
+				//********************************************************** */		
+					// 	function tableresize(section){
+					// 	// if(sap.ui.getCore().byId(`${section}`).mAggregations._grid.mAggregations.content[0].getTitle()=="Vendor Details"){
+					// 		// oBusyDialog.open();
+					// 	var columns = sap.ui.getCore().byId(`${section}`).mAggregations._grid.mAggregations.content[0].getContent().getContent().getColumns();
+					// 	if (columns != undefined)
+					// 		columns.forEach(col => {
+					// 			var colName = col.mProperties.dataProperty;
+					// 			var colHeader = col.getHeader();
+					// 			var mLength = colHeader.length;
+					// 			var valuevendor = sap.ui.getCore().byId(`${section}`).mAggregations._grid.mAggregations.content[0].getContent().getContent().mAggregations._content.mBindingInfos.rows.binding.oCache.getValue();
+					// 			const maxLength = Math.max(...valuevendor.map(item => (item[colName]?.length ?? 8)));
+					// 			if (maxLength > mLength)
+					// 				mLength = maxLength;
+					// 				// if(mLength>50){
+					// 				// 	mLength=50;
+					// 				// }
+					// 			const width = (mLength+2) * 8 + 20 + "px";
 
-								col.setWidth(width)
-							});
-							// oBusyDialog.close();
-						// }
-					}debugger
-					tableresize("panappbeta::tab1ObjectPage--fe::FacetSubSection::VendorData");
-					// let loop = sap.ui.getCore().byId("panappbeta::tab1ObjectPage--fe::FacetSubSection::VendorData").mAggregations._grid.mAggregations.content[0].getContent().getContent().mAggregations._content.getRows().length;
-					// for(let i =0 ; i<loop; i++){
+					// 			col.setWidth(width)
+					// 		});
+					// 		// oBusyDialog.close();
+					// 	// }
+					// }debugger
+					// tableresize("panappbeta::tab1ObjectPage--fe::FacetSubSection::VendorData");
+					//************************************************************************************** */
+					let loop = sap.ui.getCore().byId("panappbeta::tab1ObjectPage--fe::FacetSubSection::VendorData").mAggregations._grid.mAggregations.content[0].getContent().getContent().mAggregations._content.getRows().length;
+					for(let i =0 ; i<loop; i++){
+						sap.ui.getCore().byId("panappbeta::tab1ObjectPage--fe::FacetSubSection::VendorData").mAggregations._grid.mAggregations.content[0].getContent().getContent().mAggregations._content.getRows()[i].getCells()[1].addStyleClass("css1");
+						sap.ui.getCore().byId("panappbeta::tab1ObjectPage--fe::FacetSubSection::VendorData").mAggregations._grid.mAggregations.content[0].getContent().getContent().mAggregations._content.getRows()[i].getCells()[5].addStyleClass("css1");
 					// 	let str = "panappbeta::tab1ObjectPage--fe::table::tab1tovendor_data::LineItem::VendorData-innerTable-rows-row"+i.toString()+"-col4"+" .sapUiTableCellInner";
 					// 	sap.ui.getCore().byId(str);
-					// }
+					}
+					// sap.ui.getCore().byId("panapproval::PAN_Details_APRObjectPage--fe::table::tab1tovendor_data::LineItem::VendorData").mAggregations._content.getRows()[0].getCells()[9].addStyleClass("css1");
 
 							
 
@@ -1234,6 +1238,23 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 							value1: panNumber
 						})
 					);
+					// sap.ui.getCore().byId('panappbeta::tab1ObjectPage--__popover0-messagePopover-popover').attachAfterOpen(function(oEvent){
+					// 	debugger
+					// });
+
+					// var oMessageManager = sap.ui.GetCore().getMessageManager();
+					// var oMessageProcessor = sap.ui.core.message.ControlMessageProcessor();
+
+					// oMessageManager.registerMessageProcessor(oMessageProcessor);
+
+					// oMessageManager.addMessages(
+					// 	new sap.ui.core.message.Message({
+					// 		message: "Test message for field",
+					// 		type: sap.ui.core.MessageType.Error,
+					// 		target: "panappbeta::tab1ObjectPage--fe::FormContainer::GeneralDetails::FormElement::DataField::Subject_of_ProposalOROrder::Field-edit/value",
+					// 		processor: oMessageProcessor
+					// 	})
+					// )
 				}
 			}
 		}

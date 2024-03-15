@@ -103,7 +103,7 @@ total_levels_of_approval : String(2);
 Current_level_of_approval : String(2);
 Sap_workitem_id:String;
 
-Comments : LargeString;
+Comments : LargeString @mandatory;
 submitted_by :String;
 submitted_date :String;
    tab1totab2 : Composition of many PAN_WEB_EVENT on tab1totab2.tab2totab1 = $self;
