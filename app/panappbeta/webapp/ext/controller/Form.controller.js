@@ -987,6 +987,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 							that.getView().getContent()[0].setShowEditHeaderButton(true);
 							that.getView().getContent()[0].getHeaderTitle().mAggregations._actionsToolbar.getContent()[4].setEnabled(true);
 							that.getView().getContent()[0].getHeaderTitle().mAggregations._actionsToolbar.getContent()[4].setVisible(true);
+						
 
 
 						}
@@ -1114,6 +1115,8 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 					//************************************************************************************** */
 					let loop = sap.ui.getCore().byId("panappbeta::tab1ObjectPage--fe::FacetSubSection::VendorData").mAggregations._grid.mAggregations.content[0].getContent().getContent().mAggregations._content.getRows().length;
 					for(let i =0 ; i<loop; i++){
+						sap.ui.getCore().byId("panappbeta::tab1ObjectPage--fe::FacetSubSection::VendorData").mAggregations._grid.mAggregations.content[0].getContent().getContent().mAggregations._content.getRows()[i].getCells()[1].removeStyleClass('css1');
+						sap.ui.getCore().byId("panappbeta::tab1ObjectPage--fe::FacetSubSection::VendorData").mAggregations._grid.mAggregations.content[0].getContent().getContent().mAggregations._content.getRows()[i].getCells()[5].removeStyleClass("css1");
 						sap.ui.getCore().byId("panappbeta::tab1ObjectPage--fe::FacetSubSection::VendorData").mAggregations._grid.mAggregations.content[0].getContent().getContent().mAggregations._content.getRows()[i].getCells()[1].addStyleClass("css1");
 						sap.ui.getCore().byId("panappbeta::tab1ObjectPage--fe::FacetSubSection::VendorData").mAggregations._grid.mAggregations.content[0].getContent().getContent().mAggregations._content.getRows()[i].getCells()[5].addStyleClass("css1");
 					// 	let str = "panappbeta::tab1ObjectPage--fe::table::tab1tovendor_data::LineItem::VendorData-innerTable-rows-row"+i.toString()+"-col4"+" .sapUiTableCellInner";

@@ -141,7 +141,7 @@
         <Property Name="Destination_State_BKTShipDASHto_LocationBKT" Type="Edm.String"/>
         <Property Name="Vendor_GST_Number" Type="Edm.String"/>
         <Property Name="Vendor_CE_Score" Type="Edm.String"/>
-        <Property Name="Vendor_CE_Date" Type="Edm.Date"/>
+        <Property Name="Vendor_CE_Date" Type="Edm.String"/>
         <Property Name="Vendor_PE_Score" Type="Edm.String"/>
         <Property Name="Vendor_PE_Date" Type="Edm.String"/>
         <Property Name="Vendor_Contact_PersonDASH1" Type="Edm.String"/>

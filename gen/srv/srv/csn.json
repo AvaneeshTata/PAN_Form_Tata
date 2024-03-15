@@ -430,7 +430,7 @@
           "type": "cds.String"
         },
         "Vendor_CE_Date": {
-          "type": "cds.Date"
+          "type": "cds.String"
         },
         "Vendor_PE_Score": {
           "type": "cds.String"
@@ -2679,7 +2679,7 @@
           "type": "cds.String"
         },
         "Vendor_CE_Date": {
-          "type": "cds.Date"
+          "type": "cds.String"
         },
         "Vendor_PE_Score": {
           "type": "cds.String"
@@ -4479,7 +4479,7 @@
           "type": "cds.String"
         },
         "Vendor_CE_Date": {
-          "type": "cds.Date"
+          "type": "cds.String"
         },
         "Vendor_PE_Score": {
           "type": "cds.String"
