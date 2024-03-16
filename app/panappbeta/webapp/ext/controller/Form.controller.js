@@ -490,7 +490,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 						if(result.length){
 							dataa= result;
 						}else{debugger
-							dataa = result.value[0].tab1toWORKFLOW_HISTORY;
+							dataa = result.value[0]?.tab1toWORKFLOW_HISTORY;
 						}
 						var data = [];
 						dataa.forEach(element => {

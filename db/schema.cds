@@ -169,7 +169,7 @@ Supplier_Origin_State : String;
 Destination_State_BKTShipDASHto_LocationBKT : String; 
 Vendor_GST_Number : String; 
 Vendor_CE_Score : String; 
-Vendor_CE_Date : String; 
+Vendor_CE_Date : Date; 
 Vendor_PE_Score : String; 
 Vendor_PE_Date : String; 
 Vendor_Contact_PersonDASH1 : String; 
