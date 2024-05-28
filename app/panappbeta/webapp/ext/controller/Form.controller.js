@@ -210,7 +210,8 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 								if(result.value == "error"){
 									window.alert("Sorry.. Please try again after sometime")
 								}else{
-								// dialog.exit();
+								// dialog.exit();`1	 
+								// window.location.reload();
 								MessageToast.show("PANForm Submitted for Approval");
 								var href_For_Product_display = await sap.ushell.Container.getServiceAsync("Navigation");
 
@@ -378,7 +379,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 			},
 
 			routing: {
-				onBeforeBinding: async function (oBindingContext) {
+				onBeforeBinding: async function (oBindingContext) {debugger
 					try{ 
 					oBusyDialog.open();
 
@@ -1135,7 +1136,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 					}
 
 				},
-				onAfterBinding: function (oBindingContext) {	
+				onAfterBinding: function (oBindingContext) {	debugger
 					 
 					var path_1 = this.getView().getContent()[0].attachSectionChange(
 						function(oEvent){
@@ -1233,6 +1234,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 					var res = pieces[1];
 					var res1 = res.split("'");
 					const panNumber = res1[1];
+					debugger
 					var path = this.base.getView().getContent()[0].getSections()[2].mAggregations._grid.getContent()[0].mAggregations._grid.getContent()[0].getContent().getItems()[1].mBindingInfos.items.binding;
 					path.filter(
 						new sap.ui.model.Filter({

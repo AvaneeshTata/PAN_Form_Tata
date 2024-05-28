@@ -119,12 +119,12 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 					//    let result1 = oContext1.getObject();
 					result1 = await Fimport(oModel,sFunctionName,data);
 					}
-					   if ((result1==='Pending for Approval')||(result1==='Approved')||(result1==='Rejected')){
+					//    if ((result1==='Pending for Approval')||(result1==='Approved')||(result1==='Rejected')){
 						that.getView().getContent()[0].setShowEditHeaderButton(false);
 						that.getView().getContent()[0].getHeaderTitle().mAggregations._actionsToolbar.getContent()[1].setEnabled(false);
 						that.getView().getContent()[0].getHeaderTitle().mAggregations._actionsToolbar.getContent()[1].setVisible(false);
-						that.getView().getContent()[0].getHeaderTitle().mAggregations._actionsToolbar.getContent()[1].destroy();
-					   }
+						// that.getView().getContent()[0].getHeaderTitle().mAggregations._actionsToolbar.getContent()[1].destroy();
+					//    }
 					//    var frag4 = this.base.getView().getContent()[0]
 					// frag4.attachSectionChange(function(){ 
 					// 	var section = this.getScrollingSectionId()
