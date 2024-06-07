@@ -211,7 +211,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 									window.alert("Sorry.. Please try again after sometime")
 								}else{
 								// dialog.exit();`1	 
-								window.location.reload();
+								// window.location.reload();
 								MessageToast.show("PANForm Submitted for Approval");
 								var href_For_Product_display = await sap.ushell.Container.getServiceAsync("Navigation");
 
@@ -1235,14 +1235,14 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 					var res1 = res.split("'");
 					const panNumber = res1[1];
 					debugger
-					// var path = this.base.getView().getContent()[0].getSections()[2].mAggregations._grid.getContent()[0].mAggregations._grid.getContent()[0].getContent().getItems()[1].mBindingInfos.items.binding;
-					// path.filter(
-					// 	new sap.ui.model.Filter({
-					// 		path: "PAN_Number",
-					// 		operator: sap.ui.model.FilterOperator.EQ,
-					// 		value1: panNumber
-					// 	})
-					// );
+					var path = this.base.getView().getContent()[0].getSections()[2].mAggregations._grid.getContent()[0].mAggregations._grid.getContent()[0].getContent().getItems()[1].mBindingInfos.items.binding;
+					path.filter(
+						new sap.ui.model.Filter({
+							path: "PAN_Number",
+							operator: sap.ui.model.FilterOperator.EQ,
+							value1: panNumber
+						})
+					);
 					// sap.ui.getCore().byId('panappbeta::tab1ObjectPage--__popover0-messagePopover-popover').attachAfterOpen(function(oEvent){
 					// 	debugger
 					// });

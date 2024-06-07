@@ -128,10 +128,9 @@ this.on('updatee', async (req) => {
 
         // Extracting the first 3 characters
         var firstThreeChars = originalString.substring(0, 3);
-    let url = "/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant=%27"+resp2['Plant_Code']+"%27&docType=%27"+resp2["Order_Type_OR_Document_tyFuuidpe"]+"%27&amount=%27"+resp2["Final_proposed_Value"]+"%27&purGroup=%27"+firstThreeChars+"%27";
-                // let url = "/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant=%27 %27&plantCode=%27"+resp2["Plant_Code"]+"%27&sbg=%27"+resp2["SBG"]+"%27&sub=%27"+resp2["SBU"]+"%27";
-            url = encodeURIComponent(url);            
-                var response = await AribaSrv.get(url);
+        let url = "/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant=%27"+resp2['Plant_Code']+"%27&docType=%27"+resp2["Order_Type_OR_Document_tyFuuidpe"]+"%27&amount=%27"+resp2["Final_proposed_Value"]+"%27&purGroup=%27"+firstThreeChars+"%27&companycode=%27"+resp2["Asset_Type"]+"%27";
+        // let url = "/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant=%27 %27&plantCode=%27"+resp2["Plant_Code"]+"%27&sbg=%27"+resp2["SBG"]+"%27&sub=%27"+resp2["SBU"]+"%27";
+        let response = await AribaSrv.get(url);
                 console.log(response);
                 for(j=0;j<response.length;j++){
                     let a=[];
@@ -326,7 +325,7 @@ this.on('InsertData',async (req)=>{
             // Extracting the first 3 characters
             var firstThreeChars = originalString.substring(0, 3);
                 // let url = "/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant='"+resp2['Plant_Code']+"'&docType='"+resp2["Order_Type_OR_Document_tyFuuidpe"]+"'&amount='"+resp2["Final_proposed_Value"]+"'&purGroup='"+resp2["BUORPurchasing_Group"]+"'";
-                let url = "/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant=%27"+resp2['Plant_Code']+"%27&docType=%27"+resp2["Order_Type_OR_Document_tyFuuidpe"]+"%27&amount=%27"+resp2["Final_proposed_Value"]+"%27&purGroup=%27"+firstThreeChars+"%27";
+                let url = "/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant=%27"+resp2['Plant_Code']+"%27&docType=%27"+resp2["Order_Type_OR_Document_tyFuuidpe"]+"%27&amount=%27"+resp2["Final_proposed_Value"]+"%27&purGroup=%27"+firstThreeChars+"%27&companycode=%27"+resp2["Asset_Type"]+"%27";
                 // let url = "/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant=%27 %27&plantCode=%27"+resp2["Plant_Code"]+"%27&sbg=%27"+resp2["SBG"]+"%27&sub=%27"+resp2["SBU"]+"%27";
                 let response = await AribaSrv.get(url);
                 console.log(response);
@@ -560,6 +559,7 @@ this.on('InsertData',async (req)=>{
             "panToAttachNavi" :main_data,
             "json":JSON.stringify(data_m)
         }
+        console.log(body);
         try{
         
         response = await AribaSrv.post('/opu/odata/sap/ZARB_BTP_ATTACHMENT_SRV/panHeaderSet',body);
