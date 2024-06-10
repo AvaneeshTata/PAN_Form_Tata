@@ -23,7 +23,7 @@ this.before('READ',tab1,async (req)=>{
                 panformDest = dest;
             }
         });
-        // panformDest = vcap.destination[0];
+        panformDest = vcap.destination[0];
         console.log(panformDest);
 
 
@@ -127,10 +127,20 @@ this.on('updatee', async (req) => {
         var originalString = resp2["BUORPurchasing_Group"];
 
         // Extracting the first 3 characters
-        var firstThreeChars = originalString.substring(0, 3);
-        let url = "/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant=%27"+resp2['Plant_Code']+"%27&docType=%27"+resp2["Order_Type_OR_Document_tyFuuidpe"]+"%27&amount=%27"+resp2["Final_proposed_Value"]+"%27&purGroup=%27"+firstThreeChars+"%27&companycode=%27"+resp2["Asset_Type"]+"%27";
-        // let url = "/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant=%27 %27&plantCode=%27"+resp2["Plant_Code"]+"%27&sbg=%27"+resp2["SBG"]+"%27&sub=%27"+resp2["SBU"]+"%27";
-        let response = await AribaSrv.get(url);
+        let stringWithoutDecimals = resp2["Final_proposed_Value"].replace(/\,/g, '');
+            let number = parseFloat(stringWithoutDecimals);
+
+    // Round down to the nearest integer
+            let intValue = Math.floor(number);
+            let intValueAsString = intValue.toString();
+
+            var originalString = resp2["BUORPurchasing_Group"];
+
+            // Extracting the first 3 characters
+            var firstThreeChars = originalString.substring(0, 3);
+                // let url = "/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant='"+resp2['Plant_Code']+"'&docType='"+resp2["Order_Type_OR_Document_tyFuuidpe"]+"'&amount='"+resp2["Final_proposed_Value"]+"'&purGroup='"+resp2["BUORPurchasing_Group"]+"'";
+                let url = "/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant=%27"+resp2['Plant_Code']+"%27&docType=%27"+resp2["Order_Type_OR_Document_tyFuuidpe"]+"%27&amount=%27"+intValueAsString+"%27&purGroup=%27"+firstThreeChars+"%27&companycode=%27"+resp2["Asset_Type"]+"%27";// let url = "/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant=%27 %27&plantCode=%27"+resp2["Plant_Code"]+"%27&sbg=%27"+resp2["SBG"]+"%27&sub=%27"+resp2["SBU"]+"%27";
+            let response = await AribaSrv.get(url);
                 console.log(response);
                 for(j=0;j<response.length;j++){
                     let a=[];
@@ -319,13 +329,20 @@ this.on('InsertData',async (req)=>{
                 let del = await DELETE.from(WORKFLOW_HISTORY).where`PAN_Number=${resp1[i].PAN_Number}`;
                 console.log(del);
             }
+            console.log(resp2["Final_proposed_Value"]);
+            let stringWithoutDecimals = resp2["Final_proposed_Value"].replace(/\,/g, '');
+            let number = parseFloat(stringWithoutDecimals);
+
+    // Round down to the nearest integer
+            let intValue = Math.floor(number);
+            let intValueAsString = intValue.toString();
 
             var originalString = resp2["BUORPurchasing_Group"];
 
             // Extracting the first 3 characters
             var firstThreeChars = originalString.substring(0, 3);
                 // let url = "/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant='"+resp2['Plant_Code']+"'&docType='"+resp2["Order_Type_OR_Document_tyFuuidpe"]+"'&amount='"+resp2["Final_proposed_Value"]+"'&purGroup='"+resp2["BUORPurchasing_Group"]+"'";
-                let url = "/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant=%27"+resp2['Plant_Code']+"%27&docType=%27"+resp2["Order_Type_OR_Document_tyFuuidpe"]+"%27&amount=%27"+resp2["Final_proposed_Value"]+"%27&purGroup=%27"+firstThreeChars+"%27&companycode=%27"+resp2["Asset_Type"]+"%27";
+                let url = "/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant=%27"+resp2['Plant_Code']+"%27&docType=%27"+resp2["Order_Type_OR_Document_tyFuuidpe"]+"%27&amount=%27"+intValueAsString+"%27&purGroup=%27"+firstThreeChars+"%27&companycode=%27"+resp2["Asset_Type"]+"%27";
                 // let url = "/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant=%27 %27&plantCode=%27"+resp2["Plant_Code"]+"%27&sbg=%27"+resp2["SBG"]+"%27&sub=%27"+resp2["SBU"]+"%27";
                 let response = await AribaSrv.get(url);
                 console.log(response);
