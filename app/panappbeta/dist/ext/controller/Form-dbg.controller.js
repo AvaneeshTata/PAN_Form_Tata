@@ -164,7 +164,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 								var res1 = res.split("'");
 								let worflowdata =await Fimport(oModel, "getsync", res1[1], "data");
 								worflowdata = JSON.parse(worflowdata);
-								debugger
+								 
 								if(worflowdata.length!=0){
 
 								let comp_url = "https://btp-dev-0or0hi20.launchpad.cfapps.eu10.hana.ondemand.com/site?siteId=94a17d9a-05b5-425d-b51d-2cd74a2c2762#pan_approval-display?sap-ui-app-id-hint=saas_approuter_panapproval&/PAN_Details_APR('" + res1[1] + "')";
@@ -181,7 +181,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 
 								// await oFunction.execute();
 								// let oContext = oFunction.getBoundContext();
-								debugger
+								 
 								var result;
 								// let result = oContext.getObject();
 								try{
@@ -198,10 +198,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 								let oContext = oFunction.getBoundContext();
 
 								var result = oContext.getObject();
-								 }catch(error){debugger
-									console.log(error);
-									result = error;
-								}
+								 
 								// let value = JSON.parse(result);
 								// console.log(value);
 								dialog.close();
@@ -231,6 +228,18 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 								// };
 
 								console.log(result);
+							}catch(error){ 
+								console.log(error);
+								window.alert("Please check after few minutes...Try again after sometime in case of PAN is Not Submitted");
+								dialog.close();
+								dialog.destroy();
+								oBusyDialog.close();
+								var href_For_Product_display = await sap.ushell.Container.getServiceAsync("Navigation");
+
+								href_For_Product_display.navigate({
+									target: { semanticObject: "obj1", action: "display" }
+								});
+							}
 
 								}else{
 									if (!this.oErrorMessageDialog) {
@@ -283,7 +292,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 								oBusyDialog.close();
 								
 								  
-							// 	debugger
+							// 	 
 							// 	var backlen = window.history.length;  
 							// // 	// window.history.go(-backlen);
 							// // 	if(backlen>2){
@@ -318,10 +327,21 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 				onBeforeEdit:async function(oEvent){
 					this.getView().getContent()[0].getSections()[3].setVisible(true);
 					this.getView().getContent()[0].getSections()[2].mAggregations._grid.getContent()[0].mAggregations._grid.getContent()[0].getContent().getItems()[1].getDependents()[1].mAggregations.headerToolbar.setVisible(true);
+					// let data = {
+					// 	status:"Editing"
+					// }
+					// let url = e.context.getModel().getServiceUrl()+e.context.getPath().substring(1);
+					// await $.ajax({
+					// 	url:url,
+					// 	type:PATCH,
+					// 	data:JSON.stringify(data)
+
+					// });
+					
 
 				},
 				onBeforeSave: async function (oEvent) {
-					 debugger
+					  
 					// return this._createDialog("Do you want to submit this really nice... object ?");
 					// let sFunctionName = "draft";
 					// let oFunction = oEvent.context.getModel();
@@ -379,7 +399,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 			},
 
 			routing: {
-				onBeforeBinding: async function (oBindingContext) {debugger
+				onBeforeBinding: async function (oBindingContext) { 
 					try{ 
 					oBusyDialog.open();
 
@@ -484,13 +504,13 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 					});
 
 					// Define a function to process the result data
-					function processData(result) {debugger
+					function processData(result) { 
 						 
 
 						var dataa ;
 						if(result.length){
 							dataa= result;
-						}else{debugger
+						}else{ 
 							dataa = result.value[0]?.tab1toWORKFLOW_HISTORY;
 						}
 						var data = [];
@@ -510,7 +530,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 								"By User": element.Approved_by
 								
 							});
-						});debugger
+						}); 
 						that.base.getView().getContent()[0].getSections()[4].setBusy(true);
 						let oSection = that.base.getView().getContent()[0].getSections()[4];
 
@@ -614,7 +634,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 								 
 								let resVal = await Fimport(oFunction, functionname, panNumber, "ID")
 								resVal = JSON.parse(resVal);
-								debugger
+								 
 								this.getParent().getParent().getParent().getParent().getParent().destroySubSections();
 								processData(resVal);
 								
@@ -957,17 +977,18 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 						})
 						that.base.getView().getContent()[0].getSections()[4].setBusy(false);
 					}
-					
+					debugger
 					let result1 = await Fimport(oModel, sFunctionName, data, "ID");
+					// result1 = JSON.parse(result1);
 					status = result1;
-					// if( (result1 === 'Approved') || (result1 === 'Rejected')){debugger
+					// if( (result1 === 'Approved') || (result1 === 'Rejected')){ 
 					// 	sap.ui.getCore().byId("__button24").setVisible(false);
-					// }else{debugger
+					// }else{ 
 					// 	sap.ui.getCore().byId("__button24").setVisible(true);
 					// }
 
-					 
-					if ((result1 === 'Pending for Approval') || (result1 === 'Approved') || (result1 === 'Rejected')) {
+					debugger
+					if ((result1 === 'Approved') || (result1 === 'Rejected') || (result1 === 'Pending for Approval')) {
 						that.getView().getContent()[0].getSections()[3].setVisible(false);
 						// this.getView().getContent()[0].getSections()[2].mAggregations._grid.getContent()[0].mAggregations._grid.getContent()[0].getContent().getItems()[1].getDependents()[1].mAggregations.headerToolbar.setVisible(false);
 
@@ -1111,7 +1132,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 					// 		});
 					// 		// oBusyDialog.close();
 					// 	// }
-					// }debugger
+					// } 
 					// tableresize("panappbeta::tab1ObjectPage--fe::FacetSubSection::VendorData");
 					//************************************************************************************** */
 					let loop = sap.ui.getCore().byId("panappbeta::tab1ObjectPage--fe::FacetSubSection::VendorData").mAggregations._grid.mAggregations.content[0].getContent().getContent().mAggregations._content.getRows().length;
@@ -1136,7 +1157,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 					}
 
 				},
-				onAfterBinding: function (oBindingContext) {	debugger
+				onAfterBinding: function (oBindingContext) {	 
 					 
 					var path_1 = this.getView().getContent()[0].attachSectionChange(
 						function(oEvent){
@@ -1234,7 +1255,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 					var res = pieces[1];
 					var res1 = res.split("'");
 					const panNumber = res1[1];
-					debugger
+					 
 					var path = this.base.getView().getContent()[0].getSections()[2].mAggregations._grid.getContent()[0].mAggregations._grid.getContent()[0].getContent().getItems()[1].mBindingInfos.items.binding;
 					path.filter(
 						new sap.ui.model.Filter({
@@ -1244,7 +1265,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 						})
 					);
 					// sap.ui.getCore().byId('panappbeta::tab1ObjectPage--__popover0-messagePopover-popover').attachAfterOpen(function(oEvent){
-					// 	debugger
+					// 	 
 					// });
 
 					// var oMessageManager = sap.ui.GetCore().getMessageManager();

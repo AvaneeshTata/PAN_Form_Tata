@@ -861,10 +861,15 @@ this.on('InsertData',async (req)=>{
             console.log(req.data.ID);
             req.data.ID = JSON.parse(req.data.ID);
             let data = await SELECT.from(tab1).where`PAN_Number=${req.data.ID}`;
+            // let result = await SELECT.from(WORKFLOW_HISTORY).where`PAN_Number=${req.data.ID} and level = '1'`;
             // var callback = request.query.callback;
             // var jsonp = callback + '(' + data + ');';
             // res.send(jsonp);
             if (data){
+                // let res = {
+                //     status : data[0].status,
+                //     app : result[0].result
+                // }
             return data[0].status;  
             }else{
                 return data;
@@ -1096,6 +1101,13 @@ this.on('InsertData',async (req)=>{
         console.log('content-type: ', req.headers['content-type'])
     });
     this.on("flag",async (req) => {
+        // let pan_data = await SELECT.from(tab1).where `PAN_Number=${req.data.ID}`;
+        // if(pan_data[0].status == 'Editing'){
+        //     let updat = await UPDATE(tab1,req.data.ID).with({
+        //         "status":"Pending For Approval"
+        //     });
+        //     console.log(updat);
+        // }
         if(req.data.case == 'discard')
         {
             // let del = await DELETE.from(Files).where `size=${1}`;
