@@ -532,6 +532,10 @@
               <PropertyValue Property="Label" String="BU/Purchasing Group"/>
             </Record>
             <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="Project_Description"/>
+              <PropertyValue Property="Label" String="PAN Description"/>
+            </Record>
+            <Record Type="UI.DataField">
               <PropertyValue Property="Value" Path="Plant_Code"/>
               <PropertyValue Property="Label" String="Plant Code"/>
             </Record>
@@ -1302,7 +1306,7 @@
         <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
       </Annotations>
       <Annotations Target="CatalogService.vendor_data/Original_quote">
-        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/ReadOnly"/>
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
       </Annotations>
       <Annotations Target="CatalogService.vendor_data/Final_Quote">
         <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/ReadOnly"/>

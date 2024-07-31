@@ -25,6 +25,11 @@ annotate service.tab1 with @(
             Label : 'BU/Purchasing Group',
         },{
             $Type : 'UI.DataField',
+            Value : Project_Description,
+            Label : 'PAN Description',
+        },
+        {
+            $Type : 'UI.DataField',
             Value : Plant_Code,
             Label : 'Plant Code',
         },
@@ -773,7 +778,7 @@ annotate service.vendor_data with {
     Proposed_Vendor_Code @Common.FieldControl : #ReadOnly
 };
 annotate service.vendor_data with {
-    Original_quote @Common.FieldControl : #ReadOnly
+    Original_quote @Common.FieldControl : #Mandatory
 };
 annotate service.vendor_data with {
     Final_Quote @Common.FieldControl : #ReadOnly

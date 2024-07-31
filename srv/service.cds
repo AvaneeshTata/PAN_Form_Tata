@@ -45,7 +45,7 @@ service PanApproval {
  function InsertData(ID:String) returns String;
  function finalApprove(data:String) returns String;
  function getData(ID:String) returns String;
- function switch_control(ID:String) returns String;
+ function switch_control() returns String;
  function getuser(ID:String) returns String;
  function Reject(data:String) returns String;
  function getcomments(ID:String) returns String;

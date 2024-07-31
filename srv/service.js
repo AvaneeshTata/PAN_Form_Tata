@@ -124,22 +124,22 @@ this.on('updatee', async (req) => {
     let resp = await SELECT.from(tab1).where `PAN_Number=${value}`;
     let resp2 = resp[0];
     if((resp2['status']!='Approved')&&(resp2['status']!='Rejected')){
-        var originalString = resp2["BUORPurchasing_Group"];
+        // var originalString = resp2["BUORPurchasing_Group"];
 
         // Extracting the first 3 characters
-        let stringWithoutDecimals = resp2["Final_proposed_Value"].replace(/\,/g, '');
-            let number = parseFloat(stringWithoutDecimals);
+    //     let stringWithoutDecimals = resp2["Final_proposed_Value"].replace(/\,/g, '');
+    //         let number = parseFloat(stringWithoutDecimals);
 
-    // Round down to the nearest integer
-            let intValue = Math.floor(number);
-            let intValueAsString = intValue.toString();
+    // // Round down to the nearest integer
+    //         let intValue = Math.floor(number);
+    //         let intValueAsString = intValue.toString();
 
             var originalString = resp2["BUORPurchasing_Group"];
 
             // Extracting the first 3 characters
             var firstThreeChars = originalString.substring(0, 3);
                 // let url = "/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant='"+resp2['Plant_Code']+"'&docType='"+resp2["Order_Type_OR_Document_tyFuuidpe"]+"'&amount='"+resp2["Final_proposed_Value"]+"'&purGroup='"+resp2["BUORPurchasing_Group"]+"'";
-                let url = "/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant=%27"+resp2['Plant_Code']+"%27&docType=%27"+resp2["Order_Type_OR_Document_tyFuuidpe"]+"%27&amount=%27"+intValueAsString+"%27&purGroup=%27"+firstThreeChars+"%27&companycode=%27"+resp2["Asset_Type"]+"%27";// let url = "/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant=%27 %27&plantCode=%27"+resp2["Plant_Code"]+"%27&sbg=%27"+resp2["SBG"]+"%27&sub=%27"+resp2["SBU"]+"%27";
+                let url = "/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant=%27"+resp2['Plant_Code']+"%27&docType=%27"+resp2["Order_Type_OR_Document_tyFuuidpe"]+"%27&amount=%27"+resp2["Final_proposed_Value"]+"%27&purGroup=%27"+firstThreeChars+"%27&companycode=%27"+resp2["Asset_Type"]+"%27";// let url = "/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant=%27 %27&plantCode=%27"+resp2["Plant_Code"]+"%27&sbg=%27"+resp2["SBG"]+"%27&sub=%27"+resp2["SBU"]+"%27";
             let response = await AribaSrv.get(url);
                 console.log(response);
                 for(j=0;j<response.length;j++){
@@ -329,21 +329,22 @@ this.on('InsertData',async (req)=>{
                 let del = await DELETE.from(WORKFLOW_HISTORY).where`PAN_Number=${resp1[i].PAN_Number}`;
                 console.log(del);
             }
-            console.log(resp2["Final_proposed_Value"]);
-            let stringWithoutDecimals = resp2["Final_proposed_Value"].replace(/\,/g, '');
-            let number = parseFloat(stringWithoutDecimals);
+    //         console.log(resp2["Final_proposed_Value"]);
+    //         let stringWithoutDecimals = resp2["Final_proposed_Value"].replace(/\,/g, '');
+    //         let number = parseFloat(stringWithoutDecimals);
 
-    // Round down to the nearest integer
-            let intValue = Math.floor(number);
-            let intValueAsString = intValue.toString();
+    // // Round down to the nearest integer
+    //         let intValue = Math.floor(number);
+    //         let intValueAsString = intValue.toString();
 
             var originalString = resp2["BUORPurchasing_Group"];
 
             // Extracting the first 3 characters
             var firstThreeChars = originalString.substring(0, 3);
                 // let url = "/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant='"+resp2['Plant_Code']+"'&docType='"+resp2["Order_Type_OR_Document_tyFuuidpe"]+"'&amount='"+resp2["Final_proposed_Value"]+"'&purGroup='"+resp2["BUORPurchasing_Group"]+"'";
-                let url = "/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant=%27"+resp2['Plant_Code']+"%27&docType=%27"+resp2["Order_Type_OR_Document_tyFuuidpe"]+"%27&amount=%27"+intValueAsString+"%27&purGroup=%27"+firstThreeChars+"%27&companycode=%27"+resp2["Asset_Type"]+"%27";
+                let url = "/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant=%27"+resp2['Plant_Code']+"%27&docType=%27"+resp2["Order_Type_OR_Document_tyFuuidpe"]+"%27&amount=%27"+resp2["Final_proposed_Value"]+"%27&purGroup=%27"+firstThreeChars+"%27&companycode=%27"+resp2["Asset_Type"]+"%27";
                 // let url = "/opu/odata/sap/ZARB_BTP_APPROVAL_SRV/fimpAprovals?plant=%27 %27&plantCode=%27"+resp2["Plant_Code"]+"%27&sbg=%27"+resp2["SBG"]+"%27&sub=%27"+resp2["SBU"]+"%27";
+               console.log(url);
                 let response = await AribaSrv.get(url);
                 console.log(response);
                 for(j=0;j<response.length;j++){
@@ -532,6 +533,13 @@ this.on('InsertData',async (req)=>{
         }
         let data_m = await SELECT.from(tab1).where`PAN_Number=${data.PAN_Number}`;
         data_m = data_m[0];
+    //     let stringWithoutDecimals = data_m["Final_proposed_Value"].replace(/\,/g, '');
+    //         let number = parseFloat(stringWithoutDecimals);
+
+    // // Round down to the nearest integer
+    //         let intValue = Math.floor(number);
+    //         let intValueAsString = intValue.toString();
+        // data_m.Final_proposed_Value = intValueAsString;
         data_m.created_by=decoded['user_name'];
         data_m.status='Pending for Approval';
         data_m.submitted_date=currentDate1;
@@ -581,7 +589,7 @@ this.on('InsertData',async (req)=>{
         
         response = await AribaSrv.post('/opu/odata/sap/ZARB_BTP_ATTACHMENT_SRV/panHeaderSet',body);
         console.log(response);
-        console.log("resssssssssssssssssssssssssssssssssssssssssssssssssssss");
+        // console.log("resssssssssssssssssssssssssssssssssssssssssssssssssssss");
         }catch(error){
             return "error"
         }
@@ -606,6 +614,7 @@ this.on('InsertData',async (req)=>{
             "idd":key[i].idd,
             "PAN_Number":data.PAN_Number
         })).with(up);
+        console.log(wh);
         }
     }
         // let comm = await SELECT.from(tab1).where`PAN_Number = ${data.PAN_Number}`
@@ -1108,6 +1117,37 @@ this.on('InsertData',async (req)=>{
         //     });
         //     console.log(updat);
         // }
+        let vend = await SELECT.from(vendor_data).where`PAN_Number = ${req.data.ID}`;
+        console.log(vend);
+        for(let i=0;i<vend.length;i++){
+            let finalQuoteStripped = vend[i].Final_Quote.replace(/,/g, '');
+            let originalQuoteStripped = vend[i].Original_quote.replace(/,/g, '');
+
+            let finalQuoteNum = parseFloat(finalQuoteStripped);
+            let originalQuoteNum = parseFloat(originalQuoteStripped);
+
+            // Calculate discount amount
+            let discount_amt = originalQuoteNum - finalQuoteNum;
+
+            // Calculate discount percentage
+            let discount_percentage = (discount_amt / finalQuoteNum) * 100;
+             discount_percentage = discount_percentage.toFixed(2);
+            
+            discount_amt = discount_amt.toFixed(2);
+            discount_amt = parseFloat(discount_amt);
+            discount_amt =discount_amt.toLocaleString('en-IN');
+            let original = originalQuoteNum.toLocaleString('en-IN');
+            //  discount_percentage=discount_percentage.toString()
+            let vendup=await UPDATE(vendor_data).set({
+                Original_quote:original,
+                Discount_Amount:discount_amt.toString(),
+                Discount_percentage:discount_percentage.toString()+"%"
+            }).where({
+                Proposed_Vendor_Code:vend[i].Proposed_Vendor_Code,
+                PAN_Number:vend[i].PAN_Number
+            });
+            console.log(vendup);
+        }
         if(req.data.case == 'discard')
         {
             // let del = await DELETE.from(Files).where `size=${1}`;

@@ -364,7 +364,6 @@
         <ReturnType Type="Edm.String"/>
       </Function>
       <Function Name="switch_control" IsBound="false" IsComposable="false">
-        <Parameter Name="ID" Type="Edm.String"/>
         <ReturnType Type="Edm.String"/>
       </Function>
       <Function Name="getuser" IsBound="false" IsComposable="false">

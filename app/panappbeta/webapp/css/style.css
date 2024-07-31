@@ -243,3 +243,38 @@ width: 300%;
     border-radius: 5px;
     
   }
+
+
+  #panappbeta\:\:tab1List--fe\:\:table\:\:tab1\:\:LineItem-innerTable-rows-row0-col4 .sapUiTableCellInner:hover span,
+  #panappbeta\:\:tab1List--fe\:\:table\:\:tab1\:\:LineItem-innerTable-rows-row1-col4 .sapUiTableCellInner:hover span,
+  #panappbeta\:\:tab1List--fe\:\:table\:\:tab1\:\:LineItem-innerTable-rows-row2-col4 .sapUiTableCellInner:hover span,
+  #panappbeta\:\:tab1List--fe\:\:table\:\:tab1\:\:LineItem-innerTable-rows-row3-col4 .sapUiTableCellInner:hover span,
+  #panappbeta\:\:tab1List--fe\:\:table\:\:tab1\:\:LineItem-innerTable-rows-row4-col4 .sapUiTableCellInner:hover span,
+  #panappbeta\:\:tab1List--fe\:\:table\:\:tab1\:\:LineItem-innerTable-rows-row5-col4 .sapUiTableCellInner:hover span,
+  #panappbeta\:\:tab1List--fe\:\:table\:\:tab1\:\:LineItem-innerTable-rows-row6-col4 .sapUiTableCellInner:hover span,
+  #panappbeta\:\:tab1List--fe\:\:table\:\:tab1\:\:LineItem-innerTable-rows-row7-col4 .sapUiTableCellInner:hover span,
+  #panappbeta\:\:tab1List--fe\:\:table\:\:tab1\:\:LineItem-innerTable-rows-row8-col4 .sapUiTableCellInner:hover span,
+  #panappbeta\:\:tab1List--fe\:\:table\:\:tab1\:\:LineItem-innerTable-rows-row9-col4 .sapUiTableCellInner:hover span,
+  #panappbeta\:\:tab1List--fe\:\:table\:\:tab1\:\:LineItem-innerTable-rows-row10-col4 .sapUiTableCellInner:hover span,
+  #panappbeta\:\:tab1List--fe\:\:table\:\:tab1\:\:LineItem-innerTable-rows-row11-col4 .sapUiTableCellInner:hover span,
+  #panappbeta\:\:tab1List--fe\:\:table\:\:tab1\:\:LineItem-innerTable-rows-row12-col4 .sapUiTableCellInner:hover span,
+  #panappbeta\:\:tab1List--fe\:\:table\:\:tab1\:\:LineItem-innerTable-rows-row13-col4 .sapUiTableCellInner:hover span,
+  #panappbeta\:\:tab1List--fe\:\:table\:\:tab1\:\:LineItem-innerTable-rows-row14-col4 .sapUiTableCellInner:hover span,
+  #panappbeta\:\:tab1List--fe\:\:table\:\:tab1\:\:LineItem-innerTable-rows-row15-col4 .sapUiTableCellInner:hover span,
+  #panappbeta\:\:tab1List--fe\:\:table\:\:tab1\:\:LineItem-innerTable-rows-row16-col4 .sapUiTableCellInner:hover span,
+  #panappbeta\:\:tab1List--fe\:\:table\:\:tab1\:\:LineItem-innerTable-rows-row17-col4 .sapUiTableCellInner:hover span,
+  #panappbeta\:\:tab1List--fe\:\:table\:\:tab1\:\:LineItem-innerTable-rows-row18-col4 .sapUiTableCellInner:hover span,
+  #panappbeta\:\:tab1List--fe\:\:table\:\:tab1\:\:LineItem-innerTable-rows-row19-col4 .sapUiTableCellInner:hover span,
+  #panappbeta\:\:tab1List--fe\:\:table\:\:tab1\:\:LineItem-innerTable-rows-row20-col4 .sapUiTableCellInner:hover span{
+    /* Additional CSS properties for hover effect */
+    overflow-y: scroll !important;
+    padding: 10px;
+    text-wrap: wrap;
+    max-height: 150px; 
+    width: 100%;
+    position: absolute;
+    background-color: white;
+    z-index: 99999;
+    border: 2px solid gray;
+    border-radius: 5px;
+  }

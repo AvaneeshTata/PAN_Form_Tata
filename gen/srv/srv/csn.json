@@ -1288,6 +1288,13 @@
         {
           "$Type": "UI.DataField",
           "Value": {
+            "=": "Project_Description"
+          },
+          "Label": "PAN Description"
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
             "=": "Plant_Code"
           },
           "Label": "Plant Code"
@@ -2617,7 +2624,7 @@
         },
         "Original_quote": {
           "@Common.FieldControl": {
-            "#": "ReadOnly"
+            "#": "Mandatory"
           },
           "type": "cds.String"
         },
@@ -5390,11 +5397,6 @@
     },
     "PanApproval.switch_control": {
       "kind": "function",
-      "params": {
-        "ID": {
-          "type": "cds.String"
-        }
-      },
       "returns": {
         "type": "cds.String"
       }
