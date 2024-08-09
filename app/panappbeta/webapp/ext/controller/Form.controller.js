@@ -1,4 +1,4 @@
-sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/core/Fragment", "sap/m/library", "sap/m/MessageToast","sap/ui/core/routing/History","sap/ui/core/library"], function (ControllerExtension, Dialog, Fragment, library, MessageToast,History,Corelibrary) {
+sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/core/Fragment", "sap/m/library", "sap/m/MessageToast","sap/ui/core/routing/History","sap/ui/core/library","sap/uxap/ObjectPageSubSection"], function (ControllerExtension, Dialog, Fragment, library, MessageToast,History,Corelibrary,ObjectPageSubSection) {
 	'use strict';
 	// var oUserInfoService = sap.ushell.Container.getService("UserInfo");
 	// var oUser = oUserInfoService.getUser();
@@ -579,7 +579,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 						// 	"title":"Approval History"
 						//   }));
 
-						oSection.addSubSection(new sap.uxap.ObjectPageSubSection({
+						oSection.addSubSection(new ObjectPageSubSection({
 							// title: `Level ${levelArray[0].level}`
 						}));
 
@@ -770,7 +770,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 
 						let i = 0;
 						target.forEach((levelArray) => {
-							oScroll.addContent(new sap.uxap.ObjectPageSubSection({
+							oScroll.addContent(new ObjectPageSubSection({
 								// title: `Level ${levelArray[0].level}`
 							}));
 
@@ -979,7 +979,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 						})
 						that.base.getView().getContent()[0].getSections()[4].setBusy(false);
 					}
-					debugger
+					
 					let result1 = await Fimport(oModel, sFunctionName, data, "ID");
 					// result1 = JSON.parse(result1);
 					status = result1;
@@ -989,7 +989,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/m/Dialog", "sap/ui/co
 					// 	sap.ui.getCore().byId("__button24").setVisible(true);
 					// }
 
-					debugger
+					
 					if ((result1 === 'Approved') || (result1 === 'Rejected') || (result1 === 'Pending for Approval')) {
 						that.getView().getContent()[0].getSections()[3].setVisible(false);
 						// this.getView().getContent()[0].getSections()[2].mAggregations._grid.getContent()[0].mAggregations._grid.getContent()[0].getContent().getItems()[1].getDependents()[1].mAggregations.headerToolbar.setVisible(false);

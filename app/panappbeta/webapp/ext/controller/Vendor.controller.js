@@ -37,20 +37,20 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 			editFlow: {
 
 			// 	onBeforeSave: async function (mParameters) {
-			// 		debugger
+			// 		
 
 			// 		sap.ui.getCore().byId('plantproject1::plantObjectPage--fe::FormContainer::GeneratedFacet1').getFormElements()[1].getFields()[1].setVisible(false);
 			// 		sap.ui.getCore().byId('plantproject1::plantObjectPage--fe::FormContainer::GeneratedFacet1').getFormElements()[1].getFields()[0].setVisible(true);
 			// 		return null;
 			// 	},
-				// onBeforeEdit: function (mParameters) {debugger
+				// onBeforeEdit: function (mParameters) {
 
 				// 	// return this._createDialog("Do y//ou want to edit this really nice... object ?");
 				// 	// return MessageToast.show("Edit successful");
 					
 				// },
 			// 	onBeforeDiscard: function (mParameters) {
-			// 		debugger
+			// 		
 			// 		// return this._createDialog("Do you want to cancel this really nice... object ?");
 			// 		// sap.ui.getCore().byId('plantproject1::plantObjectPage--fe::FormContainer::GeneratedFacet1').getFormElements()[1].getFields()[1].setValue(null)
 			// 		// return MessageToast.show("Edit successful");
@@ -58,17 +58,17 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 			// 		sap.ui.getCore().byId('plantproject1::plantObjectPage--fe::FormContainer::GeneratedFacet1').getFormElements()[1].getFields()[0].setVisible(true);
 			// 		return null;
 			// 	},
-			// 	// onBeforeCreate: function (mParameters) {debugger
+			// 	// onBeforeCreate: function (mParameters) {
 			// 	// 	// return this._createDialog("Do you want to create ?");
 			// 	// },
-			// 	// onBeforeDelete: function (mParameters) {debugger
+			// 	// onBeforeDelete: function (mParameters) {
 			// 	// 	// return this._createDialog("Do you want to delete this really nice... object ?");
 			// 	// },
-			// 	// onAfterSave: function (mParameters) {debugger
+			// 	// onAfterSave: function (mParameters) {
 			// 	// 	return MessageToast.show("Save successful");
 			// 	// },
 				// onAfterEdit: function (mParameters) {
-				// 	debugger
+				// 	
 				// 	sap.ui.getCore().byId('panappbeta::tab1_tab1tovendor_dataObjectPage--fe::FormContainer::VendorResponse').getFormElements()[5].getFields()[1].setValue(sap.ui.getCore().byId('plantproject1::plantObjectPage--fe::FormContainer::GeneratedFacet1').getFormElements()[1].getFields()[0].getValue());
 				// 	sap.ui.getCore().byId('panappbeta::tab1_tab1tovendor_dataObjectPage--fe::FormContainer::VendorResponse').getFormElements()[5].getFields()[1].setVisible(true);
 				// 	sap.ui.getCore().byId('panappbeta::tab1_tab1tovendor_dataObjectPage--fe::FormContainer::VendorResponse').getFormElements()[5].getFields()[0].setVisible(false);
@@ -76,13 +76,13 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 				// 	// return null;
 
 				// },
-			// 	// onAfterDiscard: function (mParameters) {debugger
+			// 	// onAfterDiscard: function (mParameters) {
 			// 	// 	return MessageToast.show("Discard successful");
 			// 	// },
-			// 	// onAfterCreate: function (mParameters) {debugger
+			// 	// onAfterCreate: function (mParameters) {
 			// 	// 	return MessageToast.show("Create successful");
 			// 	// },
-			// 	// onAfterDelete: function (mParameters) {debugger
+			// 	// onAfterDelete: function (mParameters) {
 			// 	// 	return MessageToast.show("Delete successful");
 			// 	// }
 			},
@@ -93,7 +93,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 					var that = this;
 					this.getView().getContent()[0].getSections()[0].setVisible(false);
 					const v =this.getView().getContent()[0].getHeaderTitle().mAggregations._actionsToolbar.getContent()[4].mProperties.visible;
-					debugger
+					
 					var result1;
 					if(this.getView().getContent()[0].getHeaderTitle().mAggregations._actionsToolbar.getContent()[4].mProperties.visible==true){
 					var sFunctionName = "getData";
@@ -128,11 +128,11 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 					//    var frag4 = this.base.getView().getContent()[0]
 					// frag4.attachSectionChange(function(){ 
 					// 	var section = this.getScrollingSectionId()
-					// 	if (section == "panappbeta::tab1_tab1tovendor_dataObjectPage--fe::FacetSection::VendorResponse"){debugger
+					// 	if (section == "panappbeta::tab1_tab1tovendor_dataObjectPage--fe::FacetSection::VendorResponse"){
 					// 	sap.ui.getCore().byId('panappbeta::tab1_tab1tovendor_dataObjectPage--fe::FormContainer::VendorResponse').getFormElements()[5].getFields()[0].setVisible(false);		
 					// 	sap.ui.getCore().byId('panappbeta::tab1_tab1tovendor_dataObjectPage--fe::FormContainer::VendorResponse').getFormElements()[5].addField(new sap.m.DatePicker("panappbeta::tab1_tab1tovendor_dataObjectPage--fe::FormContainer::VendorResponse::FormElement::DataField::Vendor_CE_Date::Field", {
 					// 			change: async function (event) {
-					// 				debugger
+					// 				
 					// 				// var oModel = this.base.getExtensionAPI().getModel();
 					// 				// sap.ui.getCore().byId('plantproject1::plantObjectPage--fe::FormContainer::GeneratedFacet1').getFormElements()[1].getFields()[0].setValue(sap.ui.getCore().byId('plantproject1::plantObjectPage--fe::FormContainer::GeneratedFacet1').getFormElements()[1].getFields()[1].getValue());
 					// 				// var Name = 'updatee';
@@ -149,7 +149,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 					var frag4 = this.base.getView().getContent()[0]
 					frag4.attachSectionChange(function(){ 
 						var section = this.getScrollingSectionId()
-						if (section == "panappbeta::tab1_tab1tovendor_dataObjectPage--fe::FacetSection::VendorResponse"){debugger
+						if (section == "panappbeta::tab1_tab1tovendor_dataObjectPage--fe::FacetSection::VendorResponse"){
 							
 							// if(sap.ui.getCore().byId('panappbeta::tab1_tab1tovendor_dataObjectPage--fe::FormContainer::VendorResponse').getFormElements()[5].getFields()[0].getEditable()==true){
 							// 	sap.ui.getCore().byId('panappbeta::tab1_tab1tovendor_dataObjectPage--fe::FormContainer::VendorResponse').getFormElements()[5].getFields()[0].getContent().setVisible(false);
@@ -164,11 +164,11 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 							// 		dateValue:new Date(date),
 											
 							// 						change: async function (event) {
-							// 							debugger
+							// 							
 							// 							var oModel = this.getParent().getParent().getParent().getParent().getModel();
 							// 							sap.ui.getCore().byId('panappbeta::tab1_tab1tovendor_dataObjectPage--fe::FormContainer::VendorResponse').getFormElements()[5].getFields()[0].getContent().getContentEdit()[0].setValue(sap.ui.getCore().byId('panappbeta::tab1_tab1tovendor_dataObjectPage--fe::FormContainer::VendorResponse').getFormElements()[5].getFields()[1].getValue());
 							// 							var Name = 'updatee';
-							// 							debugger
+							// 							
 							// 							let oFunction = oModel.bindContext(`/${Name}(...)`);
 							// 							let path = event.oSource.oPropagatedProperties.oBindingContexts.undefined.oBinding.sReducedPath;
 							// 							let data1 = path.split("tab1tovendor_data");
@@ -198,7 +198,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 							// 	}
 							// sap.ui.getCore().byId('panappbeta::tab1_tab1tovendor_dataObjectPage--fe::FormContainer::VendorResponse').getFormElements()[5].addField(new sap.m.DatePicker("id1", {
 							// 	change: async function (event) {
-							// 		debugger
+							// 		
 							// 		// var oModel = this.base.getExtensionAPI().getModel();
 							// 		// sap.ui.getCore().byId('plantproject1::plantObjectPage--fe::FormContainer::GeneratedFacet1').getFormElements()[1].getFields()[0].setValue(sap.ui.getCore().byId('plantproject1::plantObjectPage--fe::FormContainer::GeneratedFacet1').getFormElements()[1].getFields()[1].getValue());
 							// 		var Name = 'updatee';
@@ -207,19 +207,19 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 							// 		await oFunction.execute();
 								// }
 				// });
-						// debugger
+						// 
 						// sap.ui.getCore().byId('panappbeta::tab1_tab1tovendor_dataObjectPage--fe::FormContainer::VendorResponse').getFormElements()[5].getFields()[0].setVisible(false);
 						// sap.ui.getCore().byId('panappbeta::tab1_tab1tovendor_dataObjectPage--fe::FormContainer::VendorResponse').getFormElements()[5].getFields()[0].setEditable(false)
 						// sap.ui.getCore().byId('panappbeta::tab1_tab1tovendor_dataObjectPage--fe::FormContainer::VendorResponse').getFormElements()[5].getFields()[1].setVisible(true);
 						}else{
 						
 							var columns = sap.ui.getCore().byId(`${section}`).mAggregations._grid.mAggregations.content[0].mAggregations._grid.mAggregations.content[0].mAggregations.content.mAggregations.content.mAggregations.columns;
-							debugger
+							
 							if(columns != undefined )
 							columns.forEach(col =>{ 
 								var colName = col.mProperties.dataProperty;
 								var colheader=col.getHeader();
-								var mLength = colheader.length;	debugger	
+								var mLength = colheader.length;		
 								var valuevendor = sap.ui.getCore().byId(`${section}`).mAggregations._grid.mAggregations.content[0].mAggregations._grid.mAggregations.content[0].mAggregations.content.mAggregations.content.mAggregations._content.mBindingInfos.rows.binding.oCache.getValue()
 											const maxLength = Math.max(...valuevendor.map(item => (item[colName].length ?? 8)));
 								if(maxLength > mLength)
@@ -252,14 +252,14 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 					]};
 					sap.ui.getCore().byId('panappbeta::tab1_tab1tovendor_dataObjectPage--fe::table::vendtopd::LineItem::PAN_PRICE_DETAILS').setFilterConditions(filter);
 					sap.ui.getCore().byId('panappbeta::tab1_tab1tovendor_dataObjectPage--fe::table::vendtoptd::LineItem::PAYMENT_TERM_DETAILS').setFilterConditions(filter);
-				// 	debugger
+				// 	
 				// 	// sap.ui.getCore().byId('plantproject1::plantObjectPage--fe::FormContainer::GeneratedFacet1').addFormElement(new sap.ui.layout.form.FormElement({
 				// 	// 	label:"hello"
 				// 	// }));
 				// 	var oModel = this.base.getExtensionAPI().getModel();
 				// 	// sap.ui.getCore().byId('plantproject1::plantObjectPage--fe::FormContainer::GeneratedFacet1').getFormElements()[1].setVisible(false)
 				// 	// sap.ui.getCore().byId('plantproject1::plantObjectPage--fe::FormContainer::GeneratedFacet1').getFormElements()[1].removeAllFields();
-				// debugger
+				// 
 				// let path = window.location.hash;
 				// let data1 = path.split("tab1tovendor_data");
 				// let data2=data1[0].split("PAN_Number=");
@@ -267,7 +267,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 				// let data3=data1[1].split("Proposed_Vendor_Code=");
 				// data3 = data3[1].split(",")
 				
-				// 		debugger
+				// 		
 				// 		if(sap.ui.getCore().byId('panappbeta::tab1_tab1tovendor_dataObjectPage--fe::FormContainer::VendorResponse').getFormElements()[5].getFields().length>1){
 				// 			sap.ui.getCore().byId('panappbeta::tab1_tab1tovendor_dataObjectPage--fe::FormContainer::VendorResponse').getFormElements()[5].getFields()[1].destroy();
 				// 		}
@@ -284,7 +284,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 
 				// sap.ui.getCore().byId('panappbeta::tab1_tab1tovendor_dataObjectPage--fe::FormContainer::VendorResponse').getFormElements()[5].addField(new sap.m.DatePicker("panappbeta::tab1_tab1tovendor_dataObjectPage--fe::FormContainer::VendorResponse::FormElement::DataField::Vendor_CE_Date::Field", {
 				// 				change: async function (event) {
-				// 					debugger
+				// 					
 				// 					// var oModel = this.base.getExtensionAPI().getModel();
 				// 					// sap.ui.getCore().byId('plantproject1::plantObjectPage--fe::FormContainer::GeneratedFacet1').getFormElements()[1].getFields()[0].setValue(sap.ui.getCore().byId('plantproject1::plantObjectPage--fe::FormContainer::GeneratedFacet1').getFormElements()[1].getFields()[1].getValue());
 				// 					// var Name = 'updatee';
@@ -293,7 +293,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 				// 					// await oFunction.execute();
 				// 				}
 				// 			}));
-				// 		debugger
+				// 		
 						
 						// sap.ui.getCore().byId('panappbeta::tab1_tab1tovendor_dataObjectPage--fe::FormContainer::VendorResponse').getFormElements()[5].getFields()[0].setEditable(false)
 						// sap.ui.getCore().byId('panappbeta::tab1_tab1tovendor_dataObjectPage--fe::FormContainer::VendorResponse').getFormElements()[5].getFields()[1].setVisible(true);

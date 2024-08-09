@@ -16,18 +16,31 @@ service CatalogService {
  entity attachments as projection on my.PAN_attachments;
  entity PAN_Payment_Method_Drop as projection on my.PAN_Payment_Method_Drop;
 entity PAN_Comments as projection on my.PAN_Comments;
+//below mentioned function import is used while the user submitting the PAN for approval process and updates certain to database from S4.
 function sendforapproval(data:String) returns LargeString;
+//below function import extracts the approvers data from S4 and inserts it into the database.
  function InsertData(ID:String) returns String;
+ //below function import is used to return the PAN status to UI extension.
  function getData(ID:String) returns String;
+ //it is used to update notification status as true or false in the Workflow history table based on UI actions.
  function switch_control(ID:String) returns String;
+ //it updates the status as draft when the user provides the justification needed for approver.
  function getuserinfo(ID:String) returns String;
+ //returns all the comments related to the PAn to the UI.
 function getcomments(ID:String) returns String;
+//returns all the workflow history table details related to the PAN to ui.
 function getsync(data:String) returns String;
+//this function has a code return but we are not using anywhere in the UI to call this function.
 function draft(ID:String) returns String;
+//this function has code written but we are notusing anywhere
 function Listdata(ID:String) returns String;
+//it is used to update certain details in the vendor table and to perform attachements related functionality
 function flag (ID:String,case:String) returns String;
+//it is used for the refresh button functionality in UI in workflow history table.
 function updatee(ID:String) returns String;
 }
+
+//below mentioned service is not used.
 service PanApproval {
  entity PAN_Details_APR as projection on my.PAN_Details;
  entity PAN_WEB_EVENT_APR as projection on my.PAN_WEB_EVENT;
